@@ -24,7 +24,7 @@ For example, the default color of the SVG content is the CSS `currentColor` valu
 
 ## Recommended Flow
 
-### Icon Preparation
+### Icons Preparation
 
 - Add the icons to `src/assets/svg`
 - Use [svg-to-ts](https://github.com/kreuzerk/svg-to-ts) to clean and extract the icons content:
@@ -58,7 +58,7 @@ For example, the default color of the SVG content is the CSS `currentColor` valu
 
 - Run `npm run generate-icons`
 
-### Render the Icon
+### Icons Rendering
 Import the `SvgIconsModule` in your `AppModule`, and register the icons:
 
 ```ts
