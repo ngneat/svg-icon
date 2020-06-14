@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'icons';
+  icon = 'location';
+  size: any = 'xs';
+  color;
+
+  change() {
+    this.icon = 'settings';
+    this.size = 'lg';
+    this.color = 'red';
+  }
 }

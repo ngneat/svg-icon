@@ -1,13 +1,22 @@
 {
-  "name": "icons",
+  "name": "svg-icons",
   "version": "0.0.0",
   "scripts": {
+    "svg": "svg-to-ts ",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "contributors:add": "all-contributors add",
+    "hooks:pre-commit": "node hooks/pre-commit.js",
+    "commit": "git-cz",
+    "release:first": "npm run release -- --first-release",
+    "build:lib": "ng build @ngneat/icons --prod && cp -r README.md dist/ngneat/icons",
+    "test:lib": "ng test @ngneat/icons",
+    "release": "cd projects/ngneat/icons && standard-version --infile ../../../CHANGELOG.md",
+    "test:lib:headless": "cross-env CI=true npm run test:lib"
   },
   "private": true,
   "dependencies": {
@@ -19,18 +28,28 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
+    "@ngneat/lib": "^1.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.8",
+    "@angular-devkit/build-ng-packagr": "~0.901.8",
     "@angular/cli": "~9.1.8",
     "@angular/compiler-cli": "~9.1.11",
-    "@types/node": "^12.11.1",
+    "@commitlint/cli": "8.1.0",
+    "@commitlint/config-angular": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@ngneat/spectator": "^4.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "all-contributors-cli": "^6.8.1",
     "codelyzer": "^5.1.2",
+    "cross-env": "^5.2.0",
+    "git-cz": "^3.2.1",
+    "husky": "^3.0.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~5.0.0",
@@ -38,9 +57,50 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "lint-staged": "^9.2.0",
+    "ng-packagr": "^9.0.0",
+    "prettier": "^1.18.2",
     "protractor": "~7.0.0",
+    "standard-version": "^6.0.1",
+    "svg-to-ts": "^4.3.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,ts,html,component.html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS",
+      "pre-commit": "npm run hooks:pre-commit && lint-staged"
+    }
+  },
+  "svg-to-ts": {
+    "srcFiles": [
+      "./src/assets/svg/*.svg"
+    ],
+    "outputDirectory": "./src/assets/svg",
+    "interfaceName": "SvgIcon",
+    "prefix": "",
+    "optimizeForLazyLoading": false,
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true,
+          "cleanupAttrs": true
+        }
+      ]
+    },
+    "modelFileName": "app-icon.model",
+    "compileSources": true
   }
 }

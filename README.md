@@ -114,7 +114,7 @@ And use the `size` input:
 
 ### SvgIconRegistry
 
-You can inject the `SvgIconRegistry` and use it to insert new SVG icons or get them:
+You can inject the `SvgIconRegistry`, and use it to insert new SVG icons or get them:
 
 ```ts
 import { SvgIconRegistry } from '@ngneat/svg-icon';
