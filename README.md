@@ -1,27 +1,153 @@
-# Icons
+<p align="center">
+ <img width="20%" height="20%" src="./logo.svg">
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
+<br />
 
-## Development server
+[![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square)]()
+[![commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)]()
+[![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![ngneat](https://img.shields.io/badge/@-ngneat-383636?style=flat-square&labelColor=8f68d4)](https://github.com/ngneat/)
+[![spectator](https://img.shields.io/badge/tested%20with-spectator-2196F3.svg?style=flat-square)]()
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> A lightweight library that makes it easier to use SVG icons in your Angular Application
 
-## Code scaffolding
+`<svg-icon>` displays SVG icons by directly inlining the SVG content into the DOM as a child of itself. This approach offers an advantage over an <img> tag or a CSS background-image because it allows styling the SVG with CSS. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+For example, the default color of the SVG content is the CSS `currentColor` value. This makes SVG icons by default have the same color as surrounding text and allows you to change the color by setting the color style on the `svg-icon` element.
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`npm install @ngneat/svg-icon`
 
-## Running unit tests
+## Recommended Flow
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Icon Preparation
 
-## Running end-to-end tests
+- Add the icons to `src/assets/svg`
+- Use [svg-to-ts](https://github.com/kreuzerk/svg-to-ts) to clean and extract the icons content:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```json
+// package.json
+{
+  "scripts": {
+    "generate-icons": "svg-to-ts"
+  },
+  "svg-to-ts": {
+    "srcFiles": [
+      "./src/assets/svg/*.svg"
+    ],
+    "outputDirectory": "./src/assets/svg",
+    "interfaceName": "SvgIcon",
+    "prefix": "",
+    "optimizeForLazyLoading": false,
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true,
+          "cleanupAttrs": true
+        }
+      ]
+    },
+    "modelFileName": "app-icon.model",
+    "compileSources": true
+  }
+}
+```
 
-## Further help
+- Run `npm run generate-icons`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Usage
+Import the `SvgIconsModule` in your `AppModule`, and register the icons:
+
+```ts
+import { SvgIconsModule, fromSvgProps } from '@ngneat/icons';
+
+import * as icons from '../assets/svg/my-icons.model';
+
+@NgModule({
+  imports: [
+    SvgIconsModule.forRoot({
+      icons: fromSvgProps(icons)
+    })
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+Now you can use the `svg-icon` component:
+
+```html
+<svg-icon key="settings"></svg-icon>
+<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+```
+
+To control the SVG size, we use the `font-size` property as described in this [article](https://css-tricks.com/control-icons-with-font-size/). 
+You have the options to pass fixed sizes and use them across the application:
+
+```ts
+@NgModule({
+  imports: [
+    SvgIconsModule.forRoot({
+      sizes: {
+        xm: '10px',
+        sm: '12px',
+        md: '16px',
+        lg: '20px'
+      },
+      icons: fromSvgProps(icons)
+    })
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+And use the `size` input:
+
+```html
+<svg-icon key="settings" size="lg"></svg-icon>
+```
+
+### SvgIconRegistry
+
+You can inject the `SvgIconRegistry` and use it to insert new SVG icons or get them:
+
+```ts
+import { SvgIconRegistry } from '@ngneat/svg-icon';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+   constructor(private registry: SvgIconRegistry) {
+     registry.register({ settings: `<svg>...</svg>`});
+     registry.get(key);
+     registry.getAll();
+   }
+}
+```
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.netbasal.com/"><img src="https://avatars1.githubusercontent.com/u/6745730?v=4" width="100px;" alt=""/><br /><sub><b>Netanel Basal</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Code">💻</a> <a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Documentation">📖</a> <a href="#ideas-NetanelBasal" title="Ideas, Planning, & Feedback">🤔</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
