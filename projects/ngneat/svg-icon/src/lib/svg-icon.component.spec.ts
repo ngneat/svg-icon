@@ -1,6 +1,6 @@
 import { createHostFactory, Spectator } from '@ngneat/spectator';
-import { fromSvgProps, SvgIconComponent, SvgIconsModule } from '@ngneat/icons';
-import * as icons from '../../../../../src/assets/svg/my-icons.model';
+import { SvgIconComponent, SvgIconsModule } from '@ngneat/svg-icon';
+import icons from '../../../../../src/assets/svg/svg-icons';
 
 describe('SvgIconComponent', () => {
   let spectator: Spectator<SvgIconComponent>;
@@ -8,7 +8,7 @@ describe('SvgIconComponent', () => {
     component: SvgIconComponent,
     imports: [
       SvgIconsModule.forRoot({
-        icons: fromSvgProps(icons),
+        icons,
         sizes: {
           md: '20px',
           lg: '40px'

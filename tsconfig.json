@@ -13,7 +13,7 @@
     "target": "es2015",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@ngneat/icons": ["projects/ngneat/icons/src/public-api.ts"]
+      "@ngneat/svg-icon": ["projects/ngneat/svg-icon/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

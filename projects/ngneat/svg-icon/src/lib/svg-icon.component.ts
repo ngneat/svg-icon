@@ -36,8 +36,6 @@ type Changes = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgIconComponent implements OnInit, OnChanges {
-  private registry = this.svgRegistry;
-
   @Input()
   key: string;
 
@@ -54,7 +52,7 @@ export class SvgIconComponent implements OnInit, OnChanges {
 
   constructor(
     private host: ElementRef,
-    private svgRegistry: SvgIconRegistry,
+    private registry: SvgIconRegistry,
     @Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG
   ) {
     this.mergedConfig = this.createConfig();

@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SvgIconsModule, fromSvgProps } from '@ngneat/icons';
+import { SvgIconsModule } from '@ngneat/svg-icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import * as icons from '../assets/svg/my-icons.model';
+import icons from '../assets/svg/svg-icons';
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,7 +12,7 @@ import * as icons from '../assets/svg/my-icons.model';
     BrowserModule,
     AppRoutingModule,
     SvgIconsModule.forRoot({
-      icons: fromSvgProps(icons)
+      icons
     })
   ],
   providers: [],

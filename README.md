@@ -35,13 +35,12 @@ For example, the default color of the SVG content is the CSS `currentColor` valu
     "generate-icons": "svg-to-ts"
   },
   "svg-to-ts": {
+    "conversionType": "object",
     "srcFiles": [
       "./src/assets/svg/*.svg"
     ],
     "outputDirectory": "./src/assets/svg",
-    "interfaceName": "SvgIcon",
-    "prefix": "",
-    "optimizeForLazyLoading": false,
+    "fileName": "svg-icons",
     "svgoConfig": {
       "plugins": [
         {
@@ -49,9 +48,7 @@ For example, the default color of the SVG content is the CSS `currentColor` valu
           "cleanupAttrs": true
         }
       ]
-    },
-    "modelFileName": "app-icon.model",
-    "compileSources": true
+    }
   }
 }
 ```
@@ -62,14 +59,14 @@ For example, the default color of the SVG content is the CSS `currentColor` valu
 Import the `SvgIconsModule` in your `AppModule`, and register the icons:
 
 ```ts
-import { SvgIconsModule, fromSvgProps } from '@ngneat/icons';
+import { SvgIconsModule } from '@ngneat/svg-icon';
 
-import * as icons from '../assets/svg/my-icons.model';
+import icons from '../assets/svg/svg-icons';
 
 @NgModule({
   imports: [
     SvgIconsModule.forRoot({
-      icons: fromSvgProps(icons)
+      icons
     })
   ],
   bootstrap: [AppComponent]
@@ -97,7 +94,7 @@ You have the options to pass fixed sizes and use them across the application:
         md: '16px',
         lg: '20px'
       },
-      icons: fromSvgProps(icons)
+      icons
     })
   ],
   bootstrap: [AppComponent]
