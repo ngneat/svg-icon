@@ -13,10 +13,12 @@
     "hooks:pre-commit": "node hooks/pre-commit.js",
     "commit": "git-cz",
     "release:first": "npm run release -- --first-release",
-    "build:lib": "ng build @ngneat/svg-icon --prod && cp -r README.md dist/ngneat/icons",
+    "build:lib": "ng build @ngneat/svg-icon --prod && npm run schematics:build && cp -r README.md dist/ngneat/svg-icon",
     "test:lib": "ng test @ngneat/svg-icon",
     "release": "cd projects/ngneat/svg-icon && standard-version --infile ../../../CHANGELOG.md",
-    "test:lib:headless": "cross-env CI=true npm run test:lib"
+    "test:lib:headless": "cross-env CI=true npm run test:lib",
+    "schematics:build": "tsc -p tsconfig.schematics.json && npm run schematics:copy",
+    "schematics:copy": "cp schematics/src/collection.json dist/ngneat/svg-icon/schematics/src && cp schematics/src/ng-add/schema.json dist/ngneat/svg-icon/schematics/src/ng-add"
   },
   "private": true,
   "dependencies": {
@@ -61,9 +63,9 @@
     "ng-packagr": "^9.0.0",
     "prettier": "^1.18.2",
     "protractor": "~7.0.0",
+    "schematics-utilities": "1.1.1",
     "standard-version": "^6.0.1",
     "svg-to-ts": "^5.0.0",
-    "svgo": "^1.3.2",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"

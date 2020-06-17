@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsSvgIconAdd",
+  "title": "Add svg-icon to Your Project",
+  "type": "object",
+  "properties": {
+    "project": {
+      "description": "The project name.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

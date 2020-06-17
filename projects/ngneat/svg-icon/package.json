@@ -1,9 +1,11 @@
 {
   "name": "@ngneat/svg-icon",
   "version": "1.0.0",
+  "schematics": "./schematics/src/collection.json",
   "description": "A lightweight library that makes it easier to use SVG icons in your Angular Application",
   "dependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0",
+    "schematics-utilities": "1.1.1"
   },
   "keywords": [
     "angular",
