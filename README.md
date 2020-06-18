@@ -15,7 +15,7 @@
 [![spectator](https://img.shields.io/badge/tested%20with-spectator-2196F3.svg?style=flat-square)]()
 
 The `svg-icon` library enables using the `<svg-icon>` tag to directly display SVG icons in the DOM. 
-This approach offers an advantage over using an `<img>` tag or via the CSS `background-image` property, because it allows styling the SVG with CSS. 
+This approach offers an advantage over using an `<img>` tag or via the CSS `background-image` property, because it allows styling and animating the SVG with CSS. 
 
 For example, if the fill or stroke properties of elements in the svg are set to `currentColor`, they will have the color defined for the containing DOM element,. So the color can easily be changed by changing the color style on the `svg-icon` element.
 
