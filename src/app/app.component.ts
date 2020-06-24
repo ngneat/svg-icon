@@ -9,7 +9,7 @@ export class AppComponent {
   icon = 'location';
   size: any = 'xs';
   color;
-
+  arr = Array(5000);
   change() {
     this.icon = 'settings';
     this.size = 'lg';

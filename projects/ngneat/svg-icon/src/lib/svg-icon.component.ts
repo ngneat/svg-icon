@@ -40,6 +40,9 @@ export class SvgIconComponent implements OnInit, OnChanges {
   key: string;
 
   @Input()
+  useRef: boolean;
+
+  @Input()
   size: 'lg' | 'md' | 'sm' | 'xs' = 'md';
 
   @Input()
@@ -90,7 +93,7 @@ export class SvgIconComponent implements OnInit, OnChanges {
     if (this.key && this.registry.hasSvg(this.key)) {
       this.element.classList.remove();
       this.element.classList.add(`svg-icon-${this.key}`);
-      this.element.innerHTML = this.registry.get(this.key);
+      this.element.innerHTML = this.registry.get(this.key, { useRef: this.useRef });
     } else if (isDevMode()) {
       console.warn(`⚠️ ${this.key} is missing!`);
     }

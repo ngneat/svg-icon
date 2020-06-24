@@ -5,6 +5,8 @@ type HashMap<T = any> = {
   [key: string]: T;
 };
 
+type Options = { setDimensions?: boolean; useRef?: boolean };
+
 class SvgIcon {
   appliedAttributes = false;
 
@@ -14,7 +16,9 @@ class SvgIcon {
 @Injectable({ providedIn: 'root' })
 export class SvgIconRegistry {
   private svgMap = new Map<string, SvgIcon>();
+  private refMap = new Map<string, string>();
   private XMLSerializer: XMLSerializer;
+  private refContainer: HTMLElement;
 
   constructor(@Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG) {
     if (config.icons) {
@@ -34,7 +38,8 @@ export class SvgIconRegistry {
     return this.svgMap;
   }
 
-  get(key: string, options: { setDimensions: boolean } = { setDimensions: true }): string | undefined {
+  get(key: string, options: Options = {}): string | undefined {
+    const merged = { setDimensions: true, ...options };
     const svg = this.svgMap.get(key);
 
     if (!svg) {
@@ -42,10 +47,10 @@ export class SvgIconRegistry {
     }
 
     if (!svg.appliedAttributes) {
-      this.addAttributes(svg, options);
+      this.addAttributes(key, svg, merged);
     }
 
-    return svg.content;
+    return merged.useRef ? this.getRef(key, merged) : svg.content;
   }
 
   register(svg: HashMap) {
@@ -71,9 +76,10 @@ export class SvgIconRegistry {
     return this.svgMap.has(key);
   }
 
-  private addAttributes(config: SvgIcon, options: { setDimensions: boolean }) {
+  private addAttributes(key: string, config: SvgIcon, options: Options) {
     const svg = this.toElement(config.content);
     this.setAttributes(svg, options);
+    svg.setAttribute('id', key);
     config.content = this.asRaw(svg);
     config.appliedAttributes = true;
   }
@@ -100,7 +106,7 @@ export class SvgIconRegistry {
     return svgElement;
   }
 
-  private setAttributes(svg: SVGElement, options: { setDimensions: boolean }): SVGElement {
+  private setAttributes(svg: SVGElement, options: Options): SVGElement {
     if (!svg.getAttribute('xmlns')) {
       svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     }
@@ -123,5 +129,29 @@ export class SvgIconRegistry {
   private addIcon(name: string, data: string) {
     const config = new SvgIcon(data);
     this.svgMap.set(name, config);
+  }
+
+  private getRef(key: string, options: Options) {
+    if (!this.refMap.has(key)) {
+      const svg = this.toElement(`<svg><use href="#${key}"></use></svg>`);
+      this.setAttributes(svg, options);
+      this.createIconRef(key);
+      this.refMap.set(key, this.asRaw(svg));
+    }
+
+    return this.refMap.get(key);
+  }
+
+  private createRefContainer() {
+    const div = document.createElement('DIV');
+    div.classList.add('svg-icon-ref-container');
+    div.style.display = 'none';
+    this.refContainer = div;
+    document.body.append(div);
+  }
+
+  private createIconRef(key: string) {
+    !this.refContainer && this.createRefContainer();
+    this.refContainer.innerHTML += this.svgMap.get(key).content;
   }
 }
