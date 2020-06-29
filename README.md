@@ -93,7 +93,7 @@ You also have the option to pass fixed sizes and use them across the application
   imports: [
     SvgIconsModule.forRoot({
       sizes: {
-        xm: '10px',
+        xs: '10px',
         sm: '12px',
         md: '16px',
         lg: '20px'
