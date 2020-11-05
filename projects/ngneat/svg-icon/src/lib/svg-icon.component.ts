@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,6 +8,7 @@ import {
   isDevMode,
   OnChanges,
   OnInit,
+  PLATFORM_ID,
   SimpleChange
 } from '@angular/core';
 import { SvgIconRegistry } from './registry';
@@ -53,14 +55,17 @@ export class SvgIconComponent implements OnInit, OnChanges {
   constructor(
     private host: ElementRef,
     private registry: SvgIconRegistry,
-    @Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG
+    @Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.mergedConfig = this.createConfig();
   }
 
   ngOnInit() {
-    this.element.setAttribute('role', 'img');
-    this.render();
+    if (isPlatformBrowser(this.platformId)) {
+      this.element.setAttribute('role', 'img');
+      this.render();
+    }
   }
 
   ngOnChanges(changes: Changes) {
