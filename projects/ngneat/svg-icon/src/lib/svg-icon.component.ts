@@ -56,7 +56,7 @@ export class SvgIconComponent implements OnInit, OnChanges {
     private host: ElementRef,
     private registry: SvgIconRegistry,
     @Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG,
-    @Inject(PLATFORM_ID) private platformId: object
+    @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.mergedConfig = this.createConfig();
   }
