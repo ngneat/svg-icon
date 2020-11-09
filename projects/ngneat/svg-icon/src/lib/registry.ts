@@ -49,7 +49,8 @@ export class SvgIconRegistry {
     return svg.content;
   }
 
-  register(svg: Record<string, string | SvgToTSIcon> | SvgToTSIcon[], { override }: { override: boolean }) {
+  register(svg: Record<string, string | SvgToTSIcon> | SvgToTSIcon[], options: { override?: boolean } = {}) {
+    const { override = true } = options;
     for (const [key, content] of this.normalizeSvgs(svg)) {
       if (override || !this.svgMap.has(key)) {
         this.addIcon(key, content);
