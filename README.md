@@ -118,6 +118,12 @@ You can inject the `SvgIconRegistry`, and get existing SVG icons or register new
 
 ```ts
 import { SvgIconRegistry } from '@ngneat/svg-icon';
+import { mySvg } from 'my-icons.ts';
+ 
+interface Icon {
+    name: string;
+    data: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -127,6 +133,9 @@ import { SvgIconRegistry } from '@ngneat/svg-icon';
 export class AppComponent {
    constructor(private registry: SvgIconRegistry) {
      registry.register({ settings: `<svg>...</svg>`});
+     // You can pass a Icon structure map or array as well
+     registry.register({ mySvg });
+     registry.register([mySvg]);
      registry.get(key);
      registry.getAll();
    }
