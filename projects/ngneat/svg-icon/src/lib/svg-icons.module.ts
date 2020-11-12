@@ -1,6 +1,7 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { SvgIconRegistry } from './registry';
 import { SvgIconComponent } from './svg-icon.component';
-import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
+import { SvgIconType, SVG_CONFIG, SVG_ICONS, SVG_ICONS_CONFIG } from './types';
 
 @NgModule({
   declarations: [SvgIconComponent],
@@ -17,5 +18,18 @@ export class SvgIconsModule {
         }
       ]
     };
+  }
+
+  static forChild(icons: SvgIconType | SvgIconType[]) {
+    return {
+      ngModule: SvgIconsModule,
+      providers: [{ provide: SVG_ICONS, useValue: icons }]
+    };
+  }
+
+  constructor(@Optional() @Inject(SVG_ICONS) icons, private service: SvgIconRegistry) {
+    if (icons) {
+      this.service.register(icons);
+    }
   }
 }

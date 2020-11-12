@@ -31,7 +31,7 @@ type Changes = {
         fill: currentColor;
         width: 1em;
         height: 1em;
-        font-size: 1.5rem;
+        font-size: 1rem;
       }
     `
   ],
@@ -51,6 +51,7 @@ export class SvgIconComponent implements OnInit, OnChanges {
   color: string;
 
   private mergedConfig: SVG_CONFIG;
+  private fz: string;
 
   constructor(
     private host: ElementRef,
@@ -78,17 +79,35 @@ export class SvgIconComponent implements OnInit, OnChanges {
       this.element.style.color = this.color;
     }
 
-    if (changes.size?.currentValue) {
-      this.element.style.fontSize = this.mergedConfig.sizes[this.size];
-    }
+    let resolveFontSize: string;
 
     if (changes.fontSize?.currentValue) {
-      this.element.style.fontSize = this.fontSize;
+      resolveFontSize = changes.fontSize.currentValue;
+    } else if (changes.size?.currentValue) {
+      const size = changes.size.currentValue;
+      resolveFontSize = this.mergedConfig.sizes[size];
+    } else {
+      const size = this.mergedConfig.defaultSize;
+      if (size) {
+        resolveFontSize = this.mergedConfig.sizes[size];
+      }
+    }
+
+    if (resolveFontSize !== this.fz) {
+      this.element.style.fontSize = resolveFontSize;
+      this.fz = resolveFontSize;
     }
   }
 
   get element() {
     return this.host.nativeElement;
+  }
+
+  private setDefaultSize() {
+    const defaultSize = this.mergedConfig.defaultSize;
+    if (this.mergedConfig.defaultSize) {
+      this.element.style.fontSize = this.mergedConfig.sizes[defaultSize];
+    }
   }
 
   private render() {
@@ -97,17 +116,17 @@ export class SvgIconComponent implements OnInit, OnChanges {
       this.element.classList.add(`svg-icon-${this.key}`);
       this.element.innerHTML = this.registry.get(this.key);
     } else if (isDevMode()) {
-      console.warn(`⚠️ ${this.key} is missing!`);
+      console.warn(`${this.key} is missing!`);
     }
   }
 
   private createConfig() {
     const defaults: SVG_CONFIG = {
       sizes: {
-        xs: '1rem',
-        sm: '1.25rem',
-        md: '1.5rem',
-        lg: '2rem'
+        xs: '0.5rem',
+        sm: '0.75rem',
+        md: '1rem',
+        lg: '1.5rem'
       }
     };
 

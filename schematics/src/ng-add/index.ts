@@ -95,10 +95,13 @@ function addScripts({ project }): Rule {
     asJSON['devDependencies']['svg-to-ts'] = '^5.0.0';
 
     asJSON['svg-to-ts'] = {
-      conversionType: 'object',
-      srcFiles: [`./${sourceRoot}/assets/svg/*.svg`],
-      outputDirectory: `./${sourceRoot}/assets/svg`,
-      fileName: 'svg-icons',
+      generateType: 'false',
+      delimiter: 'KEBAB',
+      conversionType: 'files',
+      iconsFolderName: 'svg',
+      prefix: 'app',
+      srcFiles: ['./src/assets/svg/*.svg'],
+      outputDirectory: './src/app',
       svgoConfig: {
         plugins: [
           {

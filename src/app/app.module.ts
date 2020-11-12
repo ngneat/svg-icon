@@ -4,7 +4,6 @@ import { SvgIconsModule } from '@ngneat/svg-icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import icons from '../assets/svg/svg-icons';
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,7 +11,7 @@ import icons from '../assets/svg/svg-icons';
     BrowserModule,
     AppRoutingModule,
     SvgIconsModule.forRoot({
-      icons
+      defaultSize: 'lg'
     })
   ],
   providers: [],

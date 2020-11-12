@@ -1,10 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
-
-interface SvgToTSIcon {
-  name: string;
-  data: string;
-}
+import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
 class SvgIcon {
   appliedAttributes = false;
@@ -49,11 +44,12 @@ export class SvgIconRegistry {
     return svg.content;
   }
 
-  register(svg: Record<string, string | SvgToTSIcon> | SvgToTSIcon[], options: { override?: boolean } = {}) {
-    const { override = true } = options;
-    for (const [key, content] of this.normalizeSvgs(svg)) {
-      if (override || !this.svgMap.has(key)) {
-        this.addIcon(key, content);
+  register(icons: SvgIconType | SvgIconType[]) {
+    const toArray = Array.isArray(icons) ? icons : [icons];
+
+    for (const { name, data } of toArray) {
+      if (!this.hasSvg(name)) {
+        this.addIcon(name, data);
       }
     }
   }
@@ -127,23 +123,5 @@ export class SvgIconRegistry {
   private addIcon(name: string, data: string) {
     const config = new SvgIcon(data);
     this.svgMap.set(name, config);
-  }
-
-  private svgTsToEntry({ name, data }: SvgToTSIcon) {
-    return [name, data];
-  }
-
-  private isString(value): value is string {
-    return typeof value === 'string';
-  }
-
-  private normalizeSvgs(svg: Parameters<this['register']>[0]) {
-    return Array.isArray(svg)
-      ? svg.map(this.svgTsToEntry)
-      : Object.entries(svg).map(entry => {
-          const [, content] = entry;
-
-          return this.isString(content) ? (entry as [string, string]) : this.svgTsToEntry(content);
-        });
   }
 }

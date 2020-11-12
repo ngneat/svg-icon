@@ -1,15 +1,4 @@
-<h1>Icons</h1>
-<button (click)="change()">Change</button>
-<h2>xs</h2>
-<svg-icon [key]="icon" [size]="size" [color]="color"></svg-icon> Location
-<h2>sm</h2>
-<svg-icon key="location" size="sm"></svg-icon> Location
-<h2>md</h2>
-<svg-icon key="location"></svg-icon> Location
-<h2>lg</h2>
-<svg-icon key="location" size="lg"></svg-icon> Location
-<h2>Custom</h2>
-<div style="display: flex; align-items: center;">
-  <svg-icon key="settings" color="hotpink" fontSize="30px" style="margin-right: 5px;"></svg-icon>
-  Settings
-</div>
+<button routerLink="dashboard">Dashboard Lazy</button>
+<button routerLink="todos">Todos Lazy</button>
+
+<router-outlet></router-outlet>
