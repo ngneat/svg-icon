@@ -45,7 +45,7 @@ export class SvgIconComponent implements OnInit, OnChanges {
   size: 'lg' | 'md' | 'sm' | 'xs' = 'md';
 
   @Input()
-  fontSize: number;
+  fontSize: number | string;
 
   @Input()
   color: string;
