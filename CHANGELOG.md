@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/ngneat/svg-icon/compare/v1.0.2...v1.0.3) (2020-11-12)
+
+
+### Bug Fixes
+
+* 🐛 fontsize input allow string ([7639ee2](https://github.com/ngneat/svg-icon/commit/7639ee2fe2c80687f05d363696d290258985b7ca)), closes [#8](https://github.com/ngneat/svg-icon/issues/8)
+
 ### [1.0.2](https://github.com/ngneat/svg-icon/compare/v1.0.1...v1.0.2) (2020-11-09)
 
 ### [1.0.1](https://github.com/ngneat/svg-icon/compare/v1.0.0...v1.0.1) (2020-11-05)
