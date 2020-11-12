@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/ngneat/svg-icon/compare/v1.0.3...v2.0.0) (2020-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* An icon is now an object with a name and data keys
+
+### Features
+
+* 🎸 lazy load focus ([718819f](https://github.com/ngneat/svg-icon/commit/718819f7ff56f546e2480b0ed1fe28fdfd70580c))
+
 ### [1.0.3](https://github.com/ngneat/svg-icon/compare/v1.0.2...v1.0.3) (2020-11-12)
 
 
