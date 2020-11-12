@@ -82,7 +82,6 @@ This command will automatically preform the recommended flow (steps 2-4).
 5. Now you can use the `svg-icon` component:
 
    ```html
-   // prettier-ignore
    <svg-icon key="settings"></svg-icon>
    <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
    ```
