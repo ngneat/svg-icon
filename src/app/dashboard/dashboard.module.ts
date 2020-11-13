@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { appSettings } from '../svg/app-settings.icon';
 import { SvgIconsModule } from '@ngneat/svg-icon';
+import { settingsIcon } from '../svg';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule, SvgIconsModule.forChild(appSettings)]
+  imports: [CommonModule, DashboardRoutingModule, SvgIconsModule.forChild(settingsIcon)]
 })
-export class DashboardModule {}
+export class DashboardModule {
+}

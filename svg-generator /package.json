@@ -1,0 +1,28 @@
+{
+  "name": "@ngneat/svg-generator",
+  "version": "1.0.0",
+  "description": "svg generator",
+  "main": "generator.js",
+  "bin": {
+    "svg-generator": "index.js"
+  },
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc"
+  },
+  "keywords": ["svg", "svg-generator", "svg to ts"],
+  "author": "Netanel Basal",
+  "license": "MIT",
+  "dependencies": {
+    "@types/fs-extra": "^9.0.4",
+    "@types/lodash.kebabcase": "^4.1.6",
+    "@types/svgo": "^1.3.3",
+    "camelcase": "^6.2.0",
+    "chokidar": "^3.4.3",
+    "fs-extra": "^9.0.1",
+    "glob": "^7.1.6",
+    "lodash.kebabcase": "^4.1.1",
+    "svgo": "^1.3.2",
+    "typescript": "^4.0.5"
+  }
+}

@@ -2,7 +2,7 @@
   "name": "svg-icons",
   "version": "0.0.0",
   "scripts": {
-    "generate-icons": "svg-to-ts",
+    "postinstall": "ngcc",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -20,6 +20,19 @@
     "schematics:copy": "cp schematics/src/collection.json dist/ngneat/svg-icon/schematics/src && cp schematics/src/ng-add/schema.json dist/ngneat/svg-icon/schematics/src/ng-add"
   },
   "private": true,
+  "svgGenerator": {
+    "srcFiles": "./src/assets/svg",
+    "outputDirectory": "./src/app",
+    "dirName": "svg",
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true,
+          "cleanupAttrs": true
+        }
+      ]
+    }
+  },
   "dependencies": {
     "@angular/animations": "~9.1.11",
     "@angular/common": "~9.1.11",
@@ -30,11 +43,13 @@
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
     "@ngneat/lib": "^1.0.1",
+    "@ngneat/tailwind": "^1.0.8",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "9.2.0",
     "@angular-devkit/build-angular": "~0.901.8",
     "@angular-devkit/build-ng-packagr": "~0.901.8",
     "@angular/cli": "~9.1.8",
@@ -48,6 +63,7 @@
     "@types/node": "^12.11.1",
     "all-contributors-cli": "^6.8.1",
     "codelyzer": "^5.1.2",
+    "cosmiconfig": "^7.0.0",
     "cross-env": "^5.2.0",
     "git-cz": "^3.2.1",
     "husky": "^3.0.1",
@@ -60,14 +76,19 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "lint-staged": "^9.2.0",
     "ng-packagr": "^9.0.0",
+    "postcss": "8.1.7",
+    "postcss-import": "13.0.0",
+    "postcss-loader": "4.0.4",
+    "postcss-scss": "3.0.4",
     "prettier": "^1.18.2",
     "protractor": "~7.0.0",
     "schematics-utilities": "1.1.1",
     "standard-version": "^6.0.1",
     "svg-to-ts": "5.7.1",
+    "tailwindcss": "1.9.6",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "^3.8.3"
   },
   "config": {
     "commitizen": {
@@ -84,26 +105,6 @@
     "hooks": {
       "commit-msg": "commitlint -e $GIT_PARAMS",
       "pre-commit": "npm run hooks:pre-commit && lint-staged"
-    }
-  },
-  "svg-to-ts": {
-    "generateType": "false",
-    "delimiter": "KEBAB",
-    "conversionType": "files",
-    "iconsFolderName": "svg",
-    "prefix": "app",
-    "srcFiles": [
-      "./src/assets/svg/*.svg"
-    ],
-    "outputDirectory": "./src/app",
-    "fileName": "svg-icons",
-    "svgoConfig": {
-      "plugins": [
-        {
-          "removeDimensions": true,
-          "cleanupAttrs": true
-        }
-      ]
     }
   }
 }
