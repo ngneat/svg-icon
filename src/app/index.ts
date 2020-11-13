@@ -4,6 +4,9 @@ import { MyIcon } from './svg/my-icons.model';
 
 export type IconNameSubset<T extends Readonly<MyIcon[]>> = T[number]['name'];
 
+export * from './svg/app-dashboard.icon';
+export * from './svg/app-home.icon';
 export * from './svg/app-location.icon';
 export * from './svg/app-settings.icon';
+export * from './svg/app-user.icon';
 export * from './svg/my-icons.model';
