@@ -4,11 +4,11 @@ import SVGO from 'svgo';
 import { readFileSync } from 'fs';
 import { basename, extname, resolve } from 'path';
 import { createPrinter, createSourceFile, EmitHint, NewLineKind, ScriptKind, ScriptTarget, Statement, updateSourceFileNode } from 'typescript';
-import { mkdirpSync, outputFileSync, removeSync } from 'fs-extra';
+import { outputFileSync, removeSync } from 'fs-extra';
 import { createArrayExport, createExportDeclaration, createImportDeclaration, createStatement } from './ast';
 import { Config, defaults } from './types';
 
-export default function run(config: Config | null) {
+export function generateSVGIcons(config: Config | null) {
 
   if(!config) {
     console.log(`Cant find a config object!`);
@@ -17,17 +17,14 @@ export default function run(config: Config | null) {
   }
 
   const {
-    outputDirectory,
-    dirName: rootDirName,
+    outputPath,
     prefix,
     postfix,
     svgoConfig,
-    srcFiles
+    srcPath
   }: Config = { ...defaults, ...config };
-  const rootDirPath = resolve(outputDirectory, rootDirName!);
 
-  removeSync(rootDirPath);
-  mkdirpSync(rootDirPath);
+  removeSync(resolve(outputPath));
 
   const printer = createPrinter({
     newLine: NewLineKind.LineFeed
@@ -41,10 +38,11 @@ export default function run(config: Config | null) {
     ScriptKind.TS
   );
 
-  const generateIcons = function generateIcons(iconsPath: string, dirName = '', isDir = false) {
-    const filesList = glob.sync(`${iconsPath}/*`);
+  const generateIcons = function generateIcons(srcPath: string, outputPath: string, isDir = false) {
+    const dirName = getDirName(srcPath);
+    const filesList = glob.sync(`${srcPath}/*`);
     const exportDeclarations: Statement[] = [];
-    const rootDirPath = resolve(outputDirectory, rootDirName!, dirName!);
+
     let fileIndex = 0;
     const identifiers: string[] = [];
 
@@ -54,48 +52,54 @@ export default function run(config: Config | null) {
 
       // It means it's a file
       if(!!extension) {
-        const svgContent = readFileSync(path, { encoding: 'utf8' });
-        const optimizedContent = await new SVGO(svgoConfig).optimize(svgContent);
-        fileIndex++;
+        if(extension === '.svg') {
+          const svgContent = readFileSync(path, { encoding: 'utf8' });
+          const optimizedContent = await new SVGO(svgoConfig).optimize(svgContent);
+          fileIndex++;
 
-        const iconName = basename(path, extension);
-        const identifierName = camelcase(`${prefix}-${iconName}-${postfix}`);
+          const iconName = basename(path, extension);
+          const identifierName = camelcase(`${prefix}-${iconName}-${postfix}`);
 
-        const statement = createStatement({
-          svgContent: optimizedContent.data,
-          iconName,
-          identifierName
-        });
+          const statement = createStatement({
+            svgContent: optimizedContent.data,
+            iconName,
+            identifierName
+          });
 
-        const tsCode = printer.printNode(EmitHint.Unspecified, statement, sourceFile);
-        outputFileSync(`${rootDirPath}/${iconName}.ts`, tsCode, { encoding: 'utf8' });
+          const tsCode = printer.printNode(EmitHint.Unspecified, statement, sourceFile);
+          outputFileSync(`${outputPath}/${iconName}.ts`, tsCode, { encoding: 'utf8' });
 
-        if(isDir) {
-          exportDeclarations.push(createImportDeclaration({ identifierName, iconName }));
-          identifiers.push(identifierName);
-        } else {
-          exportDeclarations.push(createExportDeclaration({ identifierName, iconName }));
-        }
-
-        if(fileIndex === filesSize) {
           if(isDir) {
-            exportDeclarations.push(createArrayExport(dirName, identifiers));
+            exportDeclarations.push(createImportDeclaration({ identifierName, iconName }));
+            identifiers.push(identifierName);
+          } else {
+            exportDeclarations.push(createExportDeclaration({ identifierName, iconName }));
           }
-          const barrelFile = updateSourceFileNode(sourceFile, exportDeclarations);
-          outputFileSync(`${rootDirPath}/index.ts`, printer.printFile(barrelFile), { encoding: 'utf8' });
+
+          if(fileIndex === filesSize) {
+            if(isDir) {
+              exportDeclarations.push(createArrayExport(dirName, identifiers));
+            }
+            const barrelFile = updateSourceFileNode(sourceFile, exportDeclarations);
+            outputFileSync(`${outputPath}/index.ts`, printer.printFile(barrelFile), { encoding: 'utf8' });
+          }
         }
       } else {
         // Otherwise it's a directory
-        const dirName = path.substring(path.lastIndexOf('/') + 1);
-        generateIcons(path, dirName, true);
+        const srcPath = path;
+        const dirName = getDirName(srcPath);
+        const output = resolve(outputPath, dirName);
+
+        generateIcons(srcPath, output, true);
       }
     });
 
   };
 
-  generateIcons(srcFiles);
+  generateIcons(srcPath, resolve(outputPath), false);
 
 }
 
-
-
+function getDirName(srcPath: string) {
+  return srcPath.substring(srcPath.lastIndexOf('/') + 1);
+}

@@ -6,11 +6,10 @@ module.exports = (config) => {
 
   return merge(config, {
     plugins: [new SvgGeneratorWebpackPlugin({
-      watch          : !isProd,
-      srcFiles       : './src/assets/svg',
-      outputDirectory: './src/app',
-      dirName        : 'svg',
-      svgoConfig     : {
+      watch     : !isProd,
+      srcPath   : './src/assets/svg',
+      outputPath: './src/app/svg',
+      svgoConfig: {
         plugins: [
           {
             removeDimensions: true,

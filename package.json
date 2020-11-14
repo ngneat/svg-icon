@@ -21,9 +21,8 @@
   },
   "private": true,
   "svgGenerator": {
-    "srcFiles": "./src/assets/svg",
-    "outputDirectory": "./src/app",
-    "dirName": "svg",
+    "srcPath": "./src/assets/svg",
+    "outputPath": "./src/app/svg",
     "svgoConfig": {
       "plugins": [
         {
