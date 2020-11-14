@@ -74,7 +74,7 @@ export function createArrayExport(arrayName: string, identifiers: string[]) {
     [createModifier(SyntaxKind.ExportKeyword)],
     factory.createVariableDeclarationList(
       [factory.createVariableDeclaration(
-        factory.createIdentifier(camelcase(arrayName)),
+        factory.createIdentifier(camelcase(`${arrayName}Icons`)),
         undefined,
         undefined,
         factory.createArrayLiteralExpression(

@@ -6,11 +6,18 @@
   "bin": {
     "svg-generator": "index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc"
   },
-  "keywords": ["svg", "svg-generator", "svg to ts"],
+  "keywords": [
+    "svg",
+    "svg-generator",
+    "svg to ts"
+  ],
   "author": "Netanel Basal",
   "license": "MIT",
   "dependencies": {
