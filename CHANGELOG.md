@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/ngneat/svg-icon/compare/v2.0.0...v2.1.0) (2020-11-16)
+
+
+### Features
+
+* support server-side rendering ([dc60850](https://github.com/ngneat/svg-icon/commit/dc6085070d38c34dc95d22b6c735552664f445fd))
+
 ## [2.0.0](https://github.com/ngneat/svg-icon/compare/v1.0.3...v2.0.0) (2020-11-12)
 
 
