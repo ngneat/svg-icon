@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { inject, Inject, Injectable } from '@angular/core';
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
 class SvgIcon {
@@ -11,8 +12,9 @@ class SvgIcon {
 export class SvgIconRegistry {
   private svgMap = new Map<string, SvgIcon>();
   private XMLSerializer: XMLSerializer;
+  private document: Document = inject(DOCUMENT);
 
-  constructor(@Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG) {
+  constructor(@Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
     if (config.icons) {
       this.register(config.icons);
     }
@@ -56,7 +58,7 @@ export class SvgIconRegistry {
 
   getSvgElement(iconName: string): SVGSVGElement {
     const svgString = this.get(iconName);
-    const div = document.createElement('DIV');
+    const div = this.document.createElement('div');
     div.innerHTML = svgString;
     const svg = div.querySelector('svg') as SVGSVGElement;
 
@@ -90,7 +92,7 @@ export class SvgIconRegistry {
   }
 
   private toElement(content: string): SVGElement {
-    const div = document.createElement('DIV');
+    const div = this.document.createElement('div');
     div.innerHTML = content;
     const svgElement = div.querySelector('svg') as SVGElement;
     if (!svgElement) {
