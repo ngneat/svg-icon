@@ -48,7 +48,9 @@ This command will automatically preform the recommended flow (steps 2-4).
        "svgoConfig": {
          "plugins": [
            {
-             "removeDimensions": true,
+             "removeDimensions": true
+           },
+           {
              "cleanupAttrs": true
            }
          ]
