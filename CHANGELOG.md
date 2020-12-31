@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/ngneat/svg-icon/compare/v2.1.0...v2.1.1) (2020-12-31)
+
+
+### Bug Fixes
+
+* 🐛 fix size ([a16f512](https://github.com/ngneat/svg-icon/commit/a16f51235163808a695a9e95ff1c77a47bcad90d))
+
 ## [2.1.0](https://github.com/ngneat/svg-icon/compare/v2.0.0...v2.1.0) (2020-11-16)
 
 
