@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { TodosRoutingModule } from './todos-routing.module';
 import { TodosComponent } from './todos.component';
 import { SvgIconsModule } from '@ngneat/svg-icon';
-import { locationIcon } from '../svg';
+import { locationIcon, dashboardIcon } from '../svg';
 
 @NgModule({
   declarations: [TodosComponent],
-  imports: [CommonModule, TodosRoutingModule, SvgIconsModule.forChild(locationIcon)]
+  imports: [CommonModule, TodosRoutingModule, SvgIconsModule.forChild([locationIcon, dashboardIcon])]
 })
-export class TodosModule {
-}
+export class TodosModule {}

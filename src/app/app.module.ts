@@ -11,7 +11,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     SvgIconsModule.forRoot({
-      defaultSize: 'lg'
+      defaultSize: 'md',
+      sizes: {
+        sm: '16px',
+        md: '32px',
+        lg: '64px'
+      }
     })
   ],
   providers: [],
