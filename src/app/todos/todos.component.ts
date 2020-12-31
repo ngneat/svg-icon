@@ -11,8 +11,7 @@ export class TodosComponent implements OnInit {
   size = 'lg';
   change() {
     this.color = 'blue';
-    this.key = 'dashboard';
-    this.size = 'md';
+    this.key = this.key === 'dashboard' ? 'location' : 'dashboard';
   }
   constructor() {}
 

@@ -86,6 +86,8 @@ export class SvgIconComponent implements OnInit, OnChanges {
       if (size) {
         resolveFontSize = this.mergedConfig.sizes[size];
       }
+    } else {
+      return;
     }
 
     if (resolveFontSize !== this.fz) {
