@@ -84,8 +84,7 @@ This command will automatically preform the recommended flow (steps 2-4).
 5. Now you can use the `svg-icon` component:
 
    ```html
-   <svg-icon key="settings"></svg-icon>
-   <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+   <svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
    ```
 
 In lazy load modules, you can use the `forChild` method:
@@ -116,7 +115,9 @@ You also have the option to pass fixed sizes and use them across the application
         xs: '10px',
         sm: '12px',
         md: '16px',
-        lg: '20px'
+        lg: '20px',
+        xl: '25px',
+        xxl: '30px'
       },
       defaultSize: 'md'
       icons
@@ -180,6 +181,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

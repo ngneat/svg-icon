@@ -14,6 +14,8 @@ export interface SVG_CONFIG {
     sm?: string;
     md?: string;
     lg?: string;
+    xl?: string;
+    xxl?: string;
   };
 }
 
