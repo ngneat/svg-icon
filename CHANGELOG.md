@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/ngneat/svg-icon/compare/v2.1.2...v2.2.0) (2021-01-01)
+
+
+### Features
+
+* 🎸 add xl and xxl sizes ([ed909c5](https://github.com/ngneat/svg-icon/commit/ed909c549e7bc742ec79bfda695e1a69bf5860d4)), closes [#18](https://github.com/ngneat/svg-icon/issues/18)
+
 ### [2.1.2](https://github.com/ngneat/svg-icon/compare/v2.1.1...v2.1.2) (2020-12-31)
 
 
