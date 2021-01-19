@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://github.com/ngneat/svg-icon/compare/v2.2.1...v2.2.2) (2021-01-19)
+
+
+### Bug Fixes
+
+* **ng-add:** missing return ([44c1aac](https://github.com/ngneat/svg-icon/commit/44c1aac3d3f8118b1be3cd23effa0fee343e504b))
+
 ### [2.2.1](https://github.com/ngneat/svg-icon/compare/v2.2.0...v2.2.1) (2021-01-19)
 
 
