@@ -127,6 +127,7 @@ process.on('exit', function() {
   const dir = fs.readdirSync(dirPath);
   if(dir.length < 1){
     console.log(`✅️ Ready. Put your svg icons in src/assets/svg and then 'npm run generate-icons'`);
+    return;
   }
   require('child_process').execSync('npm run generate-icons');
   console.log(`✅️ npm run generate-icons`);
