@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/ngneat/svg-icon/compare/v2.2.0...v2.2.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* **ng-add:** handling src/assets/svg empty folder ([5da88f3](https://github.com/ngneat/svg-icon/commit/5da88f3d1913b1466d4afedaf14aa4284e8c29b7))
+
 ## [2.2.0](https://github.com/ngneat/svg-icon/compare/v2.1.2...v2.2.0) (2021-01-01)
 
 
