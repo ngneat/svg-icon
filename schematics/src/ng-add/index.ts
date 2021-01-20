@@ -48,13 +48,6 @@ function injectImports(options: Schema): Rule {
       host.commitUpdate(recorder);
     }
 
-    const icons = insertImport(moduleSource, modulePath, 'icons', '../assets/svg/svg-icons', true);
-    if (icons) {
-      const recorder = host.beginUpdate(modulePath);
-      recorder.insertLeft((icons as InsertChange).pos, (icons as InsertChange).toAdd);
-      host.commitUpdate(recorder);
-    }
-
     return host;
   };
 }
@@ -65,7 +58,7 @@ function addModuleToImports(options: Schema): Rule {
     const project = getProjectFromWorkspace(workspace, Object.keys(workspace.projects)[0]);
 
     const moduleImport = `SvgIconsModule.forRoot({
-      icons
+      icons: [],
     })`;
 
     addModuleImportToRootModule(host, moduleImport, null as any, project);
