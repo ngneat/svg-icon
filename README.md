@@ -30,32 +30,27 @@ This command will automatically preform the recommended flow (steps 2-4).
 ### Icons Preparation
 
 1. Add the icons to `src/assets/svg`
-2. Use [svg-to-ts](https://github.com/kreuzerk/svg-to-ts) to clean and extract the icons content:
+2. Use `@ngneat/svg-generator` to clean and extract the icons content:
 
    ```json
    {
-     "scripts": {
-       "generate-icons": "svg-to-ts"
-     },
-     "svg-to-ts": {
-       "generateType": "false",
-       "delimiter": "KEBAB",
-       "conversionType": "files",
-       "iconsFolderName": "svg",
-       "prefix": "app",
-       "srcFiles": ["./src/assets/svg/*.svg"],
-       "outputDirectory": "./src/app",
-       "svgoConfig": {
-         "plugins": [
-           {
-             "removeDimensions": true
-           },
-           {
-             "cleanupAttrs": true
-           }
-         ]
-       }
-     }
+    "scripts": {
+      "generate-icons": "svgGenerator"
+    },
+    "svgGenerator": {
+      "outputPath": "./src/app/svg",
+      "prefix": "app",
+      "srcPath": "./src/assets/svg",
+      "outputDirectory": "./src/app",
+      "svgoConfig": {
+        "plugins": [
+          {
+            "removeDimensions": true,
+            "cleanupAttrs": true
+          }
+        ]
+      }
+    }
    }
    ```
 
@@ -68,7 +63,7 @@ This command will automatically preform the recommended flow (steps 2-4).
    ```ts
    import { SvgIconsModule } from '@ngneat/svg-icon';
 
-   import { appSettings } from '../svg/app-settings.icon';
+   import { appSettings } from '../svg';
 
    @NgModule({
      imports: [

@@ -91,17 +91,13 @@ function addScripts({ project }): Rule {
     const workspace = getWorkspace(host);
     const { sourceRoot } = getProjectFromWorkspace(workspace, project || Object.keys(workspace.projects)[0] || 'src');
 
-    asJSON.scripts['generate-icons'] = 'svg-to-ts';
-    asJSON['devDependencies']['svg-to-ts'] = '^5.0.0';
+    asJSON.scripts['generate-icons'] = 'svg-generator';
+    asJSON['devDependencies']['@ngneat/svg-generator'] = '^1.0.0';
 
-    asJSON['svg-to-ts'] = {
-      generateType: 'false',
-      delimiter: 'KEBAB',
-      conversionType: 'files',
-      iconsFolderName: 'svg',
+    asJSON['svgGenerator'] = {
+      outputPath: './src/app/svg',
       prefix: 'app',
-      srcFiles: ['./src/assets/svg/*.svg'],
-      outputDirectory: './src/app',
+      srcPath: './src/assets/svg',
       svgoConfig: {
         plugins: [
           {

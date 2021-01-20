@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const { SvgGeneratorWebpackPlugin } = require('./svg-generator /webpack-plugin');
+const { SvgGeneratorWebpackPlugin } = require('./svg-generator/webpack-plugin');
 
 module.exports = (config) => {
   const isProd = config.mode === 'production';
