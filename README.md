@@ -41,7 +41,6 @@ This command will automatically preform the recommended flow (steps 2-4).
       "outputPath": "./src/app/svg",
       "prefix": "app",
       "srcPath": "./src/assets/svg",
-      "conversionType": "files",
       "outputDirectory": "./src/app",
       "svgoConfig": {
         "plugins": [

@@ -98,7 +98,6 @@ function addScripts({ project }): Rule {
       outputPath: './src/app/svg',
       prefix: 'app',
       srcPath: './src/assets/svg',
-      conversionType: 'files',
       svgoConfig: {
         plugins: [
           {
