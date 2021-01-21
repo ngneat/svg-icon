@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/ngneat/svg-icon/compare/v2.2.2...v2.3.0) (2021-01-21)
+
+
+### Features
+
+* use svg-generator instead of svg-to-ts ([195d9d8](https://github.com/ngneat/svg-icon/commit/195d9d86533b824d51a56b0816b4c7c0ca13d623))
+
+
+### Bug Fixes
+
+* **ng-add:** remove svgIcons import ([4e50c32](https://github.com/ngneat/svg-icon/commit/4e50c32aa64f2a67213ddc31e9be82536a91cd7b))
+* rename invalid path 'svg-generator\ /' -> svg-generator ([d721f9d](https://github.com/ngneat/svg-icon/commit/d721f9d0e5f61055305c5fce0eedd7252bceee55))
+* svg-generator path ([209c6fc](https://github.com/ngneat/svg-icon/commit/209c6fcc06d294025a25c86862b1300d5f1b2053))
+
 ### [2.2.2](https://github.com/ngneat/svg-icon/compare/v2.2.1...v2.2.2) (2021-01-19)
 
 
