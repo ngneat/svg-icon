@@ -4,8 +4,8 @@
   "schematics": "./schematics/src/collection.json",
   "description": "A lightweight library that makes it easier to use SVG icons in your Angular Application",
   "dependencies": {
-    "tslib": "^1.10.0",
-    "schematics-utilities": "1.1.1"
+    "schematics-utilities": "1.1.1",
+    "tslib": "^2.0.0"
   },
   "keywords": [
     "angular",
