@@ -5,25 +5,25 @@ import { SvgIconType, SVG_CONFIG, SVG_ICONS, SVG_ICONS_CONFIG } from './types';
 
 @NgModule({
   declarations: [SvgIconComponent],
-  exports: [SvgIconComponent]
+  exports: [SvgIconComponent],
 })
 export class SvgIconsModule {
-  static forRoot(config: Partial<SVG_CONFIG> = {}): ModuleWithProviders {
+  static forRoot(config: Partial<SVG_CONFIG> = {}): ModuleWithProviders<SvgIconsModule> {
     return {
       ngModule: SvgIconsModule,
       providers: [
         {
           provide: SVG_ICONS_CONFIG,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 
-  static forChild(icons: SvgIconType | SvgIconType[]) {
+  static forChild(icons: SvgIconType | SvgIconType[]): ModuleWithProviders<SvgIconsModule> {
     return {
       ngModule: SvgIconsModule,
-      providers: [{ provide: SVG_ICONS, useValue: icons }]
+      providers: [{ provide: SVG_ICONS, useValue: icons }],
     };
   }
 
