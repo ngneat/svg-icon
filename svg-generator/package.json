@@ -1,6 +1,6 @@
 {
   "name": "@ngneat/svg-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "svg generator",
   "main": "generator.js",
   "bin": {
