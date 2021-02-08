@@ -5,7 +5,8 @@ import {
   getAppModulePath,
   getProjectFromWorkspace,
   getWorkspace,
-  InsertChange
+  InsertChange,
+  WorkspaceProject,
 } from 'schematics-utilities';
 import * as ts from 'typescript';
 import * as fs from 'fs';
@@ -61,7 +62,7 @@ function addModuleToImports(options: Schema): Rule {
       icons: [],
     })`;
 
-    addModuleImportToRootModule(host, moduleImport, null as any, project);
+    addModuleImportToRootModule(host, moduleImport, null as any, project as WorkspaceProject);
 
     context.logger.log('info', `✅️ @ngneat/svg-icon is imported`);
 
@@ -95,10 +96,10 @@ function addScripts({ project }): Rule {
         plugins: [
           {
             removeDimensions: true,
-            cleanupAttrs: true
-          }
-        ]
-      }
+            cleanupAttrs: true,
+          },
+        ],
+      },
     };
 
     fs.writeFileSync('./package.json', JSON.stringify(asJSON, null, 2));
@@ -108,13 +109,13 @@ function addScripts({ project }): Rule {
   };
 }
 
-process.on('exit', function() {
+process.on('exit', function () {
   const dirPath = './src/assets/svg';
-  if(!fs.existsSync(dirPath)){
+  if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath);
   }
   const dir = fs.readdirSync(dirPath);
-  if(dir.length < 1){
+  if (dir.length < 1) {
     console.log(`✅️ Ready. Put your svg icons in src/assets/svg and then 'npm run generate-icons'`);
     return;
   }
@@ -129,6 +130,6 @@ export default function ngAdd(options: Schema): Rule {
     installPackageJsonDependencies(),
     addModuleToImports(options),
     injectImports(options),
-    log()
+    log(),
   ]);
 }
