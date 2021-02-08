@@ -7,7 +7,7 @@ import {
   isDevMode,
   OnChanges,
   OnInit,
-  SimpleChange
+  SimpleChange,
 } from '@angular/core';
 import { SvgIconRegistry } from './registry';
 import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
@@ -31,9 +31,9 @@ type Changes = {
         height: 1em;
         font-size: 1rem;
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent implements OnInit, OnChanges {
   @Input()
@@ -49,7 +49,7 @@ export class SvgIconComponent implements OnInit, OnChanges {
   color: string;
 
   private mergedConfig: SVG_CONFIG;
-  private fz: string;
+  private resolvedSize: string;
 
   constructor(
     private host: ElementRef,
@@ -65,7 +65,9 @@ export class SvgIconComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: Changes) {
-    if (changes.key?.firstChange === false) {
+    const keyChanged = changes.key?.firstChange === false;
+
+    if (keyChanged) {
       this.element.classList.remove(`svg-icon-${changes.key.previousValue}`);
       this.render();
     }
@@ -74,25 +76,23 @@ export class SvgIconComponent implements OnInit, OnChanges {
       this.element.style.color = this.color;
     }
 
-    let resolveFontSize: string;
+    let resolveFontSize = this.resolvedSize;
 
     if (changes.fontSize?.currentValue) {
       resolveFontSize = changes.fontSize.currentValue;
     } else if (changes.size?.currentValue) {
       const size = changes.size.currentValue;
       resolveFontSize = this.mergedConfig.sizes[size];
-    } else if (!this.fz) {
+    } else if (!this.resolvedSize) {
       const size = this.mergedConfig.defaultSize;
       if (size) {
         resolveFontSize = this.mergedConfig.sizes[size];
       }
-    } else {
-      return;
     }
 
-    if (resolveFontSize !== this.fz) {
+    if (keyChanged || resolveFontSize !== this.resolvedSize) {
       this.element.style.fontSize = resolveFontSize;
-      this.fz = resolveFontSize;
+      this.resolvedSize = resolveFontSize;
     }
   }
 
@@ -118,13 +118,13 @@ export class SvgIconComponent implements OnInit, OnChanges {
         md: '1rem',
         lg: '1.5rem',
         xl: '2rem',
-        xxl: '2.5rem'
-      }
+        xxl: '2.5rem',
+      },
     };
 
     return {
       ...defaults,
-      ...this.config
+      ...this.config,
     };
   }
 }
