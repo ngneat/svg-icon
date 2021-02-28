@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/ngneat/svg-icon/compare/v3.0.0...v3.1.0) (2021-02-28)
+
+
+### Features
+
+* 🎸 add aria hidden attr ([5c1174c](https://github.com/ngneat/svg-icon/commit/5c1174ca41c33606fbf4723e7e1b96af823db56e))
+* 🎸 bump version ([df308e7](https://github.com/ngneat/svg-icon/commit/df308e7d9ec6cdec9e2133bfc3062210b7b9054b))
+
 ### [2.3.1](https://github.com/ngneat/svg-icon/compare/v2.3.0...v2.3.1) (2021-02-08)
 
 
