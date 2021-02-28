@@ -96,7 +96,6 @@ describe('SvgIconComponent', () => {
 });
 
 
-
 describe('SvgIconComponent Custom Sizes', () => {
   let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
 
