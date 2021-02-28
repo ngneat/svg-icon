@@ -3,16 +3,15 @@ import { inject, Inject, Injectable } from '@angular/core';
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
 class SvgIcon {
-  appliedAttributes = false;
+  init = false;
 
   constructor(public content: string) {}
 }
 
 @Injectable({ providedIn: 'root' })
 export class SvgIconRegistry {
-  private svgMap = new Map<string, SvgIcon>();
-  private XMLSerializer: XMLSerializer;
-  private document: Document = inject(DOCUMENT);
+  private readonly svgMap = new Map<string, SvgIcon>();
+  private readonly document: Document = inject(DOCUMENT);
 
   constructor(@Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
     if (config.icons) {
@@ -20,110 +19,58 @@ export class SvgIconRegistry {
     }
   }
 
-  private get lazyXMLSerializer() {
-    if (!this.XMLSerializer) {
-      this.XMLSerializer = new XMLSerializer();
-    }
-
-    return this.XMLSerializer;
-  }
-
   getAll() {
     return this.svgMap;
   }
 
-  get(key: string, options: { setDimensions: boolean } = { setDimensions: true }): string | undefined {
-    const svg = this.svgMap.get(key);
+  get(key: string): string | undefined {
+    const icon = this.svgMap.get(key);
 
-    if (!svg) {
+    if (!icon) {
       return undefined;
     }
 
-    if (!svg.appliedAttributes) {
-      this.addAttributes(svg, options);
+    if (!icon.init) {
+      const svg = this.toElement(icon.content);
+      svg.setAttribute('fit', '');
+      svg.setAttribute('height', '100%');
+      svg.setAttribute('width', '100%');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('focusable', 'false');
+
+      icon.content = svg.outerHTML;
+      icon.init = true;
     }
 
-    return svg.content;
+    return icon.content;
   }
 
   register(icons: SvgIconType | SvgIconType[]) {
-    const toArray = Array.isArray(icons) ? icons : [icons];
-
-    for (const { name, data } of toArray) {
-      if (!this.hasSvg(name)) {
-        this.addIcon(name, data);
+    for (const { name, data } of Array.isArray(icons) ? icons : [icons]) {
+      if (!this.svgMap.has(name)) {
+        this.svgMap.set(name, new SvgIcon(data));
       }
     }
   }
 
-  getSvgElement(iconName: string): SVGSVGElement {
-    const svgString = this.get(iconName);
+  getSvgElement(name: string): SVGSVGElement | undefined {
+    const content = this.get(name);
+
+    if (!content) {
+      return undefined;
+    }
+
     const div = this.document.createElement('div');
-    div.innerHTML = svgString;
-    const svg = div.querySelector('svg') as SVGSVGElement;
+    div.innerHTML = content;
 
-    if (!svg) {
-      throw Error('<svg> tag not found');
-    }
-
-    return svg;
-  }
-
-  hasSvg(key: string) {
-    return this.svgMap.has(key);
-  }
-
-  private addAttributes(config: SvgIcon, options: { setDimensions: boolean }) {
-    const svg = this.toElement(config.content);
-    this.setAttributes(svg, options);
-    config.content = this.asRaw(svg);
-    config.appliedAttributes = true;
-  }
-
-  private asRaw(svgElement: SVGElement) {
-    let content = svgElement.outerHTML;
-
-    // Handle IE11
-    if (content === undefined) {
-      content = this.lazyXMLSerializer.serializeToString(svgElement);
-    }
-
-    return content;
+    return div.querySelector('svg') as SVGSVGElement;
   }
 
   private toElement(content: string): SVGElement {
     const div = this.document.createElement('div');
     div.innerHTML = content;
-    const svgElement = div.querySelector('svg') as SVGElement;
-    if (!svgElement) {
-      throw Error('<svg> tag not found');
-    }
 
-    return svgElement;
+    return div.querySelector('svg') as SVGElement;
   }
 
-  private setAttributes(svg: SVGElement, options: { setDimensions: boolean }): SVGElement {
-    if (!svg.getAttribute('xmlns')) {
-      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    }
-
-    svg.setAttribute('fit', '');
-
-    if (options.setDimensions) {
-      svg.setAttribute('height', '100%');
-      svg.setAttribute('width', '100%');
-    }
-
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-
-    // Disable IE11 default behavior to make SVGs focusable.
-    svg.setAttribute('focusable', 'false');
-
-    return svg;
-  }
-
-  private addIcon(name: string, data: string) {
-    const config = new SvgIcon(data);
-    this.svgMap.set(name, config);
-  }
 }

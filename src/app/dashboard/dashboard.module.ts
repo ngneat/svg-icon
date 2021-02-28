@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { SvgIconsModule } from '@ngneat/svg-icon';
-import { settingsIcon } from '../svg';
+import { settingsIcon } from '../svg/settings';
 
 @NgModule({
   declarations: [DashboardComponent],

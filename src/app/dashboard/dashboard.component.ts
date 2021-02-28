@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
   icon = 'settings';
   size: string = 'xs';
-  color: string;
+  color!: string;
 
   change() {
     this.icon = 'settings';

@@ -27,7 +27,7 @@ export class SvgIconsModule {
     };
   }
 
-  constructor(@Optional() @Inject(SVG_ICONS) icons, private service: SvgIconRegistry) {
+  constructor(@Optional() @Inject(SVG_ICONS) icons: SvgIconType | SvgIconType[], private service: SvgIconRegistry) {
     if (icons) {
       this.service.register(icons);
     }
