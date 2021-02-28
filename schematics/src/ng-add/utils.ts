@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as ts from 'typescript';
 import { Tree, SchematicsException } from '@angular-devkit/schematics';
 

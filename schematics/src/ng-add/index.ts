@@ -78,15 +78,13 @@ function log(): Rule {
   };
 }
 
-function addScripts({ project }): Rule {
+function addScripts(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const content = fs.readFileSync('./package.json', 'utf-8');
     const asJSON = JSON.parse(content);
-    const workspace = getWorkspace(host);
-    const { sourceRoot } = getProjectFromWorkspace(workspace, project || Object.keys(workspace.projects)[0] || 'src');
 
     asJSON.scripts['generate-icons'] = 'svg-generator';
-    asJSON['devDependencies']['@ngneat/svg-generator'] = '^1.0.0';
+    asJSON['devDependencies']['@ngneat/svg-generator'] = '^2.0.0';
 
     asJSON['svgGenerator'] = {
       outputPath: './src/app/svg',
@@ -126,7 +124,7 @@ process.on('exit', function () {
 
 export default function ngAdd(options: Schema): Rule {
   return chain([
-    addScripts(options),
+    addScripts(),
     installPackageJsonDependencies(),
     addModuleToImports(options),
     injectImports(options),
