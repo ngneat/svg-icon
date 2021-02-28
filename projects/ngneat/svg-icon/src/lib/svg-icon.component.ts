@@ -12,7 +12,8 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
   selector: 'svg-icon',
   template: '',
   host: {
-    "role": 'img'
+    "role": 'img',
+    "aria-hidden": "true"
   },
   styles: [
     `
