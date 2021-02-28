@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { SvgGeneratorWebpackPlugin } = require('./svg-generator/webpack-plugin');
 
 module.exports = (config) => {

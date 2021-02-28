@@ -10,94 +10,157 @@
 [![commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)]()
 [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 [![ngneat](https://img.shields.io/badge/@-ngneat-383636?style=flat-square&labelColor=8f68d4)](https://github.com/ngneat/)
 [![spectator](https://img.shields.io/badge/tested%20with-spectator-2196F3.svg?style=flat-square)]()
 
 The `svg-icon` library enables using the `<svg-icon>` tag to directly display SVG icons in the DOM.
 This approach offers an advantage over using an `<img>` tag or via the CSS `background-image` property, because it allows styling and animating the SVG with CSS.
 
-For example, if the fill or stroke properties of elements in the svg are set to `currentColor`, they will have the color defined for the containing DOM element,. So the color can easily be changed by changing the color style on the `svg-icon` element.
+For example, if the `fill` or `stroke` properties of elements in the svg are set to `currentColor`, they will have the color defined for the containing DOM element. So the color can easily be changed by changing the color style on the `svg-icon` element.
 
 ## Installation
 
 `ng add @ngneat/svg-icon`
 
-This command will automatically preform the recommended flow (steps 2-4).
+## Icons Preparation
 
-## Recommended Flow
-
-### Icons Preparation
-
-1. Add the icons to `src/assets/svg`
-2. Use `@ngneat/svg-generator` to clean and extract the icons content:
-
-   ```json
-   {
-    "scripts": {
-      "generate-icons": "svgGenerator"
-    },
-    "svgGenerator": {
-      "outputPath": "./src/app/svg",
-      "prefix": "app",
-      "srcPath": "./src/assets/svg",
-      "outputDirectory": "./src/app",
-      "svgoConfig": {
-        "plugins": [
-          {
-            "removeDimensions": true,
-            "cleanupAttrs": true
-          }
-        ]
-      }
-    }
-   }
-   ```
-
-3. Run `npm run generate-icons`
-
-   ### Icons Rendering
-
-4. Import the `SvgIconsModule` in your `AppModule`, and register the icons:
-
-   ```ts
-   import { SvgIconsModule } from '@ngneat/svg-icon';
-
-   import { appSettings } from '../svg';
-
-   @NgModule({
-     imports: [
-       SvgIconsModule.forRoot({
-         icons: [appSettings]
-       })
-     ],
-     bootstrap: [AppComponent]
-   })
-   export class AppModule {}
-   ```
-
-5. Now you can use the `svg-icon` component:
-
-   ```html
-   <svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
-   ```
-
-In lazy load modules, you can use the `forChild` method:
+- Add the icons to `src/assets/svg`
+- Add an alias to the `tsconfig` file:
 
 ```ts
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
-import { appSettings } from '../svg/app-settings.icon';
+{
+  ...
+  "paths": {
+    "@app/svg/*": ["src/app/svg/*"]
+  }
+},
+```
+
+- Use `@ngneat/svg-generator` to clean and extract the icons content:
+
+```json
+{
+  "scripts": {
+    "generate-icons": "svgGenerator"
+  },
+  "svgGenerator": {
+    "outputPath": "./src/app/svg",
+    "prefix": "app",
+    "srcPath": "./src/assets/svg",
+    "outputDirectory": "./src/app",
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true,
+          "cleanupAttrs": true
+        }
+      ]
+    }
+  }
+}
+```
+
+- Run `npm run generate-icons`
+
+## Icons Rendering
+
+Import the `SvgIconsModule` in your `AppModule`, and register the icons:
+
+```ts
+import { SvgIconsModule } from '@ngneat/svg-icon';
+import { settingsIcon } from '@app/svg/settings';
+
+@NgModule({
+  imports: [
+    SvgIconsModule.forRoot({
+      icons: [settingsIcon],
+    }),
+  ]
+})
+export class AppModule {}
+```
+
+Now we can use the `svg-icon` component:
+
+```html
+<svg-icon key="settings"></svg-icon> 
+<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+```
+
+## Lazy Loaded Modules
+
+In lazy load modules, we can use the `forChild` method:
+
+```ts
+import { dashboardIcon } from '@app/svg/dashboard';
+import { userIcon } from '@app/svg/user';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule, SvgIconsModule.forChild([appSettings])]
+  imports: [ 
+    DashboardRoutingModule, 
+    SvgIconsModule.forChild([userIcon])
+  ],
 })
 export class DashboardModule {}
 ```
 
-### Icon Sizing
+Note that we're NOT using a barrel file (i.e `index.ts`). This will make sure we only **load** the SVG files we use in the current module.
+
+## Webpack Plugin
+
+To make the process more seamless, the library provides a Webpack plugin you can use to automate the extracting process:
+
+```ts
+const { SvgGeneratorWebpackPlugin } = require('@ngneat/svg-generator/webpack-plugin');
+
+{
+ plugins: [
+  new SvgGeneratorWebpackPlugin({
+    watch: !isProd,
+    srcPath: './src/assets/svg',
+    outputPath: './src/app/svg',
+    svgoConfig: {
+      plugins: [
+        {
+          removeDimensions: true,
+          cleanupAttrs: true,
+        },
+      ],
+    },
+  }),
+ ];
+}
+```
+
+## Group Icons
+
+There are cases where we want to group multiple SVG icons. For example, we might have a `notifications` feature, and we need to load SVG icons such as Slack, Email, etc.
+
+In such cases, create a unique directory, and put the related icons inside it. For example:
+
+```
+home.svg
+user.svg
+/notifications
+ - slack.svg
+ - email.svg
+```
+
+This will create a `notifications` folder with a `barrel` file that export the SVG icons inside the folder under a const named `${folderName}Icons`:
+
+```ts
+import { notificationsIcons } from '@app/svg/notifications';
+
+@NgModule({
+  imports: [SvgIconsModule.forChild(notificationsIcons)],
+})
+export class NotificationsModule {}
+```
+
+## Icon Sizing
 
 To control the SVG size, we use the `font-size` property as described in this [article](https://css-tricks.com/control-icons-with-font-size/).
 You also have the option to pass fixed sizes and use them across the application:
@@ -129,7 +192,18 @@ They are used in the `size` input:
 <svg-icon key="settings" size="lg"></svg-icon>
 ```
 
-### SvgIconRegistry
+## Inputs
+
+```ts
+@Input() key: string;
+@Input() size: string;
+@Input() fontSize: string;
+@Input() color: string;
+@Input() width: string | number;
+@Input() height: string | number;
+```
+
+## SvgIconRegistry
 
 You can inject the `SvgIconRegistry`, and get existing SVG icons or register new ones:
 
@@ -144,7 +218,7 @@ interface Icon {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   constructor(private registry: SvgIconRegistry) {
@@ -155,8 +229,6 @@ export class AppComponent {
   }
 }
 ```
-
-<a href="https://www.buymeacoffee.com/basalnetanel" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## Contributors ✨
 
@@ -177,6 +249,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

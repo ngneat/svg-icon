@@ -72,12 +72,10 @@ export function generateSVGIcons(config: Config | null) {
             exportDeclarations.push(createExportDeclaration({ identifierName, iconName }));
           }
 
-          if (fileIndex === filesSize) {
-            if (isDir) {
+          if (fileIndex === filesSize && isDir) {
               exportDeclarations.push(createArrayExport(dirName, identifiers));
-            }
-            const barrelFile = updateSourceFileNode(sourceFile, exportDeclarations);
-            outputFileSync(`${outputPath}/index.ts`, printer.printFile(barrelFile), { encoding: 'utf8' });
+              const barrelFile = updateSourceFileNode(sourceFile, exportDeclarations);
+              outputFileSync(`${outputPath}/index.ts`, printer.printFile(barrelFile), { encoding: 'utf8' });
           }
         }
       } else {

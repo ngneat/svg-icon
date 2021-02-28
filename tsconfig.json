@@ -5,6 +5,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "strict": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "es2020",
@@ -13,11 +14,13 @@
     "target": "es2015",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@ngneat/svg-icon": ["projects/ngneat/svg-icon/src/public-api.ts"]
+      "@ngneat/svg-icon": ["projects/ngneat/svg-icon/src/public-api.ts"],
+      "@app/svg/*": ["src/app/svg/*"]
     }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "disableTypeScriptVersionCheck": true
   }
 }
