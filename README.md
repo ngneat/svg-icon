@@ -48,7 +48,6 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
     "outputPath": "./src/app/svg",
     "prefix": "app",
     "srcPath": "./src/assets/svg",
-    "outputDirectory": "./src/app",
     "svgoConfig": {
       "plugins": [
         {
