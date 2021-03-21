@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/ngneat/svg-icon/compare/v3.1.0...v3.1.1) (2021-03-21)
+
+
+### Bug Fixes
+
+* 🐛 align schematics dep ([f5ec6ca](https://github.com/ngneat/svg-icon/commit/f5ec6ca0b3f8a7c3d67a246ef84f6c5fc0bdeb7e)), closes [#37](https://github.com/ngneat/svg-icon/issues/37)
+
 ## [3.1.0](https://github.com/ngneat/svg-icon/compare/v3.0.0...v3.1.0) (2021-02-28)
 
 
