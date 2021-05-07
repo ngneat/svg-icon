@@ -19,8 +19,8 @@ export class SvgIconRegistry {
       this.register(config.icons);
     }
     
-    if (config.missingIcon) {
-      this.register(config.missingIcon);
+    if (config.missingIconFallback) {
+      this.register(config.missingIconFallback);
     }
   }
 
@@ -28,9 +28,9 @@ export class SvgIconRegistry {
     return this.svgMap;
   }
 
-  get(key: string): string | undefined {
-    const icon = this.svgMap.get(key);
-
+  get(key: string | undefined): string | undefined {
+    const icon = key && this.svgMap.get(key);
+    
     if (!icon) {
       return undefined;
     }

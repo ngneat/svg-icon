@@ -26,10 +26,14 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
 export class SvgIconComponent {
   @Input()
   set key(name: string) {
-    if (this.registry.get(name)) {
-      this.renderIcon(name);
-    } else if (this.config.missingIcon && this.registry.get(this.config.missingIcon.name)) {
-      this.renderIcon(this.config.missingIcon.name);
+    const icon = this.registry.get(name) ?? this.registry.get(this.config.missingIconFallback?.name);
+
+    if (icon) {
+      this.element.setAttribute('aria-label', `${name}-icon`);
+      this.element.classList.remove(`svg-icon-${this.lastKey}`);
+      this.lastKey = name;
+      this.element.classList.add(`svg-icon-${name}`);
+      this.element.innerHTML = icon;
     }
   }
 
@@ -88,14 +92,6 @@ export class SvgIconComponent {
       ...defaults,
       ...this.config,
     };
-  }
-
-  private renderIcon(name: string) {
-    this.element.setAttribute('aria-label', `${name}-icon`);
-    this.element.classList.remove(`svg-icon-${this.lastKey}`);
-    this.lastKey = name;
-    this.element.classList.add(`svg-icon-${name}`);
-    this.element.innerHTML = this.registry.get(name);
   }
 }
 

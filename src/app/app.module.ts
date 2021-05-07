@@ -13,7 +13,7 @@ import { missingIcon } from './svg/missing';
     AppRoutingModule,
     SvgIconsModule.forRoot({
       defaultSize: 'md',
-      missingIcon: missingIcon,
+      missingIconFallback: missingIcon,
       sizes: {
         sm: '16px',
         md: '32px',

@@ -231,15 +231,15 @@ export class AppComponent {
 
 ## Missing Icon
 
-You can define **missingIcon** which will be used if icon is not found in registry:
+You can define **missingIconFallback** which will be used if icon is not found in registry:
 
 ```ts
-import { unknownIcons } from '@app/svg/unknown';
+import { unknownIcon } from '@app/svg/unknown';
 
 @NgModule({
   imports: [
     SvgIconsModule.forRoot({
-      missingIcon: unknownIcons
+      missingIconFallback: unknownIcon
     })
   ],
   bootstrap: [AppComponent]

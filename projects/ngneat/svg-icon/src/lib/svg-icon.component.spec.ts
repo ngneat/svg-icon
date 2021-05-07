@@ -158,7 +158,7 @@ describe('SvgIconComponent with Missing Icon', () => {
     component: SvgIconComponent,
     declareComponent: false,
     imports: [SvgIconsModule.forRoot({
-      missingIcon: missingIcon,
+      missingIconFallback: missingIcon,
       icons: [settingsIcon]
     })]
   });
@@ -166,7 +166,7 @@ describe('SvgIconComponent with Missing Icon', () => {
   it('should render missing icon ', () => {
     host = createHost(`<svg-icon key="unknown"></svg-icon>`);
 
-    expect(host.hostElement.querySelector('.svg-icon-missing')).toExist();
-    expect(host.hostElement.querySelector('.svg-icon-missing')?.innerHTML).toContain('<svg');
+    expect(host.hostElement.querySelector('.svg-icon-unknown')).toExist();
+    expect(host.hostElement.querySelector('.svg-icon-unknown')?.innerHTML).toContain('<svg');
   });
 });
