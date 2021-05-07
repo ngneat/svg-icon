@@ -229,6 +229,24 @@ export class AppComponent {
 }
 ```
 
+## Missing Icon
+
+You can define **missingIcon** which will be used if icon is not found in registry:
+
+```ts
+import { unknownIcons } from '@app/svg/unknown';
+
+@NgModule({
+  imports: [
+    SvgIconsModule.forRoot({
+      missingIcon: unknownIcons
+    })
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
