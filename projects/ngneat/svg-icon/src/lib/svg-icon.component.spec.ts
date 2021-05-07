@@ -1,9 +1,10 @@
+import { missingIcon } from '@app/svg/missing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
+import { dashboardIcon } from 'src/app/svg/dashboard';
+import { settingsIcon } from 'src/app/svg/settings';
 
 import { SvgIconComponent } from './svg-icon.component';
 import { SvgIconsModule } from './svg-icons.module';
-import { dashboardIcon } from 'src/app/svg/dashboard';
-import { settingsIcon } from 'src/app/svg/settings';
 
 describe('SvgIconComponent', () => {
   let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
@@ -130,4 +131,42 @@ describe('SvgIconComponent Custom Sizes', () => {
     host.setHostInput('size', 'sm');
     expect(host.element.style.fontSize).toBe('16px');
   });
-})
+});
+
+describe('SvgIconComponent without Missing Icon', () => {
+  let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
+
+  const createHost = createHostFactory({
+    component: SvgIconComponent,
+    declareComponent: false,
+    imports: [SvgIconsModule.forRoot({
+      icons: [settingsIcon]
+    })]
+  });
+
+  it('should not render unknown or missing icon', () => {
+    host = createHost(`<svg-icon key="unknown"></svg-icon>`);
+
+    expect(host.hostElement.querySelector('.svg-icon-missing')?.innerHTML).not.toContain('<svg');
+  });
+});
+
+describe('SvgIconComponent with Missing Icon', () => {
+  let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
+
+  const createHost = createHostFactory({
+    component: SvgIconComponent,
+    declareComponent: false,
+    imports: [SvgIconsModule.forRoot({
+      missingIcon: missingIcon,
+      icons: [settingsIcon]
+    })]
+  });
+
+  it('should render missing icon ', () => {
+    host = createHost(`<svg-icon key="unknown"></svg-icon>`);
+
+    expect(host.hostElement.querySelector('.svg-icon-missing')).toExist();
+    expect(host.hostElement.querySelector('.svg-icon-missing')?.innerHTML).toContain('<svg');
+  });
+});

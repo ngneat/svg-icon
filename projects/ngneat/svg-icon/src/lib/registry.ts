@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
+
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
 class SvgIcon {
@@ -16,6 +17,10 @@ export class SvgIconRegistry {
   constructor(@Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
     if (config.icons) {
       this.register(config.icons);
+    }
+    
+    if (config.missingIcon) {
+      this.register(config.missingIcon);
     }
   }
 

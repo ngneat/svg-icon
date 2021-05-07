@@ -1,10 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Inject,
-  Input
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input } from '@angular/core';
+
 import { SvgIconRegistry } from './registry';
 import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
 
@@ -12,8 +7,8 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
   selector: 'svg-icon',
   template: '',
   host: {
-    "role": 'img',
-    "aria-hidden": "true"
+    role: 'img',
+    'aria-hidden': 'true',
   },
   styles: [
     `
@@ -32,11 +27,9 @@ export class SvgIconComponent {
   @Input()
   set key(name: string) {
     if (this.registry.get(name)) {
-      this.element.setAttribute('aria-label', `${name}-icon`);
-      this.element.classList.remove(`svg-icon-${this.lastKey}`);
-      this.lastKey = name;
-      this.element.classList.add(`svg-icon-${name}`);
-      this.element.innerHTML = this.registry.get(name);
+      this.renderIcon(name);
+    } else if (this.config.missingIcon && this.registry.get(this.config.missingIcon.name)) {
+      this.renderIcon(this.config.missingIcon.name);
     }
   }
 
@@ -96,8 +89,15 @@ export class SvgIconComponent {
       ...this.config,
     };
   }
-}
 
+  private renderIcon(name: string) {
+    this.element.setAttribute('aria-label', `${name}-icon`);
+    this.element.classList.remove(`svg-icon-${this.lastKey}`);
+    this.lastKey = name;
+    this.element.classList.add(`svg-icon-${name}`);
+    this.element.innerHTML = this.registry.get(name);
+  }
+}
 
 function coerceCssPixelValue(value: any): string {
   if (value == null) {
