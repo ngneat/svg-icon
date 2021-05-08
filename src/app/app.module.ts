@@ -1,9 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { SvgIconsModule } from '@ngneat/svg-icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { missingIcon } from './svg/missing';
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,6 +13,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     SvgIconsModule.forRoot({
       defaultSize: 'md',
+      missingIconFallback: missingIcon,
       sizes: {
         sm: '16px',
         md: '32px',

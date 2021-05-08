@@ -229,6 +229,24 @@ export class AppComponent {
 }
 ```
 
+## Missing Icon
+
+You can define **missingIconFallback** which will be used if icon is not found in registry:
+
+```ts
+import { unknownIcon } from '@app/svg/unknown';
+
+@NgModule({
+  imports: [
+    SvgIconsModule.forRoot({
+      missingIconFallback: unknownIcon
+    })
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -238,15 +256,16 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://www.netbasal.com/"><img src="https://avatars1.githubusercontent.com/u/6745730?v=4" width="100px;" alt=""/><br /><sub><b>Netanel Basal</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Code">💻</a> <a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Documentation">📖</a> <a href="#ideas-NetanelBasal" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://github.com/theblushingcrow"><img src="https://avatars3.githubusercontent.com/u/638818?v=4" width="100px;" alt=""/><br /><sub><b>Inbal Sinai</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=theblushingcrow" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/shaharkazaz"><img src="https://avatars2.githubusercontent.com/u/17194830?v=4" width="100px;" alt=""/><br /><sub><b>Shahar Kazaz</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=shaharkazaz" title="Code">💻</a> <a href="#ideas-shaharkazaz" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://medium.com/@overthesanity"><img src="https://avatars1.githubusercontent.com/u/7337691?v=4" width="100px;" alt=""/><br /><sub><b>Artur Androsovych</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=arturovt" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/vltansky"><img src="https://avatars0.githubusercontent.com/u/5851280?v=4" width="100px;" alt=""/><br /><sub><b>Vlad Tansky</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=vltansky" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.netbasal.com/"><img src="https://avatars1.githubusercontent.com/u/6745730?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Netanel Basal</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Code">💻</a> <a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Documentation">📖</a> <a href="#ideas-NetanelBasal" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/theblushingcrow"><img src="https://avatars3.githubusercontent.com/u/638818?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Inbal Sinai</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=theblushingcrow" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/shaharkazaz"><img src="https://avatars2.githubusercontent.com/u/17194830?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shahar Kazaz</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=shaharkazaz" title="Code">💻</a> <a href="#ideas-shaharkazaz" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://medium.com/@overthesanity"><img src="https://avatars1.githubusercontent.com/u/7337691?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Artur Androsovych</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=arturovt" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/vltansky"><img src="https://avatars0.githubusercontent.com/u/5851280?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vlad Tansky</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=vltansky" title="Code">💻</a></td>
+    <td align="center"><a href="http://zgabievi.co/"><img src="https://avatars.githubusercontent.com/u/1515299?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zura Gabievi</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=zgabievi" title="Code">💻</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

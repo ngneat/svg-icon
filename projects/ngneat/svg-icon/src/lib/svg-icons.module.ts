@@ -1,7 +1,8 @@
 import { Inject, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+
 import { SvgIconRegistry } from './registry';
 import { SvgIconComponent } from './svg-icon.component';
-import { SvgIconType, SVG_CONFIG, SVG_ICONS, SVG_ICONS_CONFIG } from './types';
+import { SVG_CONFIG, SVG_ICONS, SVG_ICONS_CONFIG, SVG_MISSING_ICON_FALLBACK, SvgIconType } from './types';
 
 @NgModule({
   declarations: [SvgIconComponent],
@@ -27,9 +28,17 @@ export class SvgIconsModule {
     };
   }
 
-  constructor(@Optional() @Inject(SVG_ICONS) icons: SvgIconType | SvgIconType[], private service: SvgIconRegistry) {
+  constructor(
+    @Optional() @Inject(SVG_ICONS) icons: SvgIconType | SvgIconType[],
+    @Optional() @Inject(SVG_MISSING_ICON_FALLBACK) missingIconFallback: SvgIconType,
+    private service: SvgIconRegistry
+  ) {
     if (icons) {
       this.service.register(icons);
+    }
+
+    if (missingIconFallback) {
+      this.service.register(missingIconFallback);
     }
   }
 }

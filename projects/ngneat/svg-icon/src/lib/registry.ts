@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
+
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
 class SvgIcon {
@@ -17,15 +18,19 @@ export class SvgIconRegistry {
     if (config.icons) {
       this.register(config.icons);
     }
+    
+    if (config.missingIconFallback) {
+      this.register(config.missingIconFallback);
+    }
   }
 
   getAll() {
     return this.svgMap;
   }
 
-  get(key: string): string | undefined {
-    const icon = this.svgMap.get(key);
-
+  get(key: string | undefined): string | undefined {
+    const icon = key && this.svgMap.get(key);
+    
     if (!icon) {
       return undefined;
     }
