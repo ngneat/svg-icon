@@ -247,6 +247,30 @@ import { unknownIcon } from '@app/svg/unknown';
 export class AppModule {}
 ```
 
+## Export all icons
+
+If you want to export all icons from a single file you can add **exportable** to svg-generator configuration:
+
+```json
+{
+  "svgGenerator": {
+    ...
+    "exportable": true
+  }
+}
+```
+
+Inside `./src/app/svg` folder will be generated **index.ts** file with all exported icons.
+
+```ts
+export { homeIcon } from './group/home';
+export { userIcon } from './group/user';
+export { dashboardTwoIcon } from './group-two/dashboard-two';
+export { locationTwoIcon } from './group-two/location-two';
+```
+
+Make sure all of the icons have different names.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

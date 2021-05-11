@@ -1,8 +1,9 @@
-import glob from 'glob';
 import camelcase from 'camelcase';
-import SVGO from 'svgo';
 import { readFileSync } from 'fs';
+import { outputFileSync, removeSync } from 'fs-extra';
+import glob from 'glob';
 import { basename, extname, resolve } from 'path';
+import SVGO from 'svgo';
 import {
   createPrinter,
   createSourceFile,
@@ -13,7 +14,7 @@ import {
   Statement,
   updateSourceFileNode,
 } from 'typescript';
-import { outputFileSync, removeSync } from 'fs-extra';
+
 import { createArrayExport, createExportDeclaration, createImportDeclaration, createStatement } from './ast';
 import { Config, defaults } from './types';
 
@@ -24,8 +25,10 @@ export function generateSVGIcons(config: Config | null) {
     process.exit();
   }
 
-  const { outputPath, prefix, postfix, svgoConfig, srcPath }: Config = { ...defaults, ...config };
+  const { outputPath, prefix, postfix, svgoConfig, srcPath, exportable }: Config = { ...defaults, ...config };
 
+  const rootPath = resolve(outputPath);
+  
   removeOldIcons(resolve(outputPath));
 
   const printer = createPrinter({
@@ -34,7 +37,9 @@ export function generateSVGIcons(config: Config | null) {
 
   const sourceFile = createSourceFile('generator.ts', '', ScriptTarget.Latest, false, ScriptKind.TS);
 
-  const generateIcons = function generateIcons(srcPath: string, outputPath: string, isDir = false) {
+  const baseExportDeclarations: Statement[] = [];
+
+  const generateIcons = function generateIcons(srcPath: string, outputPath: string, isDir = false, isRoot = false) {
     const dirName = getDirName(srcPath);
     const filesList = glob.sync(`${srcPath}/*`);
     const exportDeclarations: Statement[] = [];
@@ -47,7 +52,7 @@ export function generateSVGIcons(config: Config | null) {
       const filesSize = filesList.filter((v) => !!extname(v)).length;
 
       // It means it's a file
-      if (!!extension) {
+      if (!!extension) { 
         if (extension === '.svg') {
           const svgContent = readFileSync(path, { encoding: 'utf8' });
           const optimizedContent = await new SVGO(svgoConfig).optimize(svgContent);
@@ -68,6 +73,12 @@ export function generateSVGIcons(config: Config | null) {
           if (isDir) {
             exportDeclarations.push(createImportDeclaration({ identifierName, iconName }));
             identifiers.push(identifierName);
+
+            if (exportable) {
+              const dirName = outputPath.replace(rootPath, '');
+              baseExportDeclarations.push(createExportDeclaration({ identifierName, iconName, dirName }));
+              exportDeclarations.push(createExportDeclaration({ identifierName, iconName }));
+            }
           } else {
             exportDeclarations.push(createExportDeclaration({ identifierName, iconName }));
           }
@@ -84,12 +95,17 @@ export function generateSVGIcons(config: Config | null) {
         const dirName = getDirName(srcPath);
         const output = resolve(outputPath, dirName);
 
-        generateIcons(srcPath, output, true);
+        generateIcons(srcPath, output, true, false);
+      }
+
+      if (isRoot && exportable) {
+        const baseBarrelFile = updateSourceFileNode(sourceFile, baseExportDeclarations);
+        outputFileSync(`${outputPath}/index.ts`, printer.printFile(baseBarrelFile), { encoding: 'utf8' });
       }
     });
   };
 
-  generateIcons(srcPath, resolve(outputPath), false);
+  generateIcons(srcPath, resolve(outputPath), false, true);
 }
 
 function getDirName(srcPath: string) {

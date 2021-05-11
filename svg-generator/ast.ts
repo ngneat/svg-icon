@@ -1,10 +1,11 @@
-import { createModifier, factory, NodeFlags, SyntaxKind } from 'typescript';
-import kebabCase from 'lodash.kebabcase';
 import camelcase from 'camelcase';
+import kebabCase from 'lodash.kebabcase';
+import { createModifier, factory, NodeFlags, SyntaxKind } from 'typescript';
 
 interface Base {
   identifierName: string;
   iconName: string;
+  dirName?: string;
 }
 
 export function createStatement({ identifierName, svgContent, iconName }: Base & { svgContent: string }) {
@@ -36,7 +37,7 @@ export function createStatement({ identifierName, svgContent, iconName }: Base &
   );
 }
 
-export function createExportDeclaration({ identifierName, iconName }: Base) {
+export function createExportDeclaration({ identifierName, iconName, dirName = '' }: Base) {
   return factory.createExportDeclaration(
     undefined,
     undefined,
@@ -45,7 +46,7 @@ export function createExportDeclaration({ identifierName, iconName }: Base) {
       undefined,
       factory.createIdentifier(identifierName)
     )]),
-    factory.createStringLiteral(`./${iconName}`, true)
+    factory.createStringLiteral(`.${dirName}/${iconName}`, true)
   );
 }
 
