@@ -18,7 +18,7 @@ export class SvgIconRegistry {
     if (config.icons) {
       this.register(config.icons);
     }
-    
+
     if (config.missingIconFallback) {
       this.register(config.missingIconFallback);
     }
@@ -30,7 +30,7 @@ export class SvgIconRegistry {
 
   get(key: string | undefined): string | undefined {
     const icon = key && this.svgMap.get(key);
-    
+
     if (!icon) {
       return undefined;
     }
@@ -77,5 +77,4 @@ export class SvgIconRegistry {
 
     return div.querySelector('svg') as SVGElement;
   }
-
 }
