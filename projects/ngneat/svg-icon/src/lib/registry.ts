@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
@@ -12,9 +12,11 @@ class SvgIcon {
 @Injectable({ providedIn: 'root' })
 export class SvgIconRegistry {
   private readonly svgMap = new Map<string, SvgIcon>();
-  private readonly document: Document = inject(DOCUMENT);
+  private readonly document: Document;
 
-  constructor(@Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
+  constructor(injector: Injector, @Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
+    this.document = injector.get(DOCUMENT);
+
     if (config.icons) {
       this.register(config.icons);
     }
