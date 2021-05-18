@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/ngneat/svg-icon/compare/v3.1.1...v3.2.0) (2021-05-18)
+
+
+### Features
+
+* 🎸 add missing icon support if icon not found in registry ([57d861f](https://github.com/ngneat/svg-icon/commit/57d861f3364ee5e8213fd5e91da3417321ccb24f))
+
+
+### Bug Fixes
+
+* replace the `inject` function with `injector.get` ([0cb3882](https://github.com/ngneat/svg-icon/commit/0cb3882a4ee37719bdf94c38a5a50a5cb3de66fb))
+
 ### [3.1.1](https://github.com/ngneat/svg-icon/compare/v3.1.0...v3.1.1) (2021-03-21)
 
 
