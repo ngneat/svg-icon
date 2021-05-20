@@ -51,8 +51,12 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
     "svgoConfig": {
       "plugins": [
         {
-          "removeDimensions": true,
-          "cleanupAttrs": true
+          "removeDimensions": true
+        },
+        {
+          "cleanupAttrs": {
+            "newlines": true
+          }
         }
       ]
     }
@@ -75,7 +79,7 @@ import { settingsIcon } from '@app/svg/settings';
     SvgIconsModule.forRoot({
       icons: [settingsIcon],
     }),
-  ]
+  ],
 })
 export class AppModule {}
 ```
@@ -83,8 +87,7 @@ export class AppModule {}
 Now we can use the `svg-icon` component:
 
 ```html
-<svg-icon key="settings"></svg-icon> 
-<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+<svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
 
 ## Lazy Loaded Modules
@@ -98,10 +101,7 @@ import { SvgIconsModule } from '@ngneat/svg-icon';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [ 
-    DashboardRoutingModule, 
-    SvgIconsModule.forChild([userIcon])
-  ],
+  imports: [DashboardRoutingModule, SvgIconsModule.forChild([userIcon])],
 })
 export class DashboardModule {}
 ```
@@ -116,21 +116,25 @@ To make the process more seamless, the library provides a Webpack plugin you can
 const { SvgGeneratorWebpackPlugin } = require('@ngneat/svg-generator/webpack-plugin');
 
 {
- plugins: [
-  new SvgGeneratorWebpackPlugin({
-    watch: !isProd,
-    srcPath: './src/assets/svg',
-    outputPath: './src/app/svg',
-    svgoConfig: {
-      plugins: [
-        {
-          removeDimensions: true,
-          cleanupAttrs: true,
-        },
-      ],
-    },
-  }),
- ];
+  plugins: [
+    new SvgGeneratorWebpackPlugin({
+      watch: !isProd,
+      srcPath: './src/assets/svg',
+      outputPath: './src/app/svg',
+      svgoConfig: {
+        plugins: [
+          {
+            removeDimensions: true,
+          },
+          {
+            cleanupAttrs: {
+              newlines: true,
+            },
+          },
+        ],
+      },
+    }),
+  ];
 }
 ```
 
@@ -239,10 +243,10 @@ import { unknownIcon } from '@app/svg/unknown';
 @NgModule({
   imports: [
     SvgIconsModule.forRoot({
-      missingIconFallback: unknownIcon
-    })
+      missingIconFallback: unknownIcon,
+    }),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
