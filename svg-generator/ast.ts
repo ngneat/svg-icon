@@ -1,5 +1,5 @@
 import kebabCase from 'lodash.kebabcase';
-import { createModifier, factory, NodeFlags, SyntaxKind } from 'typescript';
+import { factory, NodeFlags, SyntaxKind } from 'typescript';
 import camelcase from 'camelcase';
 
 interface Base {
@@ -13,7 +13,7 @@ interface Base {
 // };
 export function createStatement({ identifierName, svgContent, iconName }: Base & { svgContent: string }) {
   return factory.createVariableStatement(
-    [createModifier(SyntaxKind.ExportKeyword)],
+    [factory.createModifier(SyntaxKind.ExportKeyword)],
     factory.createVariableDeclarationList(
       [
         factory.createVariableDeclaration(
@@ -64,7 +64,7 @@ export function createImportDeclaration({ identifierName, iconName }: Base) {
 // export const authIcons = [eyeSlashIcon, eyeIcon, googleLogoIcon];
 export function createArrayExport(arrayName: string, identifiers: string[]) {
   return factory.createVariableStatement(
-    [createModifier(SyntaxKind.ExportKeyword)],
+    [factory.createModifier(SyntaxKind.ExportKeyword)],
     factory.createVariableDeclarationList(
       [factory.createVariableDeclaration(
         factory.createIdentifier(camelcase(`${arrayName}Icons`)),

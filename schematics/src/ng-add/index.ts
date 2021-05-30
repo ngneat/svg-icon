@@ -92,10 +92,8 @@ function addScripts(): Rule {
       srcPath: './src/assets/svg',
       svgoConfig: {
         plugins: [
-          {
-            removeDimensions: true,
-            cleanupAttrs: true,
-          },
+          "removeDimensions",
+          "cleanupAttrs"
         ],
       },
     };

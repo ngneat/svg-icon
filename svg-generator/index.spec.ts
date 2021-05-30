@@ -26,4 +26,5 @@ describe('createTree', () => {
 
     expect(result).toMatchSnapshot();
   });
+
 });

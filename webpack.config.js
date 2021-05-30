@@ -11,10 +11,8 @@ module.exports = (config) => {
       outputPath: './src/app/svg',
       svgoConfig: {
         plugins: [
-          {
-            removeDimensions: true,
-            cleanupAttrs    : true
-          }
+          "removeDimensions",
+          "cleanupAttrs"
         ]
       }
     })]

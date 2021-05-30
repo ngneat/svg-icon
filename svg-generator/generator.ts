@@ -1,8 +1,8 @@
 import glob from 'glob';
-import { resolve } from 'path';
-import { unlinkSync, outputFileSync } from 'fs-extra';
+import { join, resolve } from 'path';
+import { outputFileSync, unlinkSync } from 'fs-extra';
 import { Config, defaults } from './types';
-import { createTree } from './tree';
+import { createTree, INDEX } from './tree';
 
 export function generateSVGIcons(config: Config | null) {
   if(!config) {
@@ -17,9 +17,15 @@ export function generateSVGIcons(config: Config | null) {
 
   const virtualTree = createTree(mergedConfig.srcPath, mergedConfig.outputPath, mergedConfig);
 
-  virtualTree.forEach(({ path, content }) => {
-    outputFileSync(path, content, { encoding: 'utf-8' })
-  });
+  if(mergedConfig.rootBarrelFile) {
+    const allExports = virtualTree.filter(({ name }) => name !== INDEX).map(({ content }) => content).join('\n\n');
+    outputFileSync(join(mergedConfig.outputPath, `${mergedConfig.rootBarrelFileName}.ts`), allExports, { encoding: 'utf-8' });
+  } else {
+    virtualTree.forEach(({ path, content }) => {
+      outputFileSync(path, content, { encoding: 'utf-8' })
+    });
+  }
+
 }
 
 function removeOldIcons(outputPath: string) {

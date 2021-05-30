@@ -4,6 +4,8 @@ export interface Config {
   svgoConfig: { plugins: any[]};
   prefix?: string;
   postfix?: string;
+  rootBarrelFile?: boolean;
+  rootBarrelFileName?: string;
 }
 
 export const defaults: Config = {
@@ -11,5 +13,7 @@ export const defaults: Config = {
   postfix: 'Icon',
   svgoConfig: { plugins: [] },
   srcPath: '',
-  outputPath: ''
+  outputPath: '',
+  rootBarrelFile: false,
+  rootBarrelFileName: 'index'
 };

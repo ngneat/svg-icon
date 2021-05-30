@@ -1,6 +1,6 @@
 import { optimize } from 'svgo';
 import { basename, join } from 'path';
-import { createPrinter, createSourceFile, EmitHint, NewLineKind, ScriptKind, ScriptTarget, Statement, updateSourceFileNode } from 'typescript';
+import { createPrinter, createSourceFile, EmitHint, factory, NewLineKind, ScriptKind, ScriptTarget, Statement } from 'typescript';
 import { readdirSync, readFileSync } from 'fs-extra';
 import { createArrayExport, createImportDeclaration, createStatement } from './ast';
 import { Config } from './types';
@@ -18,6 +18,8 @@ type VirtualFile = {
   name: string;
   identifierName: string;
 }
+
+export const INDEX = `__INDEX__`;
 
 export function createTree(srcPath: string, outputPath: string, config: Omit<Config, 'srcPath' | 'outputPath'>): VirtualFile[] {
   const tree: VirtualFile[] = [];
@@ -37,36 +39,37 @@ export function createTree(srcPath: string, outputPath: string, config: Omit<Con
         identifiers.push(identifierName);
       }
 
-      exportDeclarations.push(createArrayExport(file.name, identifiers))
-      const barrelFile = updateSourceFileNode(sourceFile, exportDeclarations);
+      exportDeclarations.push(createArrayExport(file.name, identifiers));
+      const barrelFile = factory.updateSourceFile(sourceFile, exportDeclarations);
 
       tree.push(...children, {
         path: join(outputPath, file.name, `index.ts`),
         content: printer.printFile(barrelFile),
         identifierName: 'index',
-        name: 'index'
+        name: INDEX
       });
 
     } else {
-      const iconName = basename(file.name, '.svg');
-      const path = join(outputPath, file.name).replace('.svg', '.ts');
-      const identifierName = camelcase(`${config.prefix}-${iconName}-${config.postfix}`);
-      const svgContent = readFileSync(join(srcPath, file.name)).toString();
+      if(file.name.endsWith('.svg')) {
+        const iconName = basename(file.name, '.svg');
+        const path = join(outputPath, file.name).replace('.svg', '.ts');
+        const identifierName = camelcase(`${config.prefix}-${iconName}-${config.postfix}`);
+        const svgContent = readFileSync(join(srcPath, file.name)).toString();
 
-      const statement = createStatement({
-        svgContent: optimize(svgContent, { plugins }).data,
-        iconName,
-        identifierName,
-      });
+        const statement = createStatement({
+          svgContent: optimize(svgContent, { plugins }).data,
+          iconName,
+          identifierName,
+        });
 
-      const tsCode = printer.printNode(EmitHint.Unspecified, statement, sourceFile);
+        tree.push({
+          path,
+          content: printer.printNode(EmitHint.Unspecified, statement, sourceFile),
+          name: iconName,
+          identifierName
+        });
+      }
 
-      tree.push({
-        path,
-        content: tsCode,
-        name: iconName,
-        identifierName
-      });
     }
   }
 
