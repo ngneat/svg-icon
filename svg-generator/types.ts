@@ -1,12 +1,15 @@
 export interface Config {
   srcPath: string;
   outputPath: string;
-  svgoConfig: object;
+  svgoConfig: { plugins: any[]};
   prefix?: string;
   postfix?: string;
 }
 
-export const defaults: Partial<Config> = {
+export const defaults: Config = {
   prefix: '',
   postfix: 'Icon',
-} as const;
+  svgoConfig: { plugins: [] },
+  srcPath: '',
+  outputPath: ''
+};

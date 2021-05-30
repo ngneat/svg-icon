@@ -1,6 +1,6 @@
 {
   "name": "@ngneat/svg-generator",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "svg generator",
   "main": "generator.js",
   "bin": {
@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "tsc --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "npm run build && jest ./index.spec.js"
   },
   "keywords": [
     "svg",
@@ -21,18 +22,27 @@
   "author": "Netanel Basal",
   "license": "MIT",
   "dependencies": {
-    "@types/fs-extra": "^9.0.4",
-    "@types/lodash.kebabcase": "^4.1.6",
-    "camelcase": "^6.2.0",
-    "chokidar": "^3.4.3",
-    "cosmiconfig": "^7.0.0",
-    "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
-    "lodash.kebabcase": "^4.1.1",
-    "svgo": "^1.3.2",
-    "typescript": "^4.0.5"
+    "camelcase": "6.2.0",
+    "chokidar": "3.5.1",
+    "cosmiconfig": "7.0.0",
+    "fs-extra": "10.0.0",
+    "glob": "7.1.7",
+    "lodash.kebabcase": "4.1.1",
+    "svgo": "2.3.0"
   },
   "devDependencies": {
-    "@types/svgo": "^1.3.4"
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/fs-extra": "9.0.11",
+    "@types/jest": "^26.0.23",
+    "@types/lodash.kebabcase": "4.1.6",
+    "@types/mock-fs": "^4.13.0",
+    "@types/svgo": "2.3.0",
+    "babel-jest": "^27.0.2",
+    "jest": "^27.0.3",
+    "mock-fs": "5.0.0",
+    "ts-jest": "^27.0.1",
+    "typescript": "^4.0.5"
   }
 }

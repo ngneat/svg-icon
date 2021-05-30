@@ -1,3 +1,6 @@
 import { homeIcon } from './home';
+import { homeIcon } from './home';
 import { userIcon } from './user';
-export const groupIcons = [homeIcon, userIcon];
+import { index } from './index';
+import { userIcon } from './user';
+export const groupIcons = [homeIcon, homeIcon, userIcon, index, userIcon];
