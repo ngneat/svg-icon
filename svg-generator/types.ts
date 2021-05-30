@@ -1,7 +1,7 @@
 export interface Config {
   srcPath: string;
   outputPath: string;
-  svgoConfig: object;
+  svgoConfig: { plugins: any[]};
   prefix?: string;
   postfix?: string;
 }

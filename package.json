@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "run:generator": "node svg-generator/index.js",
     "contributors:add": "all-contributors add",
     "hooks:pre-commit": "node hooks/pre-commit.js",
     "commit": "git-cz",
@@ -25,10 +26,8 @@
     "outputPath": "./src/app/svg",
     "svgoConfig": {
       "plugins": [
-        {
-          "removeDimensions": true,
-          "cleanupAttrs": true
-        }
+        "cleanupAttrs",
+        "removeDimensions"
       ]
     }
   },
@@ -85,7 +84,8 @@
     "tailwindcss": "2.0.3",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "universal-analytics": "^0.4.23"
   },
   "config": {
     "commitizen": {

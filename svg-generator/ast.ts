@@ -1,5 +1,5 @@
-import { createModifier, factory, NodeFlags, SyntaxKind } from 'typescript';
 import kebabCase from 'lodash.kebabcase';
+import { createModifier, factory, NodeFlags, SyntaxKind } from 'typescript';
 import camelcase from 'camelcase';
 
 interface Base {
@@ -7,6 +7,10 @@ interface Base {
   iconName: string;
 }
 
+// export const eyeSlashIcon = {
+//   data: ``,
+//   name: 'eye-slash'
+// };
 export function createStatement({ identifierName, svgContent, iconName }: Base & { svgContent: string }) {
   return factory.createVariableStatement(
     [createModifier(SyntaxKind.ExportKeyword)],
@@ -36,19 +40,7 @@ export function createStatement({ identifierName, svgContent, iconName }: Base &
   );
 }
 
-export function createExportDeclaration({ identifierName, iconName }: Base) {
-  return factory.createExportDeclaration(
-    undefined,
-    undefined,
-    false,
-    factory.createNamedExports([factory.createExportSpecifier(
-      undefined,
-      factory.createIdentifier(identifierName)
-    )]),
-    factory.createStringLiteral(`./${iconName}`, true)
-  );
-}
-
+// import { eyeSlashIcon } from './eye-slash';
 export function createImportDeclaration({ identifierName, iconName }: Base) {
   return factory.createImportDeclaration(
     undefined,
@@ -69,6 +61,7 @@ export function createImportDeclaration({ identifierName, iconName }: Base) {
 
 }
 
+// export const authIcons = [eyeSlashIcon, eyeIcon, googleLogoIcon];
 export function createArrayExport(arrayName: string, identifiers: string[]) {
   return factory.createVariableStatement(
     [createModifier(SyntaxKind.ExportKeyword)],
