@@ -1,4 +1,3 @@
-import mock from 'mock-fs';
 import { createTree } from './tree';
 import { defaults } from './types';
 
@@ -7,6 +6,8 @@ const srcPath = `src/assets/svg`;
 describe('createTree', () => {
 
   it('should create the correct tree', () => {
+    const mock = require('mock-fs');
+
     mock({
       [`${srcPath}/one.svg`]: '<svg>one</svg>',
       [`${srcPath}/two.svg`]: '<svg>two</svg>',
