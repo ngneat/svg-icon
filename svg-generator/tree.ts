@@ -30,7 +30,7 @@ export function createTree(srcPath: string, outputPath: string, config: Omit<Con
       const children = createTree(join(srcPath, file.name), join(outputPath, file.name), config);
 
       const exportDeclarations: Statement[] = [];
-      const identifiers = [];
+      const identifiers: string[] = [];
 
       for(const { identifierName, name } of children) {
         exportDeclarations.push(createImportDeclaration({ identifierName, iconName: name }));
