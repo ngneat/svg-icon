@@ -2,6 +2,7 @@
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
     "target": "ES2015",
@@ -71,8 +72,5 @@
     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true
     /* Disallow inconsistently-cased references to the same file. */
-  },
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+  }
 }
