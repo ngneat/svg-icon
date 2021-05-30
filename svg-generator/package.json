@@ -12,7 +12,7 @@
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc",
-    "test": "jest"
+    "test": "npm run build && jest ./index.spec.js"
   },
   "keywords": [
     "svg",
