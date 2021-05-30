@@ -1,6 +1,6 @@
 import glob from 'glob';
 import { resolve } from 'path';
-import { unlinkSync, writeFileSync } from 'fs';
+import { unlinkSync, outputFileSync } from 'fs-extra';
 import { Config, defaults } from './types';
 import { createTree } from './tree';
 
@@ -18,7 +18,7 @@ export function generateSVGIcons(config: Config | null) {
   const virtualTree = createTree(mergedConfig.srcPath, mergedConfig.outputPath, mergedConfig);
 
   virtualTree.forEach(({ path, content }) => {
-    writeFileSync(path, content, { encoding: 'utf-8' })
+    outputFileSync(path, content, { encoding: 'utf-8' })
   });
 }
 

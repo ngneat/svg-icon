@@ -1,7 +1,7 @@
 import { optimize } from 'svgo';
 import { basename, join } from 'path';
 import { createPrinter, createSourceFile, EmitHint, NewLineKind, ScriptKind, ScriptTarget, Statement, updateSourceFileNode } from 'typescript';
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs-extra';
 import { createArrayExport, createImportDeclaration, createStatement } from './ast';
 import { Config } from './types';
 import camelcase from 'camelcase';
