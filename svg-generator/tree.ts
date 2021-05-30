@@ -19,7 +19,7 @@ type VirtualFile = {
   identifierName: string;
 }
 
-export function createTree(srcPath: string, outputPath: string, config: Config): VirtualFile[] {
+export function createTree(srcPath: string, outputPath: string, config: Omit<Config, 'srcPath' | 'outputPath'>): VirtualFile[] {
   const tree: VirtualFile[] = [];
   const result = readdirSync(srcPath, { withFileTypes: true });
   const plugins = config.svgoConfig?.plugins ?? [];

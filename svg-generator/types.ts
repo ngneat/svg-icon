@@ -6,7 +6,10 @@ export interface Config {
   postfix?: string;
 }
 
-export const defaults: Partial<Config> = {
+export const defaults: Config = {
   prefix: '',
   postfix: 'Icon',
-} as const;
+  svgoConfig: { plugins: [] },
+  srcPath: '',
+  outputPath: ''
+};

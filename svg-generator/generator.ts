@@ -15,6 +15,7 @@ export function generateSVGIcons(config: Config | null) {
 
   removeOldIcons(resolve(mergedConfig.outputPath));
 
+
   const virtualTree = createTree(mergedConfig.srcPath, mergedConfig.outputPath, mergedConfig);
 
   virtualTree.forEach(({ path, content }) => {
