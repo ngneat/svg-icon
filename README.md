@@ -116,14 +116,7 @@ const { SvgGeneratorWebpackPlugin } = require('@ngneat/svg-generator/webpack-plu
       outputPath: './src/app/svg',
       svgoConfig: {
         plugins: [
-          {
-            removeDimensions: true,
-          },
-          {
-            cleanupAttrs: {
-              newlines: true,
-            },
-          },
+          "removeDimensions"
         ],
       },
     }),
