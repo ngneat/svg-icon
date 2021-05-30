@@ -50,14 +50,7 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
     "srcPath": "./src/assets/svg",
     "svgoConfig": {
       "plugins": [
-        {
-          "removeDimensions": true
-        },
-        {
-          "cleanupAttrs": {
-            "newlines": true
-          }
-        }
+        "removeDimensions"
       ]
     }
   }
