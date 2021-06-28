@@ -83,9 +83,9 @@ Now we can use the `svg-icon` component:
 <svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
 
-## Lazy Loaded Modules
+## Register icons locally
 
-In lazy load modules, we can use the `forChild` method:
+In lazy load modules or in reusable component modules, we can use the `forChild` method, for register icons accessible locally in these modules:
 
 ```ts
 import { dashboardIcon } from '@app/svg/dashboard';

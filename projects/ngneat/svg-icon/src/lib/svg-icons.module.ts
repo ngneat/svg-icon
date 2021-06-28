@@ -1,4 +1,4 @@
-import { Inject, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule, Optional, Self } from '@angular/core';
 
 import { SvgIconRegistry } from './registry';
 import { SvgIconComponent } from './svg-icon.component';
@@ -24,17 +24,17 @@ export class SvgIconsModule {
   static forChild(icons: SvgIconType | SvgIconType[]): ModuleWithProviders<SvgIconsModule> {
     return {
       ngModule: SvgIconsModule,
-      providers: [{ provide: SVG_ICONS, useValue: icons }],
+      providers: [{ provide: SVG_ICONS, useValue: icons, multi: true }],
     };
   }
 
   constructor(
-    @Optional() @Inject(SVG_ICONS) icons: SvgIconType | SvgIconType[],
+    @Optional() @Self() @Inject(SVG_ICONS) icons: SvgIconType[] | SvgIconType[][],
     @Optional() @Inject(SVG_MISSING_ICON_FALLBACK) missingIconFallback: SvgIconType,
     private service: SvgIconRegistry
   ) {
     if (icons) {
-      this.service.register(icons);
+      this.service.register(([] as SvgIconType[]).concat(...icons));
     }
 
     if (missingIconFallback) {
