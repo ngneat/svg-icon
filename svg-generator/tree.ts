@@ -54,10 +54,11 @@ export function createTree(srcPath: string, outputPath: string, config: Omit<Con
         const iconName = basename(file.name, '.svg');
         const path = join(outputPath, file.name).replace('.svg', '.ts');
         const identifierName = camelcase(`${config.prefix}-${iconName}-${config.postfix}`);
-        const svgContent = readFileSync(join(srcPath, file.name)).toString();
+        const svgPath = join(srcPath, file.name);
+        const svgContent = readFileSync(svgPath).toString();
 
         const statement = createStatement({
-          svgContent: optimize(svgContent, { plugins }).data,
+          svgContent: optimize(svgContent, { plugins, path: svgPath }).data,
           iconName,
           identifierName,
         });
