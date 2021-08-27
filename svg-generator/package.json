@@ -1,6 +1,6 @@
 {
   "name": "@ngneat/svg-generator",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "svg generator",
   "main": "generator.js",
   "bin": {
@@ -28,7 +28,8 @@
     "fs-extra": "10.0.0",
     "glob": "7.1.7",
     "lodash.kebabcase": "4.1.1",
-    "svgo": "2.4.0"
+    "svgo": "2.4.0",
+    "typescript": "4.0.5"
   },
   "devDependencies": {
     "@types/fs-extra": "9.0.11",
@@ -37,7 +38,6 @@
     "@types/mock-fs": "^4.13.0",
     "@types/svgo": "2.3.0",
     "jest": "^27.0.3",
-    "mock-fs": "5.0.0",
-    "typescript": "^4.0.5"
+    "mock-fs": "5.0.0"
   }
 }
