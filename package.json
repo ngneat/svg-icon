@@ -74,7 +74,7 @@
     "karma-jasmine-html-reporter": "^1.5.4",
     "lint-staged": "^10.5.4",
     "ng-packagr": "^12.0.0",
-    "postcss": "8.2.6",
+    "postcss": "8.2.10",
     "postcss-import": "14.0.0",
     "postcss-loader": "5.0.0",
     "postcss-scss": "3.0.4",
