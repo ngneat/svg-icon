@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/ngneat/svg-icon/compare/v3.2.0...v3.3.0) (2021-11-10)
+
+
+### Features
+
+* 🎸 add no shrink ([#58](https://github.com/ngneat/svg-icon/issues/58)) ([13b5452](https://github.com/ngneat/svg-icon/commit/13b5452eef6960dc43c562aa6e164f50d5a2f465))
+* pass file path to SVG Optimizer ([953da9b](https://github.com/ngneat/svg-icon/commit/953da9bd98199fe2149f689bebb86eecbec58bc2))
+
+
+### Bug Fixes
+
+* 🐛 icons multi provider ([1f8e55c](https://github.com/ngneat/svg-icon/commit/1f8e55cbe12f69b4f517c32d92da31a624abd483))
+* 🐛 reregister icons in nested forChild module ([863e1a5](https://github.com/ngneat/svg-icon/commit/863e1a575203fecc16e0f4fec9e2c0a20d8a822a))
+* **docs:** svgo plugin json ([e89abc1](https://github.com/ngneat/svg-icon/commit/e89abc10481af233a3a50fcef44964dbf8ebcde4)), closes [#47](https://github.com/ngneat/svg-icon/issues/47)
+
 ## [3.2.0](https://github.com/ngneat/svg-icon/compare/v3.1.1...v3.2.0) (2021-05-18)
 
 
