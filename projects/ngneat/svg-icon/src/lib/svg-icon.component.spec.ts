@@ -12,18 +12,18 @@ describe('SvgIconComponent', () => {
   const createHost = createHostFactory({
     component: SvgIconComponent,
     declareComponent: false,
-    imports: [SvgIconsModule.forRoot({
-      icons: [dashboardIcon, settingsIcon]
-    })]
+    imports: [
+      SvgIconsModule.forRoot({
+        icons: [dashboardIcon, settingsIcon],
+      }),
+    ],
   });
-
 
   it('should render the svg', () => {
     host = createHost(`<svg-icon key="dashboard"></svg-icon>`);
     expect(host.hostElement.querySelector('.svg-icon-dashboard')).toExist();
     expect(host.hostElement.querySelector('.svg-icon-dashboard')?.innerHTML).toContain('<svg');
   });
-
 
   it('should set the role attribute', () => {
     host = createHost(`<svg-icon key="dashboard"></svg-icon>`);
@@ -33,8 +33,8 @@ describe('SvgIconComponent', () => {
   it('should change icons', () => {
     host = createHost(`<svg-icon [key]="key"></svg-icon>`, {
       hostProps: {
-        key: 'dashboard'
-      }
+        key: 'dashboard',
+      },
     });
 
     expect(host.hostElement.querySelector('.svg-icon-dashboard')).toExist();
@@ -47,8 +47,8 @@ describe('SvgIconComponent', () => {
     host = createHost(`<svg-icon [key]="key" [color]="color"></svg-icon>`, {
       hostProps: {
         key: 'dashboard',
-        color: 'white'
-      }
+        color: 'white',
+      },
     });
 
     expect(host.element.style.color).toBe('white');
@@ -60,8 +60,8 @@ describe('SvgIconComponent', () => {
     host = createHost(`<svg-icon [key]="key" [fontSize]="fontSize"></svg-icon>`, {
       hostProps: {
         key: 'dashboard',
-        fontSize: '20px'
-      }
+        fontSize: '20px',
+      },
     });
 
     expect(host.element.style.fontSize).toBe('20px');
@@ -85,8 +85,8 @@ describe('SvgIconComponent', () => {
   it('should respect sizes', () => {
     host = createHost(`<svg-icon key="dashboard" [size]="size"></svg-icon>`, {
       hostProps: {
-        size: 'md'
-      }
+        size: 'md',
+      },
     });
 
     expect(host.element.style.fontSize).toBe('1rem');
@@ -94,8 +94,18 @@ describe('SvgIconComponent', () => {
     expect(host.element.style.fontSize).toBe('1.5rem');
   });
 
-});
+  it('should add minWidth when setting noShrink to true', () => {
+    host = createHost(`<svg-icon [noShrink]="true" key="dashboard" [size]="size"></svg-icon>`, {
+      hostProps: {
+        size: 'md',
+      },
+    });
 
+    expect(host.element.style.minWidth).toBe('1rem');
+    host.setHostInput('size', 'lg');
+    expect(host.element.style.minWidth).toBe('1.5rem');
+  });
+});
 
 describe('SvgIconComponent Custom Sizes', () => {
   let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
@@ -103,15 +113,17 @@ describe('SvgIconComponent Custom Sizes', () => {
   const createHost = createHostFactory({
     component: SvgIconComponent,
     declareComponent: false,
-    imports: [SvgIconsModule.forRoot({
-      defaultSize: 'lg',
-      sizes: {
-        sm: '16px',
-        md: '32px',
-        lg: '64px'
-      },
-      icons: [dashboardIcon, settingsIcon]
-    })]
+    imports: [
+      SvgIconsModule.forRoot({
+        defaultSize: 'lg',
+        sizes: {
+          sm: '16px',
+          md: '32px',
+          lg: '64px',
+        },
+        icons: [dashboardIcon, settingsIcon],
+      }),
+    ],
   });
 
   it('should set the default size', () => {
@@ -123,8 +135,8 @@ describe('SvgIconComponent Custom Sizes', () => {
   it('should respect sizes', () => {
     host = createHost(`<svg-icon key="dashboard" [size]="size"></svg-icon>`, {
       hostProps: {
-        size: 'md'
-      }
+        size: 'md',
+      },
     });
 
     expect(host.element.style.fontSize).toBe('32px');
@@ -139,9 +151,11 @@ describe('SvgIconComponent without Missing Icon', () => {
   const createHost = createHostFactory({
     component: SvgIconComponent,
     declareComponent: false,
-    imports: [SvgIconsModule.forRoot({
-      icons: [settingsIcon]
-    })]
+    imports: [
+      SvgIconsModule.forRoot({
+        icons: [settingsIcon],
+      }),
+    ],
   });
 
   it('should not render unknown or missing icon', () => {
@@ -157,10 +171,12 @@ describe('SvgIconComponent with Missing Icon', () => {
   const createHost = createHostFactory({
     component: SvgIconComponent,
     declareComponent: false,
-    imports: [SvgIconsModule.forRoot({
-      missingIconFallback: missingIcon,
-      icons: [settingsIcon]
-    })]
+    imports: [
+      SvgIconsModule.forRoot({
+        missingIconFallback: missingIcon,
+        icons: [settingsIcon],
+      }),
+    ],
   });
 
   it('should render missing icon ', () => {

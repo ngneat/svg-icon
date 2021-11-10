@@ -12,7 +12,7 @@
     "test:generator": "npm run test --prefix svg-generator",
     "run:generator": "node svg-generator/index.js",
     "contributors:add": "all-contributors add",
-    "hooks:pre-commit": "node hooks/pre-commit.js",
+    "hooks:pre-commit": "node hooks/pre-commit.js && lint-staged",
     "commit": "git-cz",
     "build:lib": "ng build @ngneat/svg-icon --configuration production && npm run schematics:build && cp -r README.md dist/ngneat/svg-icon",
     "test:lib": "ng test @ngneat/svg-icon",
@@ -94,14 +94,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,scss,ts,html,component.html}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $GIT_PARAMS",
-      "pre-commit": "npm run hooks:pre-commit && lint-staged"
-    }
   }
 }
