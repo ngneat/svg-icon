@@ -28,13 +28,13 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 - Add the icons to `src/assets/svg`
 - Add an alias to the `tsconfig` file:
 
-```ts
+```json
 {
   ...
   "paths": {
     "@app/svg/*": ["src/app/svg/*"]
   }
-},
+}
 ```
 
 - Use `@ngneat/svg-generator` to clean and extract the icons content:
@@ -166,7 +166,7 @@ You also have the option to pass fixed sizes and use them across the application
         xl: '25px',
         xxl: '30px'
       },
-      defaultSize: 'md'
+      defaultSize: 'md',
       icons
     })
   ],
@@ -190,6 +190,7 @@ They are used in the `size` input:
 @Input() color: string;
 @Input() width: string | number;
 @Input() height: string | number;
+@Input() noShrink: boolean;
 ```
 
 ## SvgIconRegistry

@@ -30,16 +30,16 @@ export class SvgIconComponent {
 
     if (icon) {
       this.element.setAttribute('aria-label', `${name}-icon`);
-      this.element.classList.remove(`svg-icon-${this.lastKey}`);
+      this.element.classList.remove(getIconClassName(this.lastKey));
       this.lastKey = name;
-      this.element.classList.add(`svg-icon-${name}`);
+      this.element.classList.add(getIconClassName(name));
       this.element.innerHTML = icon;
     }
   }
 
   @Input()
   set size(value: keyof SVG_CONFIG['sizes']) {
-    this.element.style.fontSize = this.mergedConfig.sizes[value];
+    this.setIconSize(this.mergedConfig.sizes[value]!);
   }
 
   @Input() set width(value: number | string) {
@@ -52,13 +52,15 @@ export class SvgIconComponent {
 
   @Input()
   set fontSize(value: number | string) {
-    this.element.style.fontSize = coerceCssPixelValue(value);
+    this.setIconSize(coerceCssPixelValue(value));
   }
 
   @Input()
   set color(color: string) {
     this.element.style.color = color;
   }
+
+  @Input() noShrink = false;
 
   private mergedConfig: SVG_CONFIG;
   private lastKey!: string;
@@ -69,10 +71,10 @@ export class SvgIconComponent {
     @Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG
   ) {
     this.mergedConfig = this.createConfig();
-    this.element.style.fontSize = this.mergedConfig.sizes[this.mergedConfig.defaultSize || 'md'];
+    this.element.style.fontSize = this.mergedConfig.sizes[this.mergedConfig.defaultSize || 'md']!;
   }
 
-  get element() {
+  get element(): HTMLElement {
     return this.host.nativeElement;
   }
 
@@ -93,6 +95,13 @@ export class SvgIconComponent {
       ...this.config,
     };
   }
+
+  private setIconSize(size: string) {
+    this.element.style.fontSize = size;
+    if (this.noShrink) {
+      this.element.style.minWidth = size;
+    }
+  }
 }
 
 function coerceCssPixelValue(value: any): string {
@@ -101,4 +110,8 @@ function coerceCssPixelValue(value: any): string {
   }
 
   return typeof value === 'string' ? value : `${value}px`;
+}
+
+function getIconClassName(key: string) {
+  return `svg-icon-${key}`;
 }
