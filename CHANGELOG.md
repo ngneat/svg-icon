@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/ngneat/svg-icon/compare/v4.0.0...v4.0.1) (2021-11-20)
+
+
+### Bug Fixes
+
+* 🐛 remove schematics-utilities ([711864a](https://github.com/ngneat/svg-icon/commit/711864a0b3801553ea0dbb00b21f4a6f616bb64e)), closes [#57](https://github.com/ngneat/svg-icon/issues/57) [#56](https://github.com/ngneat/svg-icon/issues/56) [#55](https://github.com/ngneat/svg-icon/issues/55) [#38](https://github.com/ngneat/svg-icon/issues/38)
+
 ## [4.0.0](https://github.com/ngneat/svg-icon/compare/v3.3.1...v4.0.0) (2021-11-20)
 
 
