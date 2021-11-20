@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/ngneat/svg-icon/compare/v3.3.1...v4.0.0) (2021-11-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 The library requires angular v13
+
+### Features
+
+* 🎸 upgrade to v13 ([83bbc34](https://github.com/ngneat/svg-icon/commit/83bbc34a2a36ed18183ec6dd5ebffdd652ff2ef8)), closes [#59](https://github.com/ngneat/svg-icon/issues/59)
+
 ### [3.3.1](https://github.com/ngneat/svg-icon/compare/v3.3.0...v3.3.1) (2021-11-20)
 
 ## [3.3.0](https://github.com/ngneat/svg-icon/compare/v3.2.0...v3.3.0) (2021-11-10)
