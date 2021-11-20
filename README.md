@@ -80,7 +80,8 @@ export class AppModule {}
 Now we can use the `svg-icon` component:
 
 ```html
-<svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+<svg-icon key="settings"></svg-icon> 
+<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
 
 ## Register icons locally

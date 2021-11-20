@@ -1,18 +1,9 @@
 import { chain, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import {
-  addModuleImportToRootModule,
-  getAppModulePath,
-  getProjectFromWorkspace,
-  getWorkspace,
-  InsertChange,
-  WorkspaceProject,
-} from 'schematics-utilities';
 import * as ts from 'typescript';
 import * as fs from 'fs';
 
 import { Schema } from './schema';
-import { insertImport } from './utils';
 
 function installPackageJsonDependencies(): Rule {
   return (host: Tree, context: SchematicContext) => {
@@ -31,43 +22,6 @@ function getTsSourceFile(host: Tree, path: string): ts.SourceFile {
   const content = buffer.toString();
 
   return ts.createSourceFile(path, content, ts.ScriptTarget.Latest, true);
-}
-
-function injectImports(options: Schema): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    const workspace = getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, Object.keys(workspace.projects)[0]);
-    const modulePath = getAppModulePath(host, (project as any).architect.build.options.main);
-
-    const moduleSource = getTsSourceFile(host, modulePath);
-
-    const change = insertImport(moduleSource, modulePath, 'SvgIconsModule', '@ngneat/svg-icon');
-
-    if (change) {
-      const recorder = host.beginUpdate(modulePath);
-      recorder.insertLeft((change as InsertChange).pos, (change as InsertChange).toAdd);
-      host.commitUpdate(recorder);
-    }
-
-    return host;
-  };
-}
-
-function addModuleToImports(options: Schema): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    const workspace = getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, Object.keys(workspace.projects)[0]);
-
-    const moduleImport = `SvgIconsModule.forRoot({
-      icons: [],
-    })`;
-
-    addModuleImportToRootModule(host, moduleImport, null as any, project as WorkspaceProject);
-
-    context.logger.log('info', `✅️ @ngneat/svg-icon is imported`);
-
-    return host;
-  };
 }
 
 function log(): Rule {
@@ -124,8 +78,6 @@ export default function ngAdd(options: Schema): Rule {
   return chain([
     addScripts(),
     installPackageJsonDependencies(),
-    addModuleToImports(options),
-    injectImports(options),
     log(),
   ]);
 }
