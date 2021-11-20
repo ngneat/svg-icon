@@ -33,25 +33,25 @@
     }
   },
   "dependencies": {
-    "@angular/animations": "~12.0.0",
-    "@angular/common": "~12.0.0",
-    "@angular/compiler": "~12.0.0",
-    "@angular/core": "~12.0.0",
-    "@angular/forms": "~12.0.0",
-    "@angular/platform-browser": "~12.0.0",
-    "@angular/platform-browser-dynamic": "~12.0.0",
-    "@angular/router": "~12.0.0",
+    "@angular/animations": "~13.0.2",
+    "@angular/common": "~13.0.2",
+    "@angular/compiler": "~13.0.2",
+    "@angular/core": "~13.0.2",
+    "@angular/forms": "~13.0.2",
+    "@angular/platform-browser": "~13.0.2",
+    "@angular/platform-browser-dynamic": "~13.0.2",
+    "@angular/router": "~13.0.2",
     "@ngneat/lib": "^1.0.6",
     "@ngneat/tailwind": "^6.0.3",
     "rxjs": "~6.6.6",
-    "tslib": "^2.1.0",
+    "tslib": "^2.3.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^12.0.0",
-    "@angular-devkit/build-angular": "~12.0.0",
-    "@angular/cli": "~12.0.0",
-    "@angular/compiler-cli": "~12.0.0",
+    "@angular-devkit/build-angular": "~13.0.3",
+    "@angular/cli": "~13.0.3",
+    "@angular/compiler-cli": "~13.0.2",
     "@commitlint/cli": "12.0.1",
     "@commitlint/config-angular": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
@@ -73,7 +73,7 @@
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.5.4",
     "lint-staged": "^10.5.4",
-    "ng-packagr": "^12.0.0",
+    "ng-packagr": "^13.0.6",
     "postcss": "8.2.6",
     "postcss-import": "14.0.0",
     "postcss-loader": "5.0.0",
@@ -85,7 +85,7 @@
     "tailwindcss": "2.0.3",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.4.4"
   },
   "config": {
     "commitizen": {

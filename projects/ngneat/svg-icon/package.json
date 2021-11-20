@@ -7,6 +7,9 @@
     "schematics-utilities": "2.0.2",
     "tslib": "^2.0.0"
   },
+  "peerDependencies": {
+    "@angular/common": ">= 13.0.0"
+  },
   "keywords": [
     "angular",
     "angular 2",
