@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.2](https://github.com/ngneat/svg-icon/compare/v4.0.1...v4.0.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* 🐛 Fix schema ID for Angular 13 ([b45578d](https://github.com/ngneat/svg-icon/commit/b45578da3ecccbd66b74f95dd11e6143347c54f6))
+
 ### [4.0.1](https://github.com/ngneat/svg-icon/compare/v4.0.0...v4.0.1) (2021-11-20)
 
 
