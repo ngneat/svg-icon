@@ -49,6 +49,7 @@ export function createImportDeclaration({ identifierName, iconName }: Base) {
       false,
       undefined,
       factory.createNamedImports([factory.createImportSpecifier(
+        false,
         undefined,
         factory.createIdentifier(identifierName)
       )])
