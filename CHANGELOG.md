@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/ngneat/svg-icon/compare/v4.0.2...v4.1.0) (2022-03-01)
+
+
+### Features
+
+* 🎸 svg-generator update ts and svgo ([6cb2473](https://github.com/ngneat/svg-icon/commit/6cb24732e63584eaaa7f2616f5c311214ef2bed8))
+
+
+### Bug Fixes
+
+* 🐛 race between no shrink and other size inputs ([#76](https://github.com/ngneat/svg-icon/issues/76)) ([7a6edd5](https://github.com/ngneat/svg-icon/commit/7a6edd5af4bafa427849fe188bbb2ddb7fb82122))
+
 ### [4.0.2](https://github.com/ngneat/svg-icon/compare/v4.0.1...v4.0.2) (2021-11-29)
 
 
