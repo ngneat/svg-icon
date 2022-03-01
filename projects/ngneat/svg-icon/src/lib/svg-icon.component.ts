@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Inject, Input, SimpleChanges} from '@angular/core';
 
 import { SvgIconRegistry } from './registry';
 import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
@@ -24,42 +24,12 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent {
-  @Input()
-  set key(name: string) {
-    const icon = this.registry.get(name) ?? this.registry.get(this.config.missingIconFallback?.name);
-
-    if (icon) {
-      this.element.setAttribute('aria-label', `${name}-icon`);
-      this.element.classList.remove(getIconClassName(this.lastKey));
-      this.lastKey = name;
-      this.element.classList.add(getIconClassName(name));
-      this.element.innerHTML = icon;
-    }
-  }
-
-  @Input()
-  set size(value: keyof SVG_CONFIG['sizes']) {
-    this.setIconSize(this.mergedConfig.sizes[value]!);
-  }
-
-  @Input() set width(value: number | string) {
-    this.element.style.width = coerceCssPixelValue(value);
-  }
-
-  @Input() set height(value: number | string) {
-    this.element.style.height = coerceCssPixelValue(value);
-  }
-
-  @Input()
-  set fontSize(value: number | string) {
-    this.setIconSize(coerceCssPixelValue(value));
-  }
-
-  @Input()
-  set color(color: string) {
-    this.element.style.color = color;
-  }
-
+  @Input() key!: string;
+  @Input() size!: keyof SVG_CONFIG['sizes'];
+  @Input() width!: number | string;
+  @Input() height!: number | string;
+  @Input() fontSize!: number | string;
+  @Input() color!: string;
   @Input() noShrink = false;
 
   private mergedConfig: SVG_CONFIG;
@@ -76,6 +46,32 @@ export class SvgIconComponent {
 
   get element(): HTMLElement {
     return this.host.nativeElement;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.key) {
+      this.setIcon(this.key);
+    }
+
+    if (changes.size) {
+      this.setIconSize(this.mergedConfig.sizes[this.size]!);
+    }
+
+    if (changes.width) {
+      this.element.style.width = coerceCssPixelValue(this.width);
+    }
+
+    if (changes.height) {
+      this.element.style.height = coerceCssPixelValue(this.height);
+    }
+
+    if (changes.fontSize) {
+      this.setIconSize(coerceCssPixelValue(this.fontSize));
+    }
+
+    if (changes.color) {
+      this.element.style.color = this.color;
+    }
   }
 
   private createConfig() {
@@ -100,6 +96,18 @@ export class SvgIconComponent {
     this.element.style.fontSize = size;
     if (this.noShrink) {
       this.element.style.minWidth = size;
+    }
+  }
+
+  private setIcon(name: string) {
+    const icon = this.registry.get(name) ?? this.registry.get(this.config.missingIconFallback?.name);
+
+    if (icon) {
+      this.element.setAttribute('aria-label', `${name}-icon`);
+      this.element.classList.remove(getIconClassName(this.lastKey));
+      this.lastKey = name;
+      this.element.classList.add(getIconClassName(name));
+      this.element.innerHTML = icon;
     }
   }
 }
