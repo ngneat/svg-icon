@@ -38,7 +38,7 @@ function addScripts(): Rule {
     const asJSON = JSON.parse(content);
 
     asJSON.scripts['generate-icons'] = 'svg-generator';
-    asJSON['devDependencies']['@ngneat/svg-generator'] = '^2.0.0';
+    asJSON['devDependencies']['@ngneat/svg-generator'] = '^4.0.0';
 
     asJSON['svgGenerator'] = {
       outputPath: './src/app/svg',
