@@ -94,16 +94,24 @@ describe('SvgIconComponent', () => {
     expect(host.element.style.fontSize).toBe('1.5rem');
   });
 
-  it('should add minWidth when setting noShrink to true', () => {
-    host = createHost(`<svg-icon [noShrink]="true" key="dashboard" [size]="size"></svg-icon>`, {
-      hostProps: {
-        size: 'md',
-      },
+  describe('noShrink', () => {
+    it('should add minWidth when passing noShrink true', () => {
+      host = createHost(`<svg-icon [noShrink]="true" key="dashboard"></svg-icon>`);
+
+      expect(host.element.style.minWidth).toBe('1rem');
     });
 
-    expect(host.element.style.minWidth).toBe('1rem');
-    host.setHostInput('size', 'lg');
-    expect(host.element.style.minWidth).toBe('1.5rem');
+    it('should support size changes', () => {
+      host = createHost(`<svg-icon [noShrink]="true" key="dashboard" [size]="size"></svg-icon>`, {
+        hostProps: {
+          size: 'md',
+        },
+      });
+
+      expect(host.element.style.minWidth).toBe('1rem');
+      host.setHostInput('size', 'lg');
+      expect(host.element.style.minWidth).toBe('1.5rem');
+    });
   });
 });
 
