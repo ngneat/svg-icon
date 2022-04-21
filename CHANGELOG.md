@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/ngneat/svg-icon/compare/v4.1.0...v4.1.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* 🐛 noShrink when only passing a key ([26cc88d](https://github.com/ngneat/svg-icon/commit/26cc88ddc676e543a8d7b53c64f7ef3004a2231d))
+* 🐛 schematics should install the latest generator version ([4643c4d](https://github.com/ngneat/svg-icon/commit/4643c4d14f901c8a023f8662cbca2e165ab1a14a)), closes [#81](https://github.com/ngneat/svg-icon/issues/81)
+
 ## [4.1.0](https://github.com/ngneat/svg-icon/compare/v4.0.2...v4.1.0) (2022-03-01)
 
 
