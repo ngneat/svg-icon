@@ -34,6 +34,7 @@ export class SvgIconComponent {
 
   private mergedConfig: SVG_CONFIG;
   private lastKey!: string;
+  private init = false;
 
   constructor(
     private host: ElementRef,
@@ -41,7 +42,6 @@ export class SvgIconComponent {
     @Inject(SVG_ICONS_CONFIG) private config: SVG_CONFIG
   ) {
     this.mergedConfig = this.createConfig();
-    this.element.style.fontSize = this.mergedConfig.sizes[this.mergedConfig.defaultSize || 'md']!;
   }
 
   get element(): HTMLElement {
@@ -57,6 +57,15 @@ export class SvgIconComponent {
       this.setIconSize(this.mergedConfig.sizes[this.size]!);
     }
 
+    if (changes.fontSize) {
+      this.setIconSize(coerceCssPixelValue(this.fontSize));
+    }
+
+    // If on the first change no size was passed, set the default size
+    if (!this.init && !changes.size && !changes.fontSize) {
+      this.setIconSize(this.mergedConfig.sizes[this.mergedConfig.defaultSize || 'md']!);
+    }
+
     if (changes.width) {
       this.element.style.width = coerceCssPixelValue(this.width);
     }
@@ -65,13 +74,11 @@ export class SvgIconComponent {
       this.element.style.height = coerceCssPixelValue(this.height);
     }
 
-    if (changes.fontSize) {
-      this.setIconSize(coerceCssPixelValue(this.fontSize));
-    }
-
     if (changes.color) {
       this.element.style.color = this.color;
     }
+
+    this.init = true;
   }
 
   private createConfig() {
