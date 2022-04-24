@@ -17,7 +17,7 @@ export interface SVG_CONFIG {
     lg?: string;
     xl?: string;
     xxl?: string;
-  };
+  } & Record<string, string>;
 }
 
 export const SVG_ICONS_CONFIG = new InjectionToken<SVG_CONFIG>('SVG_ICONS_CONFIG');
