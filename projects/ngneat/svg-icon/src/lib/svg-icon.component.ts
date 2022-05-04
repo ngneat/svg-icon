@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Inject, Input, SimpleChanges} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, SimpleChanges } from '@angular/core';
 
 import { SvgIconRegistry } from './registry';
 import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
@@ -62,7 +62,7 @@ export class SvgIconComponent {
     }
 
     // If on the first change no size was passed, set the default size
-    if (!this.init && !changes.size && !changes.fontSize) {
+    if (!this.init && !changes.size?.currentValue && !changes.fontSize?.currentValue) {
       this.setIconSize(this.mergedConfig.sizes[this.mergedConfig.defaultSize || 'md']!);
     }
 
