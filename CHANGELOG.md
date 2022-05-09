@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.4](https://github.com/ngneat/svg-icon/compare/v4.1.3...v4.1.4) (2022-05-09)
+
+
+### Bug Fixes
+
+* 🐛 only apply size and font size when provided ([801fe7b](https://github.com/ngneat/svg-icon/commit/801fe7b5c6968fcee7f6d709a1784a21f39c9694))
+
 ### [4.1.3](https://github.com/ngneat/svg-icon/compare/v4.1.2...v4.1.3) (2022-05-08)
 
 
