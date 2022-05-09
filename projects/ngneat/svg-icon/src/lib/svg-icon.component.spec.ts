@@ -88,6 +88,16 @@ describe('SvgIconComponent', () => {
     expect(host.element.style.fontSize).toBe('1rem');
   });
 
+  it('should set the size when passing undefined fontSize property', () => {
+    host = createHost(`<svg-icon key="dashboard" [fontSize]="fontSize" [size]="size"></svg-icon>`, {
+      hostProps: {
+        size: 'lg',
+      },
+    });
+
+    expect(host.element.style.fontSize).toBe('1.5rem');
+  });
+
   it('should respect sizes', () => {
     host = createHost(`<svg-icon key="dashboard" [size]="size"></svg-icon>`, {
       hostProps: {

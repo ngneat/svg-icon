@@ -53,11 +53,11 @@ export class SvgIconComponent {
       this.setIcon(this.key);
     }
 
-    if (changes.size) {
+    if (changes.size?.currentValue) {
       this.setIconSize(this.mergedConfig.sizes[this.size]!);
     }
 
-    if (changes.fontSize) {
+    if (changes.fontSize?.currentValue) {
       this.setIconSize(coerceCssPixelValue(this.fontSize));
     }
 
