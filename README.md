@@ -59,6 +59,16 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 
 - Run `npm run generate-icons`
 
+## Custom config
+
+The `svgGenerator` config object is placed by default in your main `package.json`.
+
+It can also be placed in any location supported by the [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) such as a custom `.svgGeneratorrc.json` file.
+
+The config object is looked for in the project root directory by default.
+
+If your config object is located in another directory, you can specify it through the `--config-dir` option of the `svg-generator` CLI: `npm run svg-generator --config-dir=/your/custom/dir/where/the/config/is/located`. The config object will then be looked for in all valid [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) locations starting from that directory and going up the directory tree until a config is found.
+
 ## Icons Rendering
 
 Import the `SvgIconsModule` in your `AppModule`, and register the icons:
@@ -80,7 +90,7 @@ export class AppModule {}
 Now we can use the `svg-icon` component:
 
 ```html
-<svg-icon key="settings"></svg-icon> 
+<svg-icon key="settings"></svg-icon>
 <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
 
