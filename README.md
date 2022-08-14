@@ -42,7 +42,7 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 ```json
 {
   "scripts": {
-    "generate-icons": "svgGenerator"
+    "generate-icons": "svg-generator"
   },
   "svgGenerator": {
     "outputPath": "./src/app/svg",
