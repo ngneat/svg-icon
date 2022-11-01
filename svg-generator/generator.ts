@@ -17,7 +17,7 @@ export function generateSVGIcons(config: Config | null) {
   removeOldIcons(resolve(mergedConfig.outputPath));
 
   const virtualTree = createTree(mergedConfig.srcPath, mergedConfig.outputPath, mergedConfig);
-  const names: string[] = [];
+  let names: string[] = [];
 
   if (mergedConfig.rootBarrelFile) {
     const allExports = virtualTree
@@ -27,16 +27,18 @@ export function generateSVGIcons(config: Config | null) {
     outputFileSync(join(mergedConfig.outputPath, `${mergedConfig.rootBarrelFileName}.ts`), allExports, {
       encoding: 'utf-8',
     });
+
+    names = virtualTree.filter(({ name }) => name !== INDEX).map(({ name }) => name);
   } else {
     virtualTree.forEach(({ path, content, name }) => {
       name !== INDEX && names.push(name);
       outputFileSync(path, content, { encoding: 'utf-8' });
     });
-
-    outputFileSync(`${mergedConfig.typesPath}/types/svg.d.ts`, createTypeFile(names), {
-      encoding: 'utf-8',
-    });
   }
+
+  outputFileSync(`${mergedConfig.typesPath}/types/svg.d.ts`, createTypeFile(names), {
+    encoding: 'utf-8',
+  });
 }
 
 function removeOldIcons(outputPath: string) {

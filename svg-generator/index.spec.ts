@@ -1,11 +1,11 @@
 import mock from 'mock-fs';
+import { createTypeFile } from './create-types';
 import { createTree } from './tree';
 import { defaults } from './types';
 
 const srcPath = `src/assets/svg`;
 
 describe('createTree', () => {
-
   it('should create the correct tree', () => {
     mock({
       [`${srcPath}/one.svg`]: '<svg>one</svg>',
@@ -27,4 +27,7 @@ describe('createTree', () => {
     expect(result).toMatchSnapshot();
   });
 
+  it('should create the type file', () => {
+    expect(createTypeFile(['foo', 'bar', 'foo-bar'])).toMatchSnapshot();
+  });
 });
