@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/ngneat/svg-icon/compare/v4.1.4...v5.0.0) (2022-11-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lib:** Angular peer dependency is now v14.
+
+- Angular peer dependency is v14
+- Remove `SvgIconsModule` in favor of standalone API (see docs)
+- Make the `keys` fully typed
+- Add keys `type` to the generator
+- Add new `preserveAspectRatio` input
+
+### Features
+
+* **lib:** Upgrade to Angular v14 ([5d57b73](https://github.com/ngneat/svg-icon/commit/5d57b736a3fd8cc4da80b4955113109e0597c38a))
+
 ### [4.1.4](https://github.com/ngneat/svg-icon/compare/v4.1.3...v4.1.4) (2022-05-09)
 
 
