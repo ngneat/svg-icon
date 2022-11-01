@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, SimpleChanges } from '@angular/core';
 
 import { SvgIconRegistry } from './registry';
-import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
+import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
 
 @Component({
   selector: 'svg-icon',

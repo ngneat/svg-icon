@@ -4,19 +4,14 @@ import { dashboardIcon } from 'src/app/svg/dashboard';
 import { settingsIcon } from 'src/app/svg/settings';
 
 import { SvgIconComponent } from './svg-icon.component';
-import { SvgIconsModule } from './svg-icons.module';
+import { provideSvgIcons, provideSvgIconsConfig } from './providers';
 
 describe('SvgIconComponent', () => {
   let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
-    declareComponent: false,
-    imports: [
-      SvgIconsModule.forRoot({
-        icons: [dashboardIcon, settingsIcon],
-      }),
-    ],
+    providers: [provideSvgIcons([dashboardIcon, settingsIcon])],
   });
 
   it('should render the svg', () => {
@@ -136,9 +131,8 @@ describe('SvgIconComponent Custom Sizes', () => {
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
-    declareComponent: false,
-    imports: [
-      SvgIconsModule.forRoot({
+    providers: [
+      provideSvgIconsConfig({
         defaultSize: 'lg',
         sizes: {
           sm: '16px',
@@ -174,12 +168,7 @@ describe('SvgIconComponent without Missing Icon', () => {
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
-    declareComponent: false,
-    imports: [
-      SvgIconsModule.forRoot({
-        icons: [settingsIcon],
-      }),
-    ],
+    providers: [provideSvgIcons(settingsIcon)],
   });
 
   it('should not render unknown or missing icon', () => {
@@ -194,11 +183,10 @@ describe('SvgIconComponent with Missing Icon', () => {
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
-    declareComponent: false,
-    imports: [
-      SvgIconsModule.forRoot({
+    providers: [
+      provideSvgIcons(settingsIcon),
+      provideSvgIconsConfig({
         missingIconFallback: missingIcon,
-        icons: [settingsIcon],
       }),
     ],
   });

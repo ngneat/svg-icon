@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Inject, Injectable, Injector } from '@angular/core';
 
-import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
+import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './providers';
 
 class SvgIcon {
   init = false;
