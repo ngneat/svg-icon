@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Injector } from '@angular/core';
+import { inject, Inject, Injectable, Injector } from '@angular/core';
 
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './types';
 
@@ -11,17 +11,15 @@ class SvgIcon {
 
 @Injectable({ providedIn: 'root' })
 export class SvgIconRegistry {
-  private readonly svgMap = new Map<string, SvgIcon>();
-  private readonly document: Document;
+  private svgMap = new Map<string, SvgIcon>();
+  private document = inject(DOCUMENT);
 
-  constructor(injector: Injector, @Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
-    this.document = injector.get(DOCUMENT);
-
-    if (config.icons) {
+  constructor(@Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
+    if (config?.icons) {
       this.register(config.icons);
     }
 
-    if (config.missingIconFallback) {
+    if (config?.missingIconFallback) {
       this.register(config.missingIconFallback);
     }
   }
@@ -30,7 +28,7 @@ export class SvgIconRegistry {
     return this.svgMap;
   }
 
-  get(key: string | undefined): string | undefined {
+  get(key: string | undefined, config?: { preserveAspectRatio?: string }): string | undefined {
     const icon = key && this.svgMap.get(key);
 
     if (!icon) {
@@ -42,7 +40,7 @@ export class SvgIconRegistry {
       svg.setAttribute('fit', '');
       svg.setAttribute('height', '100%');
       svg.setAttribute('width', '100%');
-      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('preserveAspectRatio', config?.preserveAspectRatio ?? 'xMidYMid meet');
       svg.setAttribute('focusable', 'false');
 
       icon.content = svg.outerHTML;

@@ -1,4 +1,5 @@
-import { InjectionToken } from '@angular/core';
+import { ENVIRONMENT_INITIALIZER, inject, InjectionToken } from '@angular/core';
+import { SvgIconRegistry } from './registry';
 
 export interface SvgIconType {
   name: string;
@@ -20,6 +21,36 @@ export interface SVG_CONFIG {
   } & Record<string, string>;
 }
 
-export const SVG_ICONS_CONFIG = new InjectionToken<SVG_CONFIG>('SVG_ICONS_CONFIG');
+export const SVG_ICONS_CONFIG = new InjectionToken<SVG_CONFIG>('SVG_ICONS_CONFIG', {
+  providedIn: 'root',
+  factory() {
+    return {} as SVG_CONFIG;
+  },
+});
 export const SVG_ICONS = new InjectionToken<SVG_CONFIG['icons']>('SVG_ICONS');
-export const SVG_MISSING_ICON_FALLBACK = new InjectionToken<SVG_CONFIG['missingIconFallback']>('SVG_MISSING_ICON_FALLBACK');
+export const SVG_MISSING_ICON_FALLBACK = new InjectionToken<SVG_CONFIG['missingIconFallback']>(
+  'SVG_MISSING_ICON_FALLBACK',
+  {
+    providedIn: 'root',
+    factory() {
+      return undefined;
+    },
+  }
+);
+
+export function provideSvgIcons(icons: SvgIconType | SvgIconType[]) {
+  return {
+    provide: ENVIRONMENT_INITIALIZER,
+    multi: true,
+    useValue() {
+      inject(SvgIconRegistry).register(icons);
+    },
+  };
+}
+
+export function provideSvgIconsConfig(config: Partial<SVG_CONFIG>) {
+  return {
+    provide: SVG_ICONS_CONFIG,
+    useValue: config,
+  };
+}

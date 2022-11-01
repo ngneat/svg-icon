@@ -11,7 +11,7 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
       "@ngneat/svg-icon": ["projects/ngneat/svg-icon/src/public-api.ts"],
@@ -19,8 +19,7 @@
     }
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
+    "strictTemplates": true,
     "disableTypeScriptVersionCheck": true
   }
 }

@@ -1,6 +1,5 @@
-import { chain, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import * as ts from 'typescript';
 import * as fs from 'fs';
 
 import { Schema } from './schema';
@@ -12,16 +11,6 @@ function installPackageJsonDependencies(): Rule {
 
     return host;
   };
-}
-
-function getTsSourceFile(host: Tree, path: string): ts.SourceFile {
-  const buffer = host.read(path);
-  if (!buffer) {
-    throw new SchematicsException(`Could not read file (${path}).`);
-  }
-  const content = buffer.toString();
-
-  return ts.createSourceFile(path, content, ts.ScriptTarget.Latest, true);
 }
 
 function log(): Rule {
@@ -45,10 +34,7 @@ function addScripts(): Rule {
       prefix: 'app',
       srcPath: './src/assets/svg',
       svgoConfig: {
-        plugins: [
-          "removeDimensions",
-          "cleanupAttrs"
-        ],
+        plugins: ['removeDimensions', 'cleanupAttrs'],
       },
     };
 
@@ -75,9 +61,5 @@ process.on('exit', function () {
 });
 
 export default function ngAdd(options: Schema): Rule {
-  return chain([
-    addScripts(),
-    installPackageJsonDependencies(),
-    log(),
-  ]);
+  return chain([addScripts(), installPackageJsonDependencies(), log()]);
 }

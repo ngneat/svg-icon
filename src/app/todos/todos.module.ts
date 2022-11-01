@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { TodosRoutingModule } from './todos-routing.module';
 import { TodosComponent } from './todos.component';
-import { SvgIconsModule } from '@ngneat/svg-icon';
+import { provideSvgIcons, SvgIconComponent } from '@ngneat/svg-icon';
 import { settingsIcon } from '@app/svg/settings';
 import { locationIcon } from '@app/svg/location';
 
 @NgModule({
   declarations: [TodosComponent],
-  imports: [CommonModule, TodosRoutingModule, SvgIconsModule.forChild([locationIcon, settingsIcon])]
+  providers: [provideSvgIcons([locationIcon, settingsIcon])],
+  imports: [CommonModule, TodosRoutingModule, SvgIconComponent],
 })
 export class TodosModule {}

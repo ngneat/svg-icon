@@ -49,9 +49,7 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
     "prefix": "app",
     "srcPath": "./src/assets/svg",
     "svgoConfig": {
-      "plugins": [
-        "removeDimensions"
-      ]
+      "plugins": ["removeDimensions"]
     }
   }
 }
@@ -90,8 +88,7 @@ export class AppModule {}
 Now we can use the `svg-icon` component:
 
 ```html
-<svg-icon key="settings"></svg-icon>
-<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+<svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
 
 ## Register icons locally
@@ -126,9 +123,7 @@ const { SvgGeneratorWebpackPlugin } = require('@ngneat/svg-generator/webpack-plu
       srcPath: './src/assets/svg',
       outputPath: './src/app/svg',
       svgoConfig: {
-        plugins: [
-          "removeDimensions"
-        ],
+        plugins: ['removeDimensions'],
       },
     }),
   ];
@@ -175,13 +170,13 @@ You also have the option to pass fixed sizes and use them across the application
         md: '16px',
         lg: '20px',
         xl: '25px',
-        xxl: '30px'
+        xxl: '30px',
       },
       defaultSize: 'md',
-      icons
-    })
+      icons,
+    }),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
@@ -248,30 +243,3 @@ import { unknownIcon } from '@app/svg/unknown';
 })
 export class AppModule {}
 ```
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://www.netbasal.com/"><img src="https://avatars1.githubusercontent.com/u/6745730?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Netanel Basal</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Code">💻</a> <a href="https://github.com/@ngneat/icons/commits?author=NetanelBasal" title="Documentation">📖</a> <a href="#ideas-NetanelBasal" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://github.com/theblushingcrow"><img src="https://avatars3.githubusercontent.com/u/638818?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Inbal Sinai</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=theblushingcrow" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/shaharkazaz"><img src="https://avatars2.githubusercontent.com/u/17194830?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shahar Kazaz</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=shaharkazaz" title="Code">💻</a> <a href="#ideas-shaharkazaz" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://medium.com/@overthesanity"><img src="https://avatars1.githubusercontent.com/u/7337691?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Artur Androsovych</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=arturovt" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/vltansky"><img src="https://avatars0.githubusercontent.com/u/5851280?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vlad Tansky</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=vltansky" title="Code">💻</a></td>
-    <td align="center"><a href="http://zgabievi.co/"><img src="https://avatars.githubusercontent.com/u/1515299?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Zura Gabievi</b></sub></a><br /><a href="https://github.com/@ngneat/icons/commits?author=zgabievi" title="Code">💻</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-</br>
-Logo icon was made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>

@@ -6,6 +6,7 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
 @Component({
   selector: 'svg-icon',
   template: '',
+  standalone: true,
   host: {
     role: 'img',
     'aria-hidden': 'true',
@@ -24,13 +25,14 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent {
-  @Input() key!: string;
+  @Input() key!: SvgIcons extends { icons: infer Icons } ? Icons : string;
   @Input() size!: keyof SVG_CONFIG['sizes'];
   @Input() width!: number | string;
   @Input() height!: number | string;
   @Input() fontSize!: number | string;
   @Input() color!: string;
   @Input() noShrink = false;
+  @Input() preserveAspectRatio: string | undefined;
 
   private mergedConfig: SVG_CONFIG;
   private lastKey!: string;
@@ -107,7 +109,8 @@ export class SvgIconComponent {
   }
 
   private setIcon(name: string) {
-    const icon = this.registry.get(name) ?? this.registry.get(this.config.missingIconFallback?.name);
+    const config = { preserveAspectRatio: this.preserveAspectRatio };
+    const icon = this.registry.get(name, config) ?? this.registry.get(this.config.missingIconFallback?.name, config);
 
     if (icon) {
       this.element.setAttribute('aria-label', `${name}-icon`);

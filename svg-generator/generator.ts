@@ -3,9 +3,10 @@ import { join, resolve } from 'path';
 import { outputFileSync, unlinkSync } from 'fs-extra';
 import { Config, defaults } from './types';
 import { createTree, INDEX } from './tree';
+import { createTypeFile } from './create-types';
 
 export function generateSVGIcons(config: Config | null) {
-  if(!config) {
+  if (!config) {
     console.log(`Can't find a config object!`);
 
     process.exit();
@@ -16,16 +17,26 @@ export function generateSVGIcons(config: Config | null) {
   removeOldIcons(resolve(mergedConfig.outputPath));
 
   const virtualTree = createTree(mergedConfig.srcPath, mergedConfig.outputPath, mergedConfig);
+  const names: string[] = [];
 
-  if(mergedConfig.rootBarrelFile) {
-    const allExports = virtualTree.filter(({ name }) => name !== INDEX).map(({ content }) => content).join('\n\n');
-    outputFileSync(join(mergedConfig.outputPath, `${mergedConfig.rootBarrelFileName}.ts`), allExports, { encoding: 'utf-8' });
+  if (mergedConfig.rootBarrelFile) {
+    const allExports = virtualTree
+      .filter(({ name }) => name !== INDEX)
+      .map(({ content }) => content)
+      .join('\n\n');
+    outputFileSync(join(mergedConfig.outputPath, `${mergedConfig.rootBarrelFileName}.ts`), allExports, {
+      encoding: 'utf-8',
+    });
   } else {
-    virtualTree.forEach(({ path, content }) => {
-      outputFileSync(path, content, { encoding: 'utf-8' })
+    virtualTree.forEach(({ path, content, name }) => {
+      name !== INDEX && names.push(name);
+      outputFileSync(path, content, { encoding: 'utf-8' });
+    });
+
+    outputFileSync(`${mergedConfig.typesPath}/types/svg.d.ts`, createTypeFile(names), {
+      encoding: 'utf-8',
     });
   }
-
 }
 
 function removeOldIcons(outputPath: string) {

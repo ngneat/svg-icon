@@ -1,26 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createTree should create the correct tree 1`] = `
-Array [
-  Object {
+[
+  {
     "content": "export const childIcon = {
     data: \`<svg>child</svg>\`,
-    name: 'child'
+    name: 'child' as const
 };",
     "identifierName": "childIcon",
     "name": "child",
     "path": "src/app/svg/group/child.ts",
   },
-  Object {
+  {
     "content": "export const child2Icon = {
     data: \`<svg>child 2</svg>\`,
-    name: 'child-2'
+    name: 'child-2' as const
 };",
     "identifierName": "child2Icon",
     "name": "child2",
     "path": "src/app/svg/group/child2.ts",
   },
-  Object {
+  {
     "content": "import { childIcon } from './child';
 import { child2Icon } from './child2';
 export const groupIcons = [childIcon, child2Icon];
@@ -29,25 +29,25 @@ export const groupIcons = [childIcon, child2Icon];
     "name": "__INDEX__",
     "path": "src/app/svg/group/index.ts",
   },
-  Object {
+  {
     "content": "export const childOneIcon = {
     data: \`<svg>child</svg>\`,
-    name: 'child-one'
+    name: 'child-one' as const
 };",
     "identifierName": "childOneIcon",
     "name": "child-one",
     "path": "src/app/svg/group-two/child-one.ts",
   },
-  Object {
+  {
     "content": "export const childTwoIcon = {
     data: \`<svg>child 2</svg>\`,
-    name: 'child-two'
+    name: 'child-two' as const
 };",
     "identifierName": "childTwoIcon",
     "name": "child-two",
     "path": "src/app/svg/group-two/child-two.ts",
   },
-  Object {
+  {
     "content": "import { childOneIcon } from './child-one';
 import { childTwoIcon } from './child-two';
 export const groupTwoIcons = [childOneIcon, childTwoIcon];
@@ -56,19 +56,19 @@ export const groupTwoIcons = [childOneIcon, childTwoIcon];
     "name": "__INDEX__",
     "path": "src/app/svg/group-two/index.ts",
   },
-  Object {
+  {
     "content": "export const oneIcon = {
     data: \`<svg>one</svg>\`,
-    name: 'one'
+    name: 'one' as const
 };",
     "identifierName": "oneIcon",
     "name": "one",
     "path": "src/app/svg/one.ts",
   },
-  Object {
+  {
     "content": "export const twoIcon = {
     data: \`<svg>two</svg>\`,
-    name: 'two'
+    name: 'two' as const
 };",
     "identifierName": "twoIcon",
     "name": "two",

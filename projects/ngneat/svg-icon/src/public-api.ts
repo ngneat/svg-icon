@@ -1,3 +1,3 @@
-export * from './lib/svg-icons.module';
-export * from './lib/svg-icon.component';
-export * from './lib/registry';
+export { SvgIconComponent } from './lib/svg-icon.component';
+export { SvgIconRegistry } from './lib/registry';
+export { provideSvgIcons, provideSvgIconsConfig } from './lib/types';

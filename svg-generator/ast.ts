@@ -9,7 +9,7 @@ interface Base {
 
 // export const eyeSlashIcon = {
 //   data: ``,
-//   name: 'eye-slash'
+//   name: 'eye-slash' as const
 // };
 export function createStatement({ identifierName, svgContent, iconName }: Base & { svgContent: string }) {
   return factory.createVariableStatement(
@@ -28,12 +28,15 @@ export function createStatement({ identifierName, svgContent, iconName }: Base &
               ),
               factory.createPropertyAssignment(
                 factory.createIdentifier('name'),
-                factory.createStringLiteral(kebabCase(iconName), true)
-              )
+                factory.createAsExpression(
+                  factory.createStringLiteral(kebabCase(iconName), true),
+                  factory.createTypeReferenceNode(factory.createIdentifier('const'), undefined)
+                )
+              ),
             ],
             true
           )
-        )
+        ),
       ],
       NodeFlags.Const
     )
@@ -48,18 +51,12 @@ export function createImportDeclaration({ identifierName, iconName }: Base) {
     factory.createImportClause(
       false,
       undefined,
-      factory.createNamedImports([factory.createImportSpecifier(
-        false,
-        undefined,
-        factory.createIdentifier(identifierName)
-      )])
+      factory.createNamedImports([
+        factory.createImportSpecifier(false, undefined, factory.createIdentifier(identifierName)),
+      ])
     ),
-    factory.createStringLiteral(
-      `./${iconName}`,
-      true
-    )
+    factory.createStringLiteral(`./${iconName}`, true)
   );
-
 }
 
 // export const authIcons = [eyeSlashIcon, eyeIcon, googleLogoIcon];
@@ -67,15 +64,17 @@ export function createArrayExport(arrayName: string, identifiers: string[]) {
   return factory.createVariableStatement(
     [factory.createModifier(SyntaxKind.ExportKeyword)],
     factory.createVariableDeclarationList(
-      [factory.createVariableDeclaration(
-        factory.createIdentifier(camelcase(`${arrayName}Icons`)),
-        undefined,
-        undefined,
-        factory.createArrayLiteralExpression(
-          identifiers.map(id => factory.createIdentifier(id)),
-          false
-        )
-      )],
+      [
+        factory.createVariableDeclaration(
+          factory.createIdentifier(camelcase(`${arrayName}Icons`)),
+          undefined,
+          undefined,
+          factory.createArrayLiteralExpression(
+            identifiers.map((id) => factory.createIdentifier(id)),
+            false
+          )
+        ),
+      ],
       NodeFlags.Const
     )
   );
