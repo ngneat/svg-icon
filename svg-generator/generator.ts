@@ -36,7 +36,7 @@ export function generateSVGIcons(config: Config | null) {
     });
   }
 
-  outputFileSync(`${mergedConfig.typesPath}/types/svg.d.ts`, createTypeFile(names), {
+  outputFileSync(`${mergedConfig.typesPath}/${mergedConfig.typesFileName}.d.ts`, createTypeFile(names), {
     encoding: 'utf-8',
   });
 }

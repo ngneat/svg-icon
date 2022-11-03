@@ -21,7 +21,7 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 
 ## Installation
 
-`ng add @ngneat/svg-icon`
+`npm i @ngneat/svg-icon`
 
 ## Icons Preparation
 
@@ -37,25 +37,25 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 }
 ```
 
-- Use `@ngneat/svg-generator` to clean and extract the icons content:
+- Install and use the `@ngneat/svg-generator` package to clean and extract the icons content:
 
 ```json
+// package.json
 {
   "scripts": {
-    "generate-icons": "svg-generator"
+    "svg": "svg-generator"
   },
   "svgGenerator": {
     "outputPath": "./src/app/svg",
-    "prefix": "app",
     "srcPath": "./src/assets/svg",
     "svgoConfig": {
-      "plugins": ["removeDimensions"]
+      "plugins": ["removeDimensions", "cleanupAttrs"]
     }
   }
 }
 ```
 
-- Run `npm run generate-icons`
+- Run `npm run svg`
 
 ## Custom config
 
@@ -65,27 +65,22 @@ It can also be placed in any location supported by the [Cosmiconfig library](htt
 
 The config object is looked for in the project root directory by default.
 
-If your config object is located in another directory, you can specify it through the `--config-dir` option of the `svg-generator` CLI: `npm run svg-generator --config-dir=/your/custom/dir/where/the/config/is/located`. The config object will then be looked for in all valid [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) locations starting from that directory and going up the directory tree until a config is found.
+If your config object is located in another directory, you can specify it through the `--config-dir` option of the `svg` CLI: `npm run svg --config-dir=/your/custom/dir/where/the/config/is/located`. The config object will then be looked for in all valid [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) locations starting from that directory and going up the directory tree until a config is found.
 
 ## Icons Rendering
 
-Import the `SvgIconsModule` in your `AppModule`, and register the icons:
+Use the `provideSvgIcons` to register register the icons:
 
 ```ts
-import { SvgIconsModule } from '@ngneat/svg-icon';
+import { provideSvgIcons } from '@ngneat/svg-icon';
 import { settingsIcon } from '@app/svg/settings';
 
-@NgModule({
-  imports: [
-    SvgIconsModule.forRoot({
-      icons: [settingsIcon],
-    }),
-  ],
-})
-export class AppModule {}
+bootstrapApplication(AppComponent, {
+  providers: [provideSvgIcons([settingsIcon])],
+});
 ```
 
-Now we can use the `svg-icon` component:
+Now we can import the **standalone** `SvgIconComponent` and use the `svg-icon` component:
 
 ```html
 <svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
@@ -93,18 +88,26 @@ Now we can use the `svg-icon` component:
 
 ## Register icons locally
 
-In lazy load modules or in reusable component modules, we can use the `forChild` method, for register icons accessible locally in these modules:
+In lazy load modules or lazy routes, we can use the `provideSvgIcons` method, for register icons accessible locally in these modules:
 
 ```ts
 import { dashboardIcon } from '@app/svg/dashboard';
 import { userIcon } from '@app/svg/user';
-import { SvgIconsModule } from '@ngneat/svg-icon';
+import { provideSvgIcons } from '@ngneat/svg-icon';
 
 @NgModule({
   declarations: [DashboardComponent],
-  imports: [DashboardRoutingModule, SvgIconsModule.forChild([userIcon])],
+  providers: [provideSvgIcons([userIcon])],
+  imports: [DashboardRoutingModule],
 })
 export class DashboardModule {}
+
+// OR in a Route def
+{
+  path: 'dashboard',
+  providers: [provideSvgIcons([userIcon])],
+  component: DashboardPageComponent
+}
 ```
 
 Note that we're NOT using a barrel file (i.e `index.ts`). This will make sure we only **load** the SVG files we use in the current module.
@@ -150,7 +153,7 @@ This will create a `notifications` folder with a `barrel` file that export the S
 import { notificationsIcons } from '@app/svg/notifications';
 
 @NgModule({
-  imports: [SvgIconsModule.forChild(notificationsIcons)],
+  providers: [provideSvgIcons(notificationsIcons)],
 })
 export class NotificationsModule {}
 ```
@@ -161,9 +164,11 @@ To control the SVG size, we use the `font-size` property as described in this [a
 You also have the option to pass fixed sizes and use them across the application:
 
 ```ts
-@NgModule({
-  imports: [
-    SvgIconsModule.forRoot({
+import { provideSvgIconsConfig } from '@ngneat/svg-icon';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideSvgIconsConfig({
       sizes: {
         xs: '10px',
         sm: '12px',
@@ -176,9 +181,7 @@ You also have the option to pass fixed sizes and use them across the application
       icons,
     }),
   ],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
+});
 ```
 
 They are used in the `size` input:
@@ -231,15 +234,14 @@ export class AppComponent {
 You can define **missingIconFallback** which will be used if icon is not found in registry:
 
 ```ts
+import { provideSvgIconsConfig } from '@ngneat/svg-icon';
 import { unknownIcon } from '@app/svg/unknown';
 
-@NgModule({
-  imports: [
-    SvgIconsModule.forRoot({
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideSvgIconsConfig({
       missingIconFallback: unknownIcon,
     }),
   ],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
+});
 ```

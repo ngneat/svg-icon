@@ -8,13 +8,11 @@
     "run:generator": "node svg-generator/index.js",
     "hooks:pre-commit": "node hooks/pre-commit.js && lint-staged",
     "commit": "git-cz",
-    "build:lib": "ng build @ngneat/svg-icon --configuration production && npm run schematics:build && cp -r README.md dist/ngneat/svg-icon && npm run copy:types",
+    "build:lib": "ng build @ngneat/svg-icon --configuration production && cp -r README.md dist/ngneat/svg-icon && npm run copy:types",
     "test:lib": "ng test @ngneat/svg-icon",
     "release": "cd projects/ngneat/svg-icon && standard-version --infile ../../../CHANGELOG.md",
     "copy:types": "mkdir -p dist/ngneat/svg-icon/lib/src/lib/typings && cp projects/ngneat/svg-icon/src/lib/typings/index.d.ts dist/ngneat/svg-icon/lib/src/lib/typings",
-    "test:lib:headless": "cross-env CI=true npm run test:lib",
-    "schematics:build": "tsc -p tsconfig.schematics.json && npm run schematics:copy",
-    "schematics:copy": "cp schematics/src/collection.json dist/ngneat/svg-icon/schematics/src && cp schematics/src/ng-add/schema.json dist/ngneat/svg-icon/schematics/src/ng-add"
+    "test:lib:headless": "cross-env CI=true npm run test:lib"
   },
   "private": true,
   "svgGenerator": {
