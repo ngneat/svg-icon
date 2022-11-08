@@ -60,8 +60,11 @@ npm i @ngneat/svg-generator --save-dev
 
 It can be modified to meet your needs.
 
+- Add `@types/svg` to `typesRoot` in your `tsconfig` file
 - Add the `outputPath` and `@types/svg` folders to your `gitignore` file
 - Run `npm run svg`
+
+Note that this configuration is for `Nx` applications. Checkout the `Angular CLI` demo [repository](https://github.com/ngneat/svg-icon-demo/blob/master/package.json) to see how to configure it.
 
 ## Icons Rendering
 
