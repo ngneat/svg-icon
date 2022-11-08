@@ -21,28 +21,31 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 
 ## Installation
 
-`npm i @ngneat/svg-icon`
+```
+npm i @ngneat/svg-icon
+npm i @ngneat/svg-generator --save-dev
+```
 
 ## Icons Preparation
 
 - Add the icons to `src/assets/svg`
-- Add an alias to the `tsconfig` file:
+- Add an alias to the `tsconfig` file (optional):
 
 ```json
 {
-  ...
   "paths": {
     "@app/svg/*": ["src/app/svg/*"]
   }
 }
 ```
 
-- Install and use the `@ngneat/svg-generator` package to clean and extract the icons content:
+- Configure the `@ngneat/svg-generator` to clean and extract the icons content. Add the following to your `package.json` file:
 
 ```json
-// package.json
 {
   "scripts": {
+    "start": "ng serve",
+    "prestart": "npm run svg-generator",
     "svg": "svg-generator"
   },
   "svgGenerator": {
@@ -55,17 +58,10 @@ For example, if the `fill` or `stroke` properties of elements in the svg are set
 }
 ```
 
+It can be modified to meet your needs.
+
+- Add the `outputPath` and `@types/svg` folders to your `gitignore` file
 - Run `npm run svg`
-
-## Custom config
-
-The `svgGenerator` config object is placed by default in your main `package.json`.
-
-It can also be placed in any location supported by the [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) such as a custom `.svgGeneratorrc.json` file.
-
-The config object is looked for in the project root directory by default.
-
-If your config object is located in another directory, you can specify it through the `--config-dir` option of the `svg` CLI: `npm run svg --config-dir=/your/custom/dir/where/the/config/is/located`. The config object will then be looked for in all valid [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) locations starting from that directory and going up the directory tree until a config is found.
 
 ## Icons Rendering
 
@@ -83,8 +79,12 @@ bootstrapApplication(AppComponent, {
 Now we can import the **standalone** `SvgIconComponent` and use the `svg-icon` component:
 
 ```html
-<svg-icon key="settings"></svg-icon> <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+<svg-icon key="settings"></svg-icon>
+
+<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
+
+_Note_ that the `key` should be striclty typed based on your icons.
 
 ## Register icons locally
 
@@ -245,3 +245,13 @@ bootstrapApplication(AppComponent, {
   ],
 });
 ```
+
+## Custom config file
+
+The `svgGenerator` config object is placed by default in your main `package.json`.
+
+It can also be placed in any location supported by the [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) such as a custom `.svgGeneratorrc.json` file.
+
+The config object is looked for in the project root directory by default.
+
+If your config object is located in another directory, you can specify it through the `--config-dir` option of the `svg` CLI: `npm run svg --config-dir=/your/custom/dir/where/the/config/is/located`. The config object will then be looked for in all valid [Cosmiconfig library](https://github.com/davidtheclark/cosmiconfig) locations starting from that directory and going up the directory tree until a config is found.
