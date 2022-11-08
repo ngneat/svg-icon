@@ -44,8 +44,8 @@ npm i @ngneat/svg-generator --save-dev
 ```json
 {
   "scripts": {
-    "start": "ng serve",
-    "prestart": "npm run svg-generator",
+    "prestart": "npm run svg",
+    "prebuild": "npm run svg",
     "svg": "svg-generator"
   },
   "svgGenerator": {
