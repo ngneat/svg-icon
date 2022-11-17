@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/ngneat/svg-icon/compare/v5.0.0...v6.0.0) (2022-11-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 There is SvgIcons['icons'] interface anymore and we everything is
+seamless
+
+### Features
+
+* 🎸 simplify the code for stricter typed keys ([7de9bd2](https://github.com/ngneat/svg-icon/commit/7de9bd2f4c10d649a0ac9c6a821fc81a312772ad))
+
 ## [5.0.0](https://github.com/ngneat/svg-icon/compare/v4.1.4...v5.0.0) (2022-11-01)
 
 
