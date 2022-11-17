@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, SimpleChanges } from '@angular/core';
-
+import { SvgIcons } from './types';
 import { SvgIconRegistry } from './registry';
 import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
 
@@ -25,7 +25,7 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent {
-  @Input() key!: SvgIcons extends { icons: infer Icons } ? Icons : string;
+  @Input() key!: SvgIcons;
   @Input() size!: keyof SVG_CONFIG['sizes'];
   @Input() width!: number | string;
   @Input() height!: number | string;

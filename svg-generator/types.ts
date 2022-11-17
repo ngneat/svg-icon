@@ -6,8 +6,6 @@ export interface Config {
   postfix?: string;
   rootBarrelFile?: boolean;
   rootBarrelFileName?: string;
-  typesPath?: string;
-  typesFileName?: string;
 }
 
 export const defaults: Config = {
@@ -18,6 +16,4 @@ export const defaults: Config = {
   outputPath: '',
   rootBarrelFile: false,
   rootBarrelFileName: 'index',
-  typesPath: '@types/svg',
-  typesFileName: 'index',
 };

@@ -36,9 +36,13 @@ export function generateSVGIcons(config: Config | null) {
     });
   }
 
-  outputFileSync(`${mergedConfig.typesPath}/${mergedConfig.typesFileName}.d.ts`, createTypeFile(names), {
+  const path = resolve(process.cwd(), 'node_modules', '@ngneat', 'svg-icon', 'lib', 'types.d.ts');
+
+  outputFileSync(path, createTypeFile(names), {
     encoding: 'utf-8',
   });
+
+  console.log(`🚀 SvgIcons type was updated successfully`);
 }
 
 function removeOldIcons(outputPath: string) {

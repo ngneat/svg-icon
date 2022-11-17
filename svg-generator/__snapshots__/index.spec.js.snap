@@ -78,11 +78,6 @@ export const groupTwoIcons = [childOneIcon, childTwoIcon];
 `;
 
 exports[`createTree should create the type file 1`] = `
-"export {};
-declare global {
-    interface SvgIcons {
-        icons: 'foo' | 'bar' | 'foo-bar';
-    }
-}
+"export declare type SvgIcons = 'foo' | 'bar' | 'foo-bar';
 "
 `;

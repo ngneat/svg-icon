@@ -6,8 +6,7 @@
     "target": "es2020",
     "declaration": true,
     "inlineSources": true,
-    "lib": ["es2020", "DOM"],
-    "types": ["./src/lib/typings"]
+    "lib": ["es2020", "DOM"]
   },
   "exclude": ["src/test.ts", "**/*.spec.ts"]
 }

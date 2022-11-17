@@ -60,11 +60,8 @@ npm i @ngneat/svg-generator --save-dev
 
 It can be modified to meet your needs.
 
-- Add `@types/svg` to `typesRoot` in your `tsconfig` file
-- Add the `outputPath` and `@types/svg` folders to your `gitignore` file
+- Add the `outputPath` to your `gitignore` file
 - Run `npm run svg`
-
-Note that this configuration is for `Nx` applications. Checkout the `Angular CLI` demo [repository](https://github.com/ngneat/svg-icon-demo/blob/master/package.json) to see how to configure it.
 
 ## Icons Rendering
 
@@ -87,7 +84,7 @@ Now we can import the **standalone** `SvgIconComponent` and use the `svg-icon` c
 <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
 ```
 
-_Note_ that the `key` should be striclty typed based on your icons.
+_Note_ that the `key` should be striclty typed based on your icons. You can also export the `SvgIcons` type from the library if you need it.
 
 ## Register icons locally
 

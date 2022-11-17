@@ -17,25 +17,15 @@ const sourceFile = createSourceFile('types.ts', '', ScriptTarget.Latest, false, 
 
 export function createTypeFile(names: string[]) {
   const block = [
-    factory.createExportDeclaration(undefined, false, factory.createNamedExports([]), undefined, undefined),
-    factory.createModuleDeclaration(
-      [factory.createModifier(SyntaxKind.DeclareKeyword)],
-      factory.createIdentifier('global'),
-      factory.createModuleBlock([
-        factory.createInterfaceDeclaration(undefined, factory.createIdentifier('SvgIcons'), undefined, undefined, [
-          factory.createPropertySignature(
-            undefined,
-            factory.createIdentifier('icons'),
-            undefined,
-            factory.createUnionTypeNode(
-              names.map((name) => {
-                return factory.createLiteralTypeNode(factory.createStringLiteral(name, true));
-              })
-            )
-          ),
-        ]),
-      ]),
-      NodeFlags.ExportContext | NodeFlags.GlobalAugmentation | NodeFlags.ContextFlags
+    factory.createTypeAliasDeclaration(
+      [factory.createModifier(SyntaxKind.ExportKeyword), factory.createModifier(SyntaxKind.DeclareKeyword)],
+      factory.createIdentifier('SvgIcons'),
+      undefined,
+      factory.createUnionTypeNode(
+        names.map((name) => {
+          return factory.createLiteralTypeNode(factory.createStringLiteral(name, true));
+        })
+      )
     ),
   ];
 
