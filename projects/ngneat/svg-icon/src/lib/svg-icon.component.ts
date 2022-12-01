@@ -16,9 +16,8 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
       :host {
         display: inline-block;
         fill: currentColor;
-        width: 1em;
-        height: 1em;
-        font-size: 1rem;
+        width: var(--svg-icon-width, 1em);
+        height: var(--svg-icon-height, 1em);
       }
     `,
   ],
@@ -69,15 +68,15 @@ export class SvgIconComponent {
     }
 
     if (changes.width) {
-      this.element.style.width = coerceCssPixelValue(this.width);
+      this.element.style.width = `var(--svg-icon-width, ${coerceCssPixelValue(this.width)})`;
     }
 
     if (changes.height) {
-      this.element.style.height = coerceCssPixelValue(this.height);
+      this.element.style.height = `var(--svg-icon-height, ${coerceCssPixelValue(this.height)})`;
     }
 
     if (changes.color) {
-      this.element.style.color = this.color;
+      this.element.style.color = `var(--svg-icon-color, ${this.color})`;
     }
 
     this.init = true;
@@ -88,17 +87,25 @@ export class SvgIconComponent {
       sizes: {
         xs: '0.5rem',
         sm: '0.75rem',
-        md: '1rem',
+        md: `1rem`,
         lg: '1.5rem',
         xl: '2rem',
         xxl: '2.5rem',
       },
     };
 
-    return {
+    const merged = {
       ...defaults,
       ...this.config,
     };
+
+    merged.sizes = Object.entries(merged.sizes).reduce((acc, [key, value]) => {
+      acc[key] = `var(--svg-icon-font-size-${key}, ${value})`;
+
+      return acc;
+    }, {} as SVG_CONFIG['sizes']);
+
+    return merged;
   }
 
   private setIconSize(size: string) {

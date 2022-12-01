@@ -46,9 +46,9 @@ describe('SvgIconComponent', () => {
       },
     });
 
-    expect(host.element.style.color).toBe('white');
+    expect(host.element.style.color).toBe('var(--svg-icon-color, white)');
     host.setHostInput('color', 'red');
-    expect(host.element.style.color).toBe('red');
+    expect(host.element.style.color).toBe('var(--svg-icon-color, red)');
   });
 
   it('should change font size', () => {
@@ -67,20 +67,20 @@ describe('SvgIconComponent', () => {
   it('should change width and height', () => {
     host = createHost(`<svg-icon key="dashboard" width="50px" height="50px"></svg-icon>`);
 
-    expect(host.element.style.width).toBe('50px');
-    expect(host.element.style.height).toBe('50px');
+    expect(host.element.style.width).toBe('var(--svg-icon-width, 50px)');
+    expect(host.element.style.height).toBe('var(--svg-icon-height, 50px)');
   });
 
   it('should set the default size', () => {
     host = createHost(`<svg-icon key="dashboard"></svg-icon>`);
 
-    expect(host.element.style.fontSize).toBe('1rem');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-md, 1rem)');
   });
 
   it('should set the default size when passing undefined size properties', () => {
     host = createHost(`<svg-icon key="dashboard" [fontSize]="fontSize" [size]="size"></svg-icon>`);
 
-    expect(host.element.style.fontSize).toBe('1rem');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-md, 1rem)');
   });
 
   it('should set the size when passing undefined fontSize property', () => {
@@ -90,7 +90,7 @@ describe('SvgIconComponent', () => {
       },
     });
 
-    expect(host.element.style.fontSize).toBe('1.5rem');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-lg, 1.5rem)');
   });
 
   it('should respect sizes', () => {
@@ -100,16 +100,16 @@ describe('SvgIconComponent', () => {
       },
     });
 
-    expect(host.element.style.fontSize).toBe('1rem');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-md, 1rem)');
     host.setHostInput('size', 'lg');
-    expect(host.element.style.fontSize).toBe('1.5rem');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-lg, 1.5rem)');
   });
 
   describe('noShrink', () => {
     it('should add minWidth when passing noShrink true', () => {
       host = createHost(`<svg-icon [noShrink]="true" key="dashboard"></svg-icon>`);
 
-      expect(host.element.style.minWidth).toBe('1rem');
+      expect(host.element.style.minWidth).toBe('var(--svg-icon-font-size-md, 1rem)');
     });
 
     it('should support size changes', () => {
@@ -119,9 +119,9 @@ describe('SvgIconComponent', () => {
         },
       });
 
-      expect(host.element.style.minWidth).toBe('1rem');
+      expect(host.element.style.minWidth).toBe('var(--svg-icon-font-size-md, 1rem)');
       host.setHostInput('size', 'lg');
-      expect(host.element.style.minWidth).toBe('1.5rem');
+      expect(host.element.style.minWidth).toBe('var(--svg-icon-font-size-lg, 1.5rem)');
     });
   });
 });
@@ -147,7 +147,7 @@ describe('SvgIconComponent Custom Sizes', () => {
   it('should set the default size', () => {
     host = createHost(`<svg-icon key="dashboard"></svg-icon>`);
 
-    expect(host.element.style.fontSize).toBe('64px');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-lg, 64px)');
   });
 
   it('should respect sizes', () => {
@@ -157,9 +157,9 @@ describe('SvgIconComponent Custom Sizes', () => {
       },
     });
 
-    expect(host.element.style.fontSize).toBe('32px');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-md, 32px)');
     host.setHostInput('size', 'sm');
-    expect(host.element.style.fontSize).toBe('16px');
+    expect(host.element.style.fontSize).toBe('var(--svg-icon-font-size-sm, 16px)');
   });
 });
 

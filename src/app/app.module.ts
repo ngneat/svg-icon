@@ -10,7 +10,6 @@ import { missingIcon } from './svg/missing';
   declarations: [AppComponent],
   providers: [
     provideSvgIconsConfig({
-      defaultSize: 'md',
       missingIconFallback: missingIcon,
       sizes: {
         sm: '16px',
