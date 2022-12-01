@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/ngneat/svg-icon/compare/v6.0.0...v6.1.0) (2022-12-01)
+
+
+### Features
+
+* 🎸 add css variables ([f53a6bf](https://github.com/ngneat/svg-icon/commit/f53a6bf1bab3fe146a915e9429a9999e066510fa))
+
 ## [6.0.0](https://github.com/ngneat/svg-icon/compare/v5.0.0...v6.0.0) (2022-11-17)
 
 
