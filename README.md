@@ -78,10 +78,18 @@ bootstrapApplication(AppComponent, {
 
 Now we can import the **standalone** `SvgIconComponent` and use the `svg-icon` component:
 
-```html
-<svg-icon key="settings"></svg-icon>
+```ts
+import { SvgIconComponent } from '@ngneat/svg-icon';
 
-<svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+@Component({
+  imports: [SvgIconComponent],
+  template: `
+    <svg-icon key="settings"></svg-icon>
+
+    <svg-icon key="settings" color="hotpink" fontSize="40px"></svg-icon>
+  `,
+})
+export class FooComponent {}
 ```
 
 _Note_ that the `key` should be striclty typed based on your icons. You can also export the `SvgIcons` type from the library if you need it.
