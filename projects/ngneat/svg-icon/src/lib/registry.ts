@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Inject, Injectable, Injector } from '@angular/core';
+import { forwardRef, inject, Inject, Injectable } from '@angular/core';
 
 import { SVG_CONFIG, SVG_ICONS_CONFIG, SvgIconType } from './providers';
 
@@ -14,7 +14,7 @@ export class SvgIconRegistry {
   private svgMap = new Map<string, SvgIcon>();
   private document = inject(DOCUMENT);
 
-  constructor(@Inject(SVG_ICONS_CONFIG) config: SVG_CONFIG) {
+  constructor(@Inject(forwardRef(() => SVG_ICONS_CONFIG)) config: SVG_CONFIG) {
     if (config?.icons) {
       this.register(config.icons);
     }
