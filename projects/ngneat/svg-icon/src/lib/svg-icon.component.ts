@@ -94,18 +94,18 @@ export class SvgIconComponent {
       },
     };
 
-    const merged = {
+    const mergedConfig = {
       ...defaults,
       ...this.config,
     };
 
-    merged.sizes = Object.entries(merged.sizes).reduce((acc, [key, value]) => {
+    mergedConfig.sizes = Object.entries({ ...defaults.sizes, ...mergedConfig.sizes }).reduce((acc, [key, value]) => {
       acc[key] = `var(--svg-icon-font-size-${key}, ${value})`;
 
       return acc;
     }, {} as SVG_CONFIG['sizes']);
 
-    return merged;
+    return mergedConfig;
   }
 
   private setIconSize(size: string) {
