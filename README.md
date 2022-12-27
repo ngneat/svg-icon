@@ -52,7 +52,16 @@ npm i @ngneat/svg-generator --save-dev
     "outputPath": "./src/app/svg",
     "srcPath": "./src/assets/svg",
     "svgoConfig": {
-      "plugins": ["removeDimensions", "cleanupAttrs"]
+      "plugins": [
+        "removeDimensions",
+        "cleanupAttrs",
+        {
+          "name": "convertColors",
+          "params": {
+            "currentColor": true
+          }
+        }
+      ]
     }
   }
 }
