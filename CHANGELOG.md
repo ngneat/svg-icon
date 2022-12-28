@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/ngneat/svg-icon/compare/v6.1.1...v6.2.0) (2022-12-28)
+
+
+### Features
+
+* 🎸 add inline fallback input ([9c6cef3](https://github.com/ngneat/svg-icon/commit/9c6cef3f71d2104f22ad14d081fec24071ab40ec))
+
 ### [6.1.1](https://github.com/ngneat/svg-icon/compare/v6.1.0...v6.1.1) (2022-12-27)
 
 
