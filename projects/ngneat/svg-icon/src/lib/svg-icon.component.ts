@@ -25,6 +25,7 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
 })
 export class SvgIconComponent {
   @Input() key!: SvgIcons;
+  @Input() fallback!: SvgIcons;
   @Input() size!: keyof SVG_CONFIG['sizes'];
   @Input() width!: number | string;
   @Input() height!: number | string;
@@ -117,7 +118,9 @@ export class SvgIconComponent {
 
   private setIcon(name: string) {
     const config = { preserveAspectRatio: this.preserveAspectRatio };
-    const icon = this.registry.get(name, config) ?? this.registry.get(this.config.missingIconFallback?.name, config);
+    const icon =
+      this.registry.get(name, config) ??
+      this.registry.get(this.fallback ?? this.config.missingIconFallback?.name, config);
 
     if (icon) {
       this.element.setAttribute('aria-label', `${name}-icon`);
