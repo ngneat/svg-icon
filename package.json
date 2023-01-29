@@ -33,7 +33,7 @@
     "@angular/platform-browser": "^14.2.8",
     "@angular/platform-browser-dynamic": "^14.2.8",
     "@angular/router": "^14.2.8",
-    "@ngneat/lib": "^1.0.6",
+    "@ngneat/lib": "^5.0.0",
     "@ngneat/tailwind": "^6.0.3",
     "rxjs": "^7.5.7",
     "tslib": "^2.3.1",
