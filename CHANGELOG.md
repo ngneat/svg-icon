@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.3.0](https://github.com/ngneat/svg-icon/compare/v6.2.0...v6.3.0) (2023-01-29)
+
+
+### Features
+
+* 🎸 add svg to data url pipe ([#125](https://github.com/ngneat/svg-icon/issues/125)) ([5a59546](https://github.com/ngneat/svg-icon/commit/5a5954659a71477446ea95e5e33e86c94e88aa0a))
+
+
+### Bug Fixes
+
+* allow referring to SVG_ICONS_CONFIG before being defined ([a3df716](https://github.com/ngneat/svg-icon/commit/a3df716310e4ccfa7038cf58b299790332d9729b)), closes [#114](https://github.com/ngneat/svg-icon/issues/114)
+
 ## [6.2.0](https://github.com/ngneat/svg-icon/compare/v6.1.1...v6.2.0) (2022-12-28)
 
 
