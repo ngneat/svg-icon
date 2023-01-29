@@ -1,5 +1,6 @@
 import {inject, Pipe, PipeTransform} from "@angular/core";
-import {SvgIconRegistry, SvgIcons} from "@ngneat/svg-icon";
+import {SvgIconRegistry} from "../lib/registry";
+import {SvgIcons} from "../lib/types";
 
 @Pipe({
   name: 'svgToDataUrl',
