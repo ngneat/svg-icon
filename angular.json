@@ -58,13 +58,21 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "playground:build"
+            "browserTarget": "playground:build:development"
           },
           "configurations": {
             "production": {
@@ -132,5 +140,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

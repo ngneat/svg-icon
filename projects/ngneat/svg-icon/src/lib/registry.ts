@@ -28,7 +28,7 @@ export class SvgIconRegistry {
     return this.svgMap;
   }
 
-  get(key: string | undefined, config?: { preserveAspectRatio?: string }): string | undefined {
+  get(key: string | undefined, config: { preserveAspectRatio?: string, asDataUrl?: boolean } = {}): string | undefined {
     const icon = key && this.svgMap.get(key);
 
     if (!icon) {
@@ -40,11 +40,17 @@ export class SvgIconRegistry {
       svg.setAttribute('fit', '');
       svg.setAttribute('height', '100%');
       svg.setAttribute('width', '100%');
-      svg.setAttribute('preserveAspectRatio', config?.preserveAspectRatio ?? 'xMidYMid meet');
+      svg.setAttribute('preserveAspectRatio', config.preserveAspectRatio ?? 'xMidYMid meet');
       svg.setAttribute('focusable', 'false');
 
       icon.content = svg.outerHTML;
       icon.init = true;
+    }
+
+    if (config.asDataUrl) {
+      const svg = this.toElement(icon.content).outerHTML;
+
+      return `data:image/svg+xml;base64,${btoa(svg)}`
     }
 
     return icon.content;
