@@ -11,12 +11,20 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
-    "lib": ["es2018", "dom"],
+    "target": "ES2022",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "paths": {
-      "@ngneat/svg-icon": ["projects/ngneat/svg-icon/src/public-api.ts"],
-      "@app/svg/*": ["src/app/svg/*"]
-    }
+      "@ngneat/svg-icon": [
+        "projects/ngneat/svg-icon/src/public-api.ts"
+      ],
+      "@app/svg/*": [
+        "src/app/svg/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "strictTemplates": true,

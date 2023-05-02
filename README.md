@@ -74,7 +74,7 @@ It can be modified to meet your needs.
 
 ## Icons Rendering
 
-Use the `provideSvgIcons` to register register the icons:
+Use the `provideSvgIcons` to register the icons:
 
 ```ts
 import { provideSvgIcons } from '@ngneat/svg-icon';

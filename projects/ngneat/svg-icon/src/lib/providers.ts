@@ -1,4 +1,10 @@
-import { ENVIRONMENT_INITIALIZER, inject, InjectionToken } from '@angular/core';
+import {
+  ENVIRONMENT_INITIALIZER,
+  EnvironmentProviders,
+  inject,
+  InjectionToken,
+  makeEnvironmentProviders,
+} from '@angular/core';
 import { SvgIconRegistry } from './registry';
 
 export interface SvgIconType {
@@ -38,19 +44,23 @@ export const SVG_MISSING_ICON_FALLBACK = new InjectionToken<SVG_CONFIG['missingI
   }
 );
 
-export function provideSvgIcons(icons: SvgIconType | SvgIconType[]) {
-  return {
-    provide: ENVIRONMENT_INITIALIZER,
-    multi: true,
-    useValue() {
-      inject(SvgIconRegistry).register(icons);
+export function provideSvgIcons(icons: SvgIconType | SvgIconType[]): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      multi: true,
+      useValue() {
+        inject(SvgIconRegistry).register(icons);
+      },
     },
-  };
+  ]);
 }
 
-export function provideSvgIconsConfig(config: Partial<SVG_CONFIG>) {
-  return {
-    provide: SVG_ICONS_CONFIG,
-    useValue: config,
-  };
+export function provideSvgIconsConfig(config: Partial<SVG_CONFIG>): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    {
+      provide: SVG_ICONS_CONFIG,
+      useValue: config,
+    },
+  ]);
 }
