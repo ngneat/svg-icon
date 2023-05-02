@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/ngneat/svg-icon/compare/v6.3.0...v7.0.0) (2023-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 min version is ng15
+
+### Features
+
+* 🎸 upgrade to ng15 ([fa7f3f6](https://github.com/ngneat/svg-icon/commit/fa7f3f6f3ed0155923b19cd104f30609afe155ce))
+
 ## [6.3.0](https://github.com/ngneat/svg-icon/compare/v6.2.0...v6.3.0) (2023-01-29)
 
 
