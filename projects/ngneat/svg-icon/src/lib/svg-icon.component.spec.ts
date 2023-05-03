@@ -51,6 +51,39 @@ describe('SvgIconComponent', () => {
     expect(host.element.style.color).toBe('var(--svg-icon-color, red)');
   });
 
+  it('should not assign falsy height', () => {
+    host = createHost(`<svg-icon [key]="key" [height]="height"></svg-icon>`, {
+      hostProps: {
+        key: 'dashboard',
+        height: undefined,
+      },
+    });
+
+    expect(host.element.style.height).toBe('');
+  });
+
+  it('should not assign falsy width', () => {
+    host = createHost(`<svg-icon [key]="key" [width]="width"></svg-icon>`, {
+      hostProps: {
+        key: 'dashboard',
+        width: undefined,
+      },
+    });
+
+    expect(host.element.style.width).toBe('');
+  });
+
+  it('should not assign falsy color', () => {
+    host = createHost(`<svg-icon [key]="key" [color]="color"></svg-icon>`, {
+      hostProps: {
+        key: 'dashboard',
+        color: undefined,
+      },
+    });
+
+    expect(host.element.style.color).toBe('');
+  });
+
   it('should change font size', () => {
     host = createHost(`<svg-icon [key]="key" [fontSize]="fontSize"></svg-icon>`, {
       hostProps: {
