@@ -68,15 +68,15 @@ export class SvgIconComponent {
       this.setIconSize(this.mergedConfig.sizes[this.mergedConfig.defaultSize || 'md']!);
     }
 
-    if (changes.width) {
+    if (changes.width?.currentValue) {
       this.element.style.width = `var(--svg-icon-width, ${coerceCssPixelValue(this.width)})`;
     }
 
-    if (changes.height) {
+    if (changes.height?.currentValue) {
       this.element.style.height = `var(--svg-icon-height, ${coerceCssPixelValue(this.height)})`;
     }
 
-    if (changes.color) {
+    if (changes.color?.currentValue) {
       this.element.style.color = `var(--svg-icon-color, ${this.color})`;
     }
 
