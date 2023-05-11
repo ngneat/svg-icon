@@ -1,6 +1,6 @@
 {
   "name": "@ngneat/svg-generator",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "svg generator",
   "main": "generator.js",
   "bin": {
@@ -11,7 +11,9 @@
   },
   "scripts": {
     "start": "tsc --watch",
+    "prebuild": "rm -rf dist",
     "build": "tsc",
+    "postbuild": "cp package.json dist",
     "test": "npm run build && jest ./index.spec.js"
   },
   "keywords": [
@@ -21,6 +23,9 @@
   ],
   "author": "Netanel Basal",
   "license": "MIT",
+  "peerDependencies": {
+    "svgo": ">=3.0.0"
+  },
   "dependencies": {
     "camelcase": "6.2.0",
     "chokidar": "3.5.3",
@@ -28,7 +33,6 @@
     "fs-extra": "10.1.0",
     "glob": "8.0.3",
     "lodash.kebabcase": "4.1.1",
-    "svgo": "2.8.0",
     "typescript": "4.8.4",
     "commander": "9.4.1"
   },

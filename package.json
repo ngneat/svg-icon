@@ -6,6 +6,7 @@
     "start": "ng serve",
     "test:generator": "npm run test --prefix svg-generator",
     "run:generator": "node svg-generator/index.js",
+    "build:generator": "npm run build --prefix svg-generator",
     "hooks:pre-commit": "node hooks/pre-commit.js && lint-staged",
     "commit": "git-cz",
     "build:lib": "ng build @ngneat/svg-icon --configuration production && cp -r README.md dist/ngneat/svg-icon",
