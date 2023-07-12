@@ -1,4 +1,4 @@
-name: '@ngneat/svg-icon-generator'
+name: '@ngneat/svg-icon'
 
 on:
   push:
@@ -9,9 +9,6 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: svg-generator
 
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +22,9 @@ jobs:
         run: npm i
 
       - name: Run Build
-        run: npm run build
+        run: npm run build:lib
 
       - name: Run unit tests
-        run: npm run test
+        run: npm run test:lib:headless
+        env:
+          CI: true

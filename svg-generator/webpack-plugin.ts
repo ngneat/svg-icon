@@ -1,10 +1,10 @@
 import { generateSVGIcons } from './generator';
-import { Config } from './types';
+import { GeneratorConfig } from './config';
 import chokidar from 'chokidar';
 
 export class SvgGeneratorWebpackPlugin {
 
-  constructor(private config: Config & { watch?: boolean }) {
+  constructor(private config: GeneratorConfig & { watch?: boolean }) {
     generateSVGIcons(this.config);
   }
 

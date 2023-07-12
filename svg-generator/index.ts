@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import { cosmiconfigSync } from 'cosmiconfig';
 import { generateSVGIcons } from './generator';
-import { Config } from './types';
+import { GeneratorConfig } from './config';
 
 const program = new Command();
 program
@@ -19,6 +19,6 @@ program.parse();
 const opts = program.opts();
 
 const explorerSync = cosmiconfigSync('svgGenerator');
-const config: Config | null = explorerSync.search(opts.configDir)?.config;
+const config: GeneratorConfig | null = explorerSync.search(opts.configDir)?.config;
 
 generateSVGIcons(config);
