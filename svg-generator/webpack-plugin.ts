@@ -1,5 +1,5 @@
 import { generateSVGIcons } from './generator';
-import { GeneratorConfig } from './types';
+import { GeneratorConfig } from './config';
 import chokidar from 'chokidar';
 
 export class SvgGeneratorWebpackPlugin {

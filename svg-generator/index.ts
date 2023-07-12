@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import { cosmiconfigSync } from 'cosmiconfig';
 import { generateSVGIcons } from './generator';
-import { GeneratorConfig } from './types';
+import { GeneratorConfig } from './config';
 
 const program = new Command();
 program

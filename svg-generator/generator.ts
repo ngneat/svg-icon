@@ -1,7 +1,7 @@
 import glob from 'glob';
 import { join, resolve } from 'path';
 import { outputFileSync, unlinkSync } from 'fs-extra';
-import { GeneratorConfig, defaults } from './types';
+import { GeneratorConfig, defaultConfig } from './config';
 import { createTree, INDEX } from './tree';
 import { createTypeFile } from './create-types';
 
@@ -12,7 +12,7 @@ export function generateSVGIcons(config: GeneratorConfig | null) {
     process.exit();
   }
 
-  const mergedConfig: Required<GeneratorConfig> = { ...defaults, ...config };
+  const mergedConfig: Required<GeneratorConfig> = { ...defaultConfig, ...config };
 
   removeOldIcons(resolve(mergedConfig.outputPath));
 

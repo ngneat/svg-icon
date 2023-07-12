@@ -3,7 +3,7 @@ import { basename, join } from 'path';
 import { createPrinter, createSourceFile, EmitHint, factory, NewLineKind, ScriptKind, ScriptTarget, Statement } from 'typescript';
 import { readdirSync, readFileSync } from 'fs-extra';
 import { createArrayExport, createImportDeclaration, createStatement } from './ast';
-import { GeneratorConfig } from './types';
+import { GeneratorConfig } from './config';
 import camelcase from 'camelcase';
 
 const printer = createPrinter({
@@ -79,15 +79,16 @@ export function createTree(srcPath: string, outputPath: string, config: Config):
   return tree;
 }
 
-const invalidVariableChars = /[^a-zA-Z0-9_$]/g;
-const startWithDigit = /^[0-9]/;
+const invalidVariableCharsRegex = /[^a-zA-Z0-9_$]/g;
+const startWithDigitRegex = /^[0-9]/;
+const lettersRegex = /[a-zA-Z]/;
 
-function resolveIdentifierName(iconName: string, config: Config) {
-  const normalizedName = iconName
+export function resolveIdentifierName(iconName: string, config: Config) {
+  return camelcase([config.prefix, iconName, config.postfix])
     // Replace invalid characters with $ sign
-    .replace(invalidVariableChars, config.invalidCharReplacer)
+    .replace(invalidVariableCharsRegex, config.invalidCharReplacer)
     // Ensure the first character is not a digit
-    .replace(startWithDigit, config.invalidCharReplacer);
-
-  return camelcase(`${config.prefix}-${normalizedName}-${config.postfix}`);
+    .replace(startWithDigitRegex, config.invalidCharReplacer)
+    // Ensure the first letter is lowercase
+    .replace(lettersRegex, (match) => match.toLowerCase());
 }

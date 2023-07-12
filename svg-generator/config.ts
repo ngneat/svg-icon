@@ -9,7 +9,7 @@ export interface GeneratorConfig {
   invalidCharReplacer?: (invalidChar: string) => string;
 }
 
-export const defaults: Required<GeneratorConfig> = {
+export const defaultConfig: Required<GeneratorConfig> = {
   prefix: '',
   postfix: 'Icon',
   svgoConfig: { plugins: [] },

@@ -1,7 +1,7 @@
 import mock from 'mock-fs';
-import { createTypeFile } from './create-types';
-import { createTree } from './tree';
-import { defaults } from './types';
+import { createTypeFile } from '../create-types';
+import { createTree } from '../tree';
+import { defaultConfig } from '../config';
 
 const srcPath = `src/assets/svg`;
 
@@ -20,7 +20,7 @@ describe('createTree', () => {
       },
     });
 
-    const result = createTree(srcPath, `src/app/svg`, defaults);
+    const result = createTree(srcPath, `src/app/svg`, defaultConfig);
 
     mock.restore();
 
