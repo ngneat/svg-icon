@@ -3,7 +3,7 @@ import { basename, join } from 'path';
 import { createPrinter, createSourceFile, EmitHint, factory, NewLineKind, ScriptKind, ScriptTarget, Statement } from 'typescript';
 import { readdirSync, readFileSync } from 'fs-extra';
 import { createArrayExport, createImportDeclaration, createStatement } from './ast';
-import { Config } from './types';
+import { GeneratorConfig } from './types';
 import camelcase from 'camelcase';
 
 const printer = createPrinter({
@@ -19,9 +19,11 @@ type VirtualFile = {
   identifierName: string;
 }
 
+type Config = Required<Omit<GeneratorConfig, 'srcPath' | 'outputPath'>>;
+
 export const INDEX = `__INDEX__`;
 
-export function createTree(srcPath: string, outputPath: string, config: Omit<Config, 'srcPath' | 'outputPath'>): VirtualFile[] {
+export function createTree(srcPath: string, outputPath: string, config: Config): VirtualFile[] {
   const tree: VirtualFile[] = [];
   const result = readdirSync(srcPath, { withFileTypes: true });
   const plugins = config.svgoConfig?.plugins ?? [];
@@ -53,7 +55,7 @@ export function createTree(srcPath: string, outputPath: string, config: Omit<Con
       if(file.name.endsWith('.svg')) {
         const iconName = basename(file.name, '.svg');
         const path = join(outputPath, file.name).replace('.svg', '.ts');
-        const identifierName = camelcase(`${config.prefix}-${iconName}-${config.postfix}`);
+        const identifierName = resolveIdentifierName(iconName, config);
         const svgPath = join(srcPath, file.name);
         const svgContent = readFileSync(svgPath).toString();
 
@@ -75,4 +77,17 @@ export function createTree(srcPath: string, outputPath: string, config: Omit<Con
   }
 
   return tree;
+}
+
+const invalidVariableChars = /[^a-zA-Z0-9_$]/g;
+const startWithDigit = /^[0-9]/;
+
+function resolveIdentifierName(iconName: string, config: Config) {
+  const normalizedName = iconName
+    // Replace invalid characters with $ sign
+    .replace(invalidVariableChars, config.invalidCharReplacer)
+    // Ensure the first character is not a digit
+    .replace(startWithDigit, config.invalidCharReplacer);
+
+  return camelcase(`${config.prefix}-${normalizedName}-${config.postfix}`);
 }

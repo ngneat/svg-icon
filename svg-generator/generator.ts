@@ -1,18 +1,18 @@
 import glob from 'glob';
 import { join, resolve } from 'path';
 import { outputFileSync, unlinkSync } from 'fs-extra';
-import { Config, defaults } from './types';
+import { GeneratorConfig, defaults } from './types';
 import { createTree, INDEX } from './tree';
 import { createTypeFile } from './create-types';
 
-export function generateSVGIcons(config: Config | null) {
+export function generateSVGIcons(config: GeneratorConfig | null) {
   if (!config) {
     console.log(`Can't find a config object!`);
 
     process.exit();
   }
 
-  const mergedConfig: Config = { ...defaults, ...config };
+  const mergedConfig: Required<GeneratorConfig> = { ...defaults, ...config };
 
   removeOldIcons(resolve(mergedConfig.outputPath));
 
@@ -36,9 +36,9 @@ export function generateSVGIcons(config: Config | null) {
     });
   }
 
-  const path = resolve(process.cwd(), 'node_modules', '@ngneat', 'svg-icon', 'lib', 'types.d.ts');
+  const typeFilePath = resolve(process.cwd(), 'node_modules', '@ngneat', 'svg-icon', 'lib', 'types.d.ts');
 
-  outputFileSync(path, createTypeFile(names), {
+  outputFileSync(typeFilePath, createTypeFile(names), {
     encoding: 'utf-8',
   });
 

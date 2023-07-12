@@ -1,4 +1,4 @@
-export interface Config {
+export interface GeneratorConfig {
   srcPath: string;
   outputPath: string;
   svgoConfig: { plugins: any[] };
@@ -6,9 +6,10 @@ export interface Config {
   postfix?: string;
   rootBarrelFile?: boolean;
   rootBarrelFileName?: string;
+  invalidCharReplacer?: (invalidChar: string) => string;
 }
 
-export const defaults: Config = {
+export const defaults: Required<GeneratorConfig> = {
   prefix: '',
   postfix: 'Icon',
   svgoConfig: { plugins: [] },
@@ -16,4 +17,5 @@ export const defaults: Config = {
   outputPath: '',
   rootBarrelFile: false,
   rootBarrelFileName: 'index',
+  invalidCharReplacer: () => '$'
 };
