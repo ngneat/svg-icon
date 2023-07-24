@@ -246,6 +246,28 @@ export class AppComponent {
 }
 ```
 
+You can also use the `injectRegisterIcons` method to register icons using the new `inject` API:
+
+```ts
+import { injectRegisterIcons } from '@ngneat/svg-icon';
+
+interface Icon {
+  name: string;
+  data: string;
+}
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+  constructor() {
+    injectRegisterIcons([Icon, Icon, Icon]);
+  }
+}
+```
+
 ## Missing Icon
 
 You can define **missingIconFallback** which will be used if icon is not found in registry:
