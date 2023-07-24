@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/ngneat/svg-icon/compare/v7.0.0...v7.1.0) (2023-07-24)
+
+
+### Features
+
+* 🎸 add injectRegisterIcons ([#138](https://github.com/ngneat/svg-icon/issues/138)) ([fed8995](https://github.com/ngneat/svg-icon/commit/fed89957719fd76768801458a91c1b78023c8aa5))
+
+
+### Bug Fixes
+
+* **component:** add check for falsy values ([e711475](https://github.com/ngneat/svg-icon/commit/e7114759b251fff2b300a10784ce0c201a83696a)), closes [#130](https://github.com/ngneat/svg-icon/issues/130)
+* **svg-generator:** support special file name cases ([#137](https://github.com/ngneat/svg-icon/issues/137)) ([f4d26b0](https://github.com/ngneat/svg-icon/commit/f4d26b0e15b44c98b13330a0c12e228740d3ee27))
+
 ## [7.0.0](https://github.com/ngneat/svg-icon/compare/v6.3.0...v7.0.0) (2023-05-02)
 
 
