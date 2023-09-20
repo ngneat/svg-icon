@@ -5,6 +5,10 @@ import { GeneratorConfig, defaultConfig } from './config';
 import { createTree, INDEX } from './tree';
 import { createTypeFile } from './create-types';
 
+function skipLintAndTsChecks(fileContent: string) {
+  return `// @ts-nocheck\n/* eslint-disable */\n${fileContent}`;
+}
+
 export function generateSVGIcons(config: GeneratorConfig | null) {
   if (!config) {
     console.log(`Can't find a config object!`);
@@ -24,7 +28,7 @@ export function generateSVGIcons(config: GeneratorConfig | null) {
       .filter(({ name }) => name !== INDEX)
       .map(({ content }) => content)
       .join('\n\n');
-    outputFileSync(join(mergedConfig.outputPath, `${mergedConfig.rootBarrelFileName}.ts`), allExports, {
+    outputFileSync(join(mergedConfig.outputPath, `${mergedConfig.rootBarrelFileName}.ts`), skipLintAndTsChecks(allExports), {
       encoding: 'utf-8',
     });
 
@@ -32,7 +36,7 @@ export function generateSVGIcons(config: GeneratorConfig | null) {
   } else {
     virtualTree.forEach(({ path, content, name }) => {
       name !== INDEX && names.push(name);
-      outputFileSync(path, content, { encoding: 'utf-8' });
+      outputFileSync(path, skipLintAndTsChecks(content), { encoding: 'utf-8' });
     });
   }
 
