@@ -21,9 +21,19 @@ exports[`createTree should create the correct tree 1`] = `
     "path": "src/app/svg/group/child2.ts",
   },
   {
+    "content": "export const childCopyIcon = {
+    data: \`<svg>child_copy</svg>\`,
+    name: 'child-copy' as const
+};",
+    "identifierName": "childCopyIcon",
+    "name": "child_copy",
+    "path": "src/app/svg/group/child_copy.ts",
+  },
+  {
     "content": "import { childIcon } from './child';
 import { child2Icon } from './child2';
-export const groupIcons = [childIcon, child2Icon];
+import { childCopyIcon } from './child_copy';
+export const groupIcons = [childIcon, child2Icon, childCopyIcon];
 ",
     "identifierName": "index",
     "name": "__INDEX__",
@@ -78,6 +88,6 @@ export const groupTwoIcons = [childOneIcon, childTwoIcon];
 `;
 
 exports[`createTree should create the type file 1`] = `
-"export declare type SvgIcons = 'foo' | 'bar' | 'foo-bar';
+"export declare type SvgIcons = 'foo' | 'bar' | 'foo-bar' | 'foo-baz';
 "
 `;

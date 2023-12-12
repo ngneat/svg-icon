@@ -5,9 +5,9 @@ import {
   ScriptTarget,
   ScriptKind,
   factory,
-  NodeFlags,
   SyntaxKind,
 } from 'typescript';
+import kebabCase from 'lodash.kebabcase';
 
 const printer = createPrinter({
   newLine: NewLineKind.LineFeed,
@@ -23,7 +23,7 @@ export function createTypeFile(names: string[]) {
       undefined,
       factory.createUnionTypeNode(
         names.map((name) => {
-          return factory.createLiteralTypeNode(factory.createStringLiteral(name, true));
+          return factory.createLiteralTypeNode(factory.createStringLiteral(kebabCase(name), true));
         })
       )
     ),

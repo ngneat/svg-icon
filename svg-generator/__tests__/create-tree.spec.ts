@@ -13,6 +13,7 @@ describe('createTree', () => {
       [`${srcPath}/group`]: {
         'child.svg': `<svg>child</svg>`,
         'child2.svg': `<svg>child 2</svg>`,
+        'child_copy.svg': `<svg>child_copy</svg>`
       },
       [`${srcPath}/group-two`]: {
         'child-one.svg': `<svg>child</svg>`,
@@ -28,6 +29,6 @@ describe('createTree', () => {
   });
 
   it('should create the type file', () => {
-    expect(createTypeFile(['foo', 'bar', 'foo-bar'])).toMatchSnapshot();
+    expect(createTypeFile(['foo', 'bar', 'foo-bar', 'foo_baz'])).toMatchSnapshot();
   });
 });
