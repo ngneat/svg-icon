@@ -141,5 +141,7 @@ function coerceCssPixelValue(value: any): string {
 }
 
 function getIconClassName(key: string) {
+if(!key) return '';
+
   return `svg-icon-${key.replace(/ /g, '-')}`;
 }
