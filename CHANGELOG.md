@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.1.3](https://github.com/ngneat/svg-icon/compare/v7.1.2...v7.1.3) (2024-06-03)
+
+
+### Bug Fixes
+
+* 🐛 add protection ([5e6225a](https://github.com/ngneat/svg-icon/commit/5e6225a4bdbedfe640deda2b061dcdafc0a86adb))
+
 ### [7.1.2](https://github.com/ngneat/svg-icon/compare/v7.1.1...v7.1.2) (2024-06-03)
 
 
