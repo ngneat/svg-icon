@@ -124,7 +124,11 @@ export class SvgIconComponent {
 
     if (icon) {
       this.element.setAttribute('aria-label', `${name}-icon`);
-      this.element.classList.remove(getIconClassName(this.lastKey));
+
+      if (this.lastKey) {
+        this.element.classList.remove(getIconClassName(this.lastKey));
+      }
+
       this.lastKey = name;
       this.element.classList.add(getIconClassName(name));
       this.element.innerHTML = icon;
@@ -141,7 +145,5 @@ function coerceCssPixelValue(value: any): string {
 }
 
 function getIconClassName(key: string) {
-  if (!key) return '';
-
   return `svg-icon-${key.replace(/ /g, '-')}`;
 }
