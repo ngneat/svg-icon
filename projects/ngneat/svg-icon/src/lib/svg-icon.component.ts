@@ -126,7 +126,7 @@ export class SvgIconComponent {
       this.element.setAttribute('aria-label', `${name}-icon`);
       this.element.classList.remove(getIconClassName(this.lastKey));
       this.lastKey = name;
-      this.element.classList.add(getIconClassName(name));
+      this.element.classList.add(getIconClassName(name.replace(/ /g, "-")));
       this.element.innerHTML = icon;
     }
   }
