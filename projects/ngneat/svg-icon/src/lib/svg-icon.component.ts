@@ -117,6 +117,8 @@ export class SvgIconComponent {
   }
 
   private setIcon(name: string) {
+    if (!name) return;
+
     const config = { preserveAspectRatio: this.preserveAspectRatio };
     const icon =
       this.registry.get(name, config) ??
