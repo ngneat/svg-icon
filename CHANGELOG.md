@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.1.1](https://github.com/ngneat/svg-icon/compare/v7.1.0...v7.1.1) (2024-06-03)
+
+
+### Bug Fixes
+
+* 🐛 allow keys with spaces ([c2c18b4](https://github.com/ngneat/svg-icon/commit/c2c18b43a3bb97c4d1a9175e15a33ff404dd3023))
+* **svg-generator:** add kebab-case transform to type generator ([#143](https://github.com/ngneat/svg-icon/issues/143)) ([b17183c](https://github.com/ngneat/svg-icon/commit/b17183c3d25bd9b76223bd585558dfb2fd0030d5))
+* **svg-generator:** add ts-nocheck and eslint ignore to generated files ([#140](https://github.com/ngneat/svg-icon/issues/140)) ([bcceb6e](https://github.com/ngneat/svg-icon/commit/bcceb6eb9fc066f038dc4b00633c5841995e66ba))
+
 ## [7.1.0](https://github.com/ngneat/svg-icon/compare/v7.0.0...v7.1.0) (2023-07-24)
 
 
