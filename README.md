@@ -129,27 +129,6 @@ export class DashboardModule {}
 
 Note that we're NOT using a barrel file (i.e `index.ts`). This will make sure we only **load** the SVG files we use in the current module.
 
-## Webpack Plugin
-
-To make the process more seamless, the library provides a Webpack plugin you can use to automate the extracting process:
-
-```ts
-const { SvgGeneratorWebpackPlugin } = require('@ngneat/svg-generator/webpack-plugin');
-
-{
-  plugins: [
-    new SvgGeneratorWebpackPlugin({
-      watch: !isProd,
-      srcPath: './src/assets/svg',
-      outputPath: './src/app/svg',
-      svgoConfig: {
-        plugins: ['removeDimensions'],
-      },
-    }),
-  ];
-}
-```
-
 ## Group Icons
 
 There are cases where we want to group multiple SVG icons. For example, we might have a `notifications` feature, and we need to load SVG icons such as Slack, Email, etc.
