@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/ngneat/svg-icon/compare/v7.1.6...v8.0.0) (2025-05-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Webpack plugin has been removed
+
+### Features
+
+* 🎸 remove webpack plugin ([47b9590](https://github.com/ngneat/svg-icon/commit/47b9590c53cabb84f10c964186a2688df20e28cd))
+* 🎸 upgrade to signals and v19 ([d7501ae](https://github.com/ngneat/svg-icon/commit/d7501aefba7055e303729726f8011633b4eb3ffc))
+
 ### [7.1.6](https://github.com/ngneat/svg-icon/compare/v7.1.5...v7.1.6) (2024-06-03)
 
 ### [7.1.5](https://github.com/ngneat/svg-icon/compare/v7.1.4...v7.1.5) (2024-06-03)
