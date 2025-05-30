@@ -2,7 +2,6 @@
   "name": "svg-icons",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "ngcc",
     "start": "ng serve",
     "test:generator": "npm run test --prefix svg-generator",
     "run:generator": "node svg-generator/index.js",
