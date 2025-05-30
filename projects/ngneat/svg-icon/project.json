@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "@ngneat/svg-icon",
+  "projectType": "library",
+  "sourceRoot": "projects/ngneat/svg-icon/src",
+  "prefix": "lib",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "tsConfig": "projects/ngneat/svg-icon/tsconfig.lib.json",
+        "project": "projects/ngneat/svg-icon/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "projects/ngneat/svg-icon/tsconfig.lib.prod.json"
+        }
+      },
+      "outputs": [
+        "{workspaceRoot}/dist/ngneat/svg-icon"
+      ]
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "projects/ngneat/svg-icon/src/test.ts",
+        "tsConfig": "projects/ngneat/svg-icon/tsconfig.spec.json",
+        "karmaConfig": "projects/ngneat/svg-icon/karma.conf.js"
+      }
+    }
+  }
+}

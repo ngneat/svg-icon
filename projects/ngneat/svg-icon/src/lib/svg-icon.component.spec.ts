@@ -7,7 +7,7 @@ import { SvgIconComponent } from './svg-icon.component';
 import { provideSvgIcons, provideSvgIconsConfig } from './providers';
 
 describe('SvgIconComponent', () => {
-  let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
+  let host: SpectatorHost<SvgIconComponent>;
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
@@ -160,7 +160,7 @@ describe('SvgIconComponent', () => {
 });
 
 describe('SvgIconComponent Custom Sizes', () => {
-  let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
+  let host: SpectatorHost<SvgIconComponent>;
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
@@ -197,7 +197,7 @@ describe('SvgIconComponent Custom Sizes', () => {
 });
 
 describe('SvgIconComponent without Missing Icon', () => {
-  let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
+  let host: SpectatorHost<SvgIconComponent>;
 
   const createHost = createHostFactory({
     component: SvgIconComponent,
@@ -212,7 +212,7 @@ describe('SvgIconComponent without Missing Icon', () => {
 });
 
 describe('SvgIconComponent with Missing Icon', () => {
-  let host: SpectatorHost<SvgIconComponent, Partial<SvgIconComponent>>;
+  let host: SpectatorHost<SvgIconComponent>;
 
   const createHost = createHostFactory({
     component: SvgIconComponent,

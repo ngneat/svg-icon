@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, SimpleChanges, input } from '@angular/core';
 import { SvgIcons } from './types';
 import { SvgIconRegistry } from './registry';
 import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
@@ -24,15 +24,15 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './providers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent {
-  @Input() key!: SvgIcons;
-  @Input() fallback!: SvgIcons;
-  @Input() size!: keyof SVG_CONFIG['sizes'];
-  @Input() width!: number | string;
-  @Input() height!: number | string;
-  @Input() fontSize!: number | string;
-  @Input() color!: string;
-  @Input() noShrink = false;
-  @Input() preserveAspectRatio: string | undefined;
+  readonly key = input<SvgIcons>();
+  readonly fallback = input<SvgIcons>();
+  readonly size = input<keyof SVG_CONFIG['sizes']>();
+  readonly width = input<number | string>();
+  readonly height = input<number | string>();
+  readonly fontSize = input<number | string>();
+  readonly color = input<string>();
+  readonly noShrink = input(false);
+  readonly preserveAspectRatio = input<string>();
 
   private mergedConfig: SVG_CONFIG;
   private lastKey!: string;
@@ -51,16 +51,16 @@ export class SvgIconComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.key) {
-      this.setIcon(this.key);
+    if (changes.key?.currentValue) {
+      this.setIcon(changes.key.currentValue);
     }
 
     if (changes.size?.currentValue) {
-      this.setIconSize(this.mergedConfig.sizes[this.size]!);
+      this.setIconSize(this.mergedConfig.sizes[changes.size.currentValue]!);
     }
 
     if (changes.fontSize?.currentValue) {
-      this.setIconSize(coerceCssPixelValue(this.fontSize));
+      this.setIconSize(coerceCssPixelValue(changes.fontSize.currentValue));
     }
 
     // If on the first change no size was passed, set the default size
@@ -69,15 +69,15 @@ export class SvgIconComponent {
     }
 
     if (changes.width?.currentValue) {
-      this.element.style.width = `var(--svg-icon-width, ${coerceCssPixelValue(this.width)})`;
+      this.element.style.width = `var(--svg-icon-width, ${coerceCssPixelValue(changes.width.currentValue)})`;
     }
 
     if (changes.height?.currentValue) {
-      this.element.style.height = `var(--svg-icon-height, ${coerceCssPixelValue(this.height)})`;
+      this.element.style.height = `var(--svg-icon-height, ${coerceCssPixelValue(changes.height.currentValue)})`;
     }
 
     if (changes.color?.currentValue) {
-      this.element.style.color = `var(--svg-icon-color, ${this.color})`;
+      this.element.style.color = `var(--svg-icon-color, ${changes.color.currentValue})`;
     }
 
     this.init = true;
@@ -111,16 +111,16 @@ export class SvgIconComponent {
 
   private setIconSize(size: string) {
     this.element.style.fontSize = size;
-    if (this.noShrink) {
+    if (this.noShrink()) {
       this.element.style.minWidth = size;
     }
   }
 
   private setIcon(name: string) {
-    const config = { preserveAspectRatio: this.preserveAspectRatio };
+    const config = { preserveAspectRatio: this.preserveAspectRatio() };
     const icon =
       this.registry.get(name, config) ??
-      this.registry.get(this.fallback ?? this.config.missingIconFallback?.name, config);
+      this.registry.get(this.fallback() ?? this.config.missingIconFallback?.name, config);
 
     if (icon) {
       this.element.setAttribute('aria-label', `${name}-icon`);

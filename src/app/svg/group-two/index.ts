@@ -1,3 +1,5 @@
-import { dashboardTwoIcon } from './dashboard-two';
+// @ts-nocheck
+/* eslint-disable */
 import { locationTwoIcon } from './location-two';
-export const groupTwoIcons = [dashboardTwoIcon, locationTwoIcon];
+import { dashboardTwoIcon } from './dashboard-two';
+export const groupTwoIcons = [locationTwoIcon, dashboardTwoIcon];

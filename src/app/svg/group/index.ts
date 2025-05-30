@@ -1,3 +1,5 @@
-import { homeIcon } from './home';
+// @ts-nocheck
+/* eslint-disable */
 import { userIcon } from './user';
-export const groupIcons = [homeIcon, userIcon];
+import { homeIcon } from './home';
+export const groupIcons = [userIcon, homeIcon];
