@@ -3,7 +3,8 @@ import { SvgIconRegistry } from '../lib/registry';
 import { SvgIcons } from '../lib/types';
 
 @Pipe({
-  name: 'svgToDataUrl',
+    name: 'svgToDataUrl',
+    standalone: false
 })
 export class SvgToDataUrlPipe implements PipeTransform {
   registry = inject(SvgIconRegistry);
